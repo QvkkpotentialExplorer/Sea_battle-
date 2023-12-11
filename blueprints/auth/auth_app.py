@@ -38,18 +38,7 @@ def login():
         return f'Вы залогинены как {user.login}'
     return render_template('login.html', form=form)
 
-# @auth_pages.route('/login1', methods=['GET', 'POST'])
-# def login1():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         print(1)
-#         db_sess = db_session.create_session()
-#         user = db_sess.query(User).filter(User.login == form.login.data).first()
-#         db_sess.close()
-#         print(user.login)
-#         login_user(user, remember=form.remember_me.data)
-#         return f'Вы залогинены как {user.login}'
-#     return render_template('login1.html', form=form)
+
 
 
 
