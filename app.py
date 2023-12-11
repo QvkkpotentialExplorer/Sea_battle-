@@ -3,6 +3,7 @@ from data import db_session
 from data.users import User
 from flask_login import LoginManager
 from blueprints.auth.auth_app import auth_pages
+from blueprints.main_page.main_page import main_page
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'lJihdIUh12eIHUI34'
 
 app.register_blueprint(auth_pages)
+app.register_blueprint(main_page)
 
 
 @login_manager.user_loader

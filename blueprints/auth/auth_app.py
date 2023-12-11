@@ -6,11 +6,11 @@ from forms.login_form import LoginForm
 from forms.register_form import RegisterForm
 
 
-auth_pages = Blueprint('auth_page', __name__, template_folder='templates')
+auth_pages = Blueprint('auth_page', __name__, template_folder='templates', static_folder='static', url_prefix='/auth/')
 
 
 @auth_pages.route('/register', methods=['GET', 'POST'])
-def reqister():
+def register():
     form = RegisterForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
