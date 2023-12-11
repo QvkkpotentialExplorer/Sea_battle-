@@ -10,7 +10,7 @@ def validate_login(form, data):
     val = db_sess.query(User).filter(User.login == data.data).first()
     db_sess.close()
     if val:
-        raise ValidationError('Логин уже существует')
+        raise ValidationError('Этот логин уже занят , придумайте другой')
 
 
 class RegisterForm(FlaskForm):

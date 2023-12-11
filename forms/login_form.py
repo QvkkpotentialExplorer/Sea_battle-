@@ -14,7 +14,7 @@ def validate_password(form, data):
 
 
 class LoginForm(FlaskForm):
-    login = StringField('Логин', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired(), validate_password])
-    remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Логин')
+    login = StringField('Login', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), validate_password])
+    remember_me = BooleanField('Remember me')
+    submit = SubmitField('Login')
