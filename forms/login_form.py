@@ -10,11 +10,11 @@ def validate_password(form, data):
     val = db_sess.query(User).filter(User.login == form.login.data).first()
     db_sess.close()
     if not val or not val.check_password(form.password.data):
-        raise ValidationError('Не верный логин или пароль')
+        raise ValidationError('Неверный логин или пароль')
 
 
 class LoginForm(FlaskForm):
-    login = StringField('Login', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), validate_password])
-    remember_me = BooleanField('Remember me')
-    submit = SubmitField('Login')
+    login = StringField('Логин', validators=[DataRequired()])
+    password = PasswordField('Пароль', validators=[DataRequired(), validate_password])
+    remember_me = BooleanField('Запомнить меня')
+    submit = SubmitField('Войти')
