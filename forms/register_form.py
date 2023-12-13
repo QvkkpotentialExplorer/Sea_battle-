@@ -16,5 +16,5 @@ def validate_login(form, data):
 class RegisterForm(FlaskForm):
     login = StringField('Логин', validators=[DataRequired(), validate_login])
     password = PasswordField('Пароль', validators=[DataRequired(), EqualTo('confirm', message='Пароли не совпадают')])
-    confirm = PasswordField('Подтвердите пароль', validators=[DataRequired(),EqualTo('confirm',message='Пароли должны совпадать')])
+    confirm = PasswordField('Подтвердите пароль', validators=[DataRequired()])
     submit = SubmitField('Регистрация')
