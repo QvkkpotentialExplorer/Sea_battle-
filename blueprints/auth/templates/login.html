@@ -25,8 +25,8 @@
                                 {% for error in form.errors %}
                                 {% if error%}
                                 <div class="alert alert-danger" role="alert">
-                                    {{form.errors[error][0]}} #Обращаемся к ошибкам form(RegisterForm), достаем по ключу
-                                    ошибки(название колонки) первый элемент
+<!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                                    {{form.errors[error][0]}}
                                 </div>
                                 {%endif%}
 
