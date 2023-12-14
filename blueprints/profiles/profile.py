@@ -9,6 +9,7 @@ profile = Blueprint('profile', __name__, template_folder='templates', static_fol
 
 
 @profile.route('/profile_page')
+@login_required
 def user():
     user = db_sess.query(User).filter(User.login == current_user.login).first()
     prizes = [db_sess.query(PrizeData).filter(PrizeData.owner_id == current_user.id).all()]

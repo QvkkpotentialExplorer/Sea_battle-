@@ -5,11 +5,16 @@
     <title>edit</title>
 </head>
 <body>
+{{ ship_form.errors }}
 <form method="post">
-    {{ ship_form.x(max=board.n) }}
-    {{ ship_form.y(max=board.n) }}
-    {{ ship_form.prize(choices=prizes) }}
+    {{ ship_form.hidden_tag() }}
+    {{ ship_form.x(max=board.n - 1)}}
+    {{ ship_form.y(max=board.n - 1)}}
+    {{ ship_form.prize() }}
     {{ ship_form.submit()}}
 </form>
+{% for i in board_render %}
+    <form>{{ i }}</form>
+{% endfor %}
 </body>
 </html>
