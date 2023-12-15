@@ -22,16 +22,15 @@
                             <form method="post">
 
                                 <h2 class="fw-bold mb-2 text-uppercase">Вход</h2>
-                                {% for error in form.errors %}
-                                {% if error%}
+
+                                {% if form.errors%}
                                 <div class="alert alert-danger" role="alert">
-<!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                                    {{form.errors[error][0]}}
+                                    <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                                    {{form.errors['password'][0]}}
                                 </div>
                                 {%endif%}
 
 
-                                {% endfor %}
                                 <p class="text-white-50 mb-5">Пожалуйста введите свой пароль</p>
                                 {{ form.hidden_tag() }}
                                 <div class="form-outline form-white mb-4">

@@ -9,8 +9,10 @@ def validate_password(form, data):
     db_sess = db_session.create_session()
     val = db_sess.query(User).filter(User.login == form.login.data).first()
     db_sess.close()
-    if not val or not val.check_password(form.password.data):
-        raise ValidationError('Неверный логин или пароль')
+    if not val :
+        raise ValidationError('Такого логина нет')
+    elif not val.check_password(form.password.data):
+        raise ValidationError('Неверный пароль')
 
 
 class LoginForm(FlaskForm):
