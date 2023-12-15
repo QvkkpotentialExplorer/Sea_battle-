@@ -30,4 +30,6 @@ def global_init(db_file):
 
 def create_session() -> Session:
     global __factory
+    if __factory is None:
+        return None
     return __factory()

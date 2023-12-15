@@ -5,7 +5,6 @@ from data import db_session
 from forms.login_form import LoginForm
 from forms.register_form import RegisterForm
 
-
 auth_pages = Blueprint('auth_page', __name__, template_folder='templates', static_folder='static', url_prefix='/auth/')
 
 
@@ -15,7 +14,8 @@ def register():
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         user = User(
-            login=form.login.data
+            login=form.login.data,
+            is_admin=False
         )
         user.set_password(form.password.data)
         db_sess.add(user)
@@ -37,8 +37,3 @@ def login():
         login_user(user, remember=form.remember_me.data)
         return f'Вы залогинены как {user.login}'
     return render_template('login.html', form=form)
-
-
-
-
-
