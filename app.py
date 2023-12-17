@@ -6,6 +6,7 @@ from blueprints.auth.auth_app import auth_pages
 from blueprints.main_page.main_page import main_page
 from blueprints.admin.admin import admin
 from blueprints.boards.board import board
+from blueprints.api.api import api
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ app.register_blueprint(auth_pages)
 app.register_blueprint(main_page)
 app.register_blueprint(admin)
 app.register_blueprint(board)
+app.register_blueprint(api)
 
 
 @login_manager.user_loader
