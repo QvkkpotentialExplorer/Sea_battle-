@@ -25,11 +25,11 @@ def add_board():
         db_sess = db_session.create_session()
         board = Board(
             admin_id=current_user.id,
-            n=form.n.data
+            n=form.n.data,
+            default_shoots=form.default_shoots.data
         )
         db_sess.add(board)
         db_sess.commit()
         db_sess.close()
-        print(1)
         return 'Доска создана'
     return render_template('add_board.html', form=form)

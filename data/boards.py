@@ -10,3 +10,4 @@ class Board(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     admin_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=True)
     n = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    default_shoots = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
