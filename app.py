@@ -1,4 +1,6 @@
 from flask import Flask
+
+from blueprints.profiles.profile import profile
 from data import db_session
 from data.users import User
 from flask_login import LoginManager
@@ -18,7 +20,7 @@ app.register_blueprint(auth_pages)
 app.register_blueprint(main_page)
 app.register_blueprint(admin)
 app.register_blueprint(board)
-
+app.register_blueprint(profile)
 
 @login_manager.user_loader
 def load_user(user_id):

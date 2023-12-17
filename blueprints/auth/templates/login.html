@@ -45,12 +45,16 @@
                                     {{form.password.label(class = "form-label")}}
                                     {{ form.password(class = "form-control form-control-lg") }}
                                 </div>
+                                <div class = "mb-3">
+                                    {{form.remember_me.label(class="form-label")}} {{form.remember_me}}
+                                </div>
 
                                 {{form.submit(class = "btn btn-outline-light btn-lg px-5")}}
+
                             </form>
                         </div>
                         <div>
-                            <p class="mb-0">У Вас нет аккаунта? <a href="/auth/register" class="text-white-50 fw-bold">Зарегистрироваться</a>
+                            <p class="mb-auto">У Вас нет аккаунта? <a href="/auth/register" class="text-white-50 fw-bold">Зарегистрироваться</a>
                             </p>
                         </div>
                     </div>
