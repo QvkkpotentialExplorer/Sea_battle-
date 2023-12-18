@@ -7,5 +7,8 @@
 <body>
 <a href="{{ url_for('auth_page.login') }}">login</a>
 <a href="{{ url_for('auth_page.register') }}">register</a>
+{% if current_user.is_authenticated %}
+<a href="{{ url_for('profile.user') }}">{{ current_user.login }}</a>
+{% endif %}
 </body>
 </html>

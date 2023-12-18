@@ -14,6 +14,6 @@ def user():
     prizes = [db_sess.query(PrizeData).filter(PrizeData.owner_id == current_user.id).all()]
 
     if current_user.is_admin:
-        return render_template('admin_html')
+        return render_template('admin.html')
     else:
-        return render_template('user.html',user = user,prizes= prizes)
+        return render_template('user.html', user=user, prizes=prizes)

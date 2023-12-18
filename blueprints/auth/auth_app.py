@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, redirect
-from flask_login import login_user
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_user, logout_user
 from data.users import User
 from data.prize_data import PrizeData
 from data.db_session import db_sess
@@ -30,8 +30,12 @@ def login():
     if form.validate_on_submit():
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         login_user(user, remember=form.remember_me.data)
-        return redirect(location='/profile/profile_page' )
+        return redirect(location=url_for('profile.user'))
 
     return render_template('login.html', form=form)
 
 
+@auth_pages.route('/logout', methods=['GET'])
+def logout():
+    logout_user()
+    return redirect('/')

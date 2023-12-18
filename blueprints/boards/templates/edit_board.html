@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+</head>
+<body>
+<form method="post">
+    {{ ship_form.x(max=board.n) }}
+    {{ ship_form.y(max=board.n) }}
+    {{ ship_form.prize(choices=prizes) }}
+    {{ ship_form.submit()}}
+</form>
+</body>
+</html>

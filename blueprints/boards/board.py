@@ -2,7 +2,11 @@ from flask import Blueprint, render_template, redirect, abort
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
+
+from data.prizes import Prize
 from forms.add_board_form import AddBoardForm
+from forms.add_ship_form import AddShipForm
+from data.ships import Ship
 
 board = Blueprint('board', __name__, template_folder='templates', static_folder='static', url_prefix='/board')
 
@@ -29,3 +33,27 @@ def add_board():
         db_sess.commit()
         return 'Доска создана'
     return render_template('add_board.html', form=form)
+
+
+@board.route('/edit/<int:board_id>', methods=['GET', 'POST'])
+@login_required
+def edit_board(board_id: int):
+    if not current_user.is_admin:
+        return abort(401)
+    add_ship_form = AddShipForm()
+    if add_ship_form.validate_on_submit():
+        print(add_ship_form.prize.data)
+        ship = Ship(
+            board_id=board_id,
+            prize_id=add_ship_form.prize.data
+        )
+        db_sess.add(board)
+        db_sess.commit()
+        return render_template('edit_board.html',
+                               ship_form=add_ship_form,
+                               board=db_sess.get(Board, board_id),
+                               prizes=[(prize.name, prize.id) for prize in db_sess.query(Prize).all()])
+    return render_template('edit_board.html',
+                           ship_form=add_ship_form,
+                           board=db_sess.get(Board, board_id),
+                           prizes=[(prize.name, prize.id) for prize in db_sess.query(Prize).all()])
