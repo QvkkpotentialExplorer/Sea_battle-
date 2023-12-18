@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect
 from flask_login import login_user
 from data.users import User
 from data.prize_data import PrizeData
-from data import db_session
+from data.db_session import db_sess
 from forms.login_form import LoginForm
 from forms.register_form import RegisterForm
 
@@ -13,7 +13,6 @@ auth_pages = Blueprint('auth_page', __name__, template_folder='templates', stati
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
         user = User(
             login=form.login.data,
             is_admin=False
@@ -21,7 +20,6 @@ def register():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        db_sess.close()
         return 'Вы зареганы'
     return render_template('register.html', form=form)
 
@@ -30,11 +28,7 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.login == form.login.data).first()
-
-        db_sess.close()
-        print(user.login)
         login_user(user, remember=form.remember_me.data)
         return redirect(location='/profile/profile_page' )
 

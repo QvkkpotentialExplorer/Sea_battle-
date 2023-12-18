@@ -1,14 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, SubmitField, StringField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
-from data import db_session
 from data.users import User
+from data.db_session import db_sess
 
 
 def validate_login(form, data):
-    db_sess = db_session.create_session()
     val = db_sess.query(User).filter(User.login == data.data).first()
-    db_sess.close()
     if val:
         raise ValidationError('Этот логин уже занят , придумайте другой')
 

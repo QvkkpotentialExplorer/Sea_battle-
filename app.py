@@ -1,5 +1,8 @@
-from flask import Flask
 from data import db_session
+db_session.global_init('./db/sea_battel.db')
+
+from flask import Flask
+from data.db_session import db_sess
 from data.users import User
 from flask_login import LoginManager
 from blueprints.auth.auth_app import auth_pages
@@ -24,12 +27,9 @@ app.register_blueprint(api)
 
 @login_manager.user_loader
 def load_user(user_id):
-    db_sess = db_session.create_session()
     user = db_sess.query(User).get(user_id)
-    db_sess.close()
     return user
 
 
 if __name__ == '__main__':
-    db_session.global_init("db/sea_battel.db")
     app.run()

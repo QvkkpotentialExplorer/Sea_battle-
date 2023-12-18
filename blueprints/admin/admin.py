@@ -1,5 +1,6 @@
 import click
 from flask import Blueprint
+from data.db_session import db_sess
 from data import db_session
 from data.users import User
 
@@ -10,10 +11,9 @@ admin = Blueprint('admin', __name__, url_prefix='/admin/')
 @click.argument("name")
 @click.argument("password")
 def create_admin(name, password):
-    db_sess = db_session.create_session()
+    global db_sess
     if db_sess is None:
         db_session.global_init('db/sea_battel.db')
-        db_sess = db_session.create_session()
     user = User(
         login=name,
         is_admin=True

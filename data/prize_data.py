@@ -11,3 +11,4 @@ class PrizeData(SqlAlchemyBase):
     is_win = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True)
     owner_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=True)
     prize_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('prizes.id'), nullable=True)
+    prize = orm.relationship('Prize')
