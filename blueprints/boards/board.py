@@ -3,7 +3,7 @@ from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
 
-from data.prizes import Prize
+from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
@@ -47,12 +47,18 @@ def edit_board(board_id: int):
     for x, y in ship_coords:
         board_render[y][x] = '#'
     if add_ship_form.validate_on_submit():
+        prize_data = PrizeData(
+            is_win=False,
+            owner_id=current_user.id,
+            prize_id=add_ship_form.prize.data
+        )
         ship = Ship(
             board_id=board_id,
             prize_id=add_ship_form.prize.data,
             x=add_ship_form.x.data,
             y=add_ship_form.y.data
         )
+        db_sess.add(prize_data)
         db_sess.add(ship)
         db_sess.commit()
         board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'

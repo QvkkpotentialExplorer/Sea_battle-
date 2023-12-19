@@ -18,5 +18,5 @@ class AddShipForm(FlaskForm):
     board_id = HiddenField()
     x = IntegerField('x', validators=[NumberRange(min=0)])
     y = IntegerField('y', validators=[NumberRange(min=0)])
-    prize = SelectField('prizes', choices=[(prize.name, prize.id) for prize in db_sess.query(Prize).all()])
+    prize = SelectField('prizes', choices=[(prize.id, prize.name) for prize in db_sess.query(Prize).all()])
     submit = SubmitField('Добавить корабль', validators=[coords_validator])

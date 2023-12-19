@@ -40,7 +40,6 @@ def add_prize():
             avatar=f'{file_name}',
             name=form.name.data,
             description=form.description.data,
-            is
         )
         db_sess.add(prize)
         db_sess.commit()
