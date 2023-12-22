@@ -23,18 +23,15 @@
 
                                 {{ form.hidden_tag() }}
                                 <h2 class="fw-bold mb-2 text-uppercase">Регистрация</h2>
-                                {% if form.errors%}
+                                {% for error in form.errors %}
+                                {% if error%}
                                 <div class="alert alert-danger" role="alert">
                                     <!--                                Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент, то есть наше сообщение-->
-                                    {% if form.login.errors%}
-                                    {{form.errors['login'][0]}}
-                                    {%elif form.password.errors%}
-                                    {{form.errors['password'][0]}}
-                                    {%endif%}
+                                    {{form.errors[error][0]}}
                                 </div>
                                 {%endif%}
 
-
+                                {% endfor %}
                                 <p class="text-white-50 mb-5">Пожалуйста введите свой пароль</p>
 
                                 <div class="form-outline form-white mb-4">

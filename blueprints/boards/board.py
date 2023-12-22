@@ -2,11 +2,12 @@ from flask import Blueprint, render_template, redirect, abort
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
-
+from data.users_on_boards import UserOnBoard
 from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
+from data.users_shoots import UserShoot
 
 board = Blueprint('board', __name__, template_folder='templates', static_folder='static', url_prefix='/board')
 
@@ -71,3 +72,34 @@ def edit_board(board_id: int):
                            ship_form=add_ship_form,
                            board=db_sess.get(Board, board_id),
                            board_render=[''.join(i) for i in board_render])
+
+
+@board.route('/show/<int:board_id>', methods=['GET', 'POST'])
+@login_required
+def show_board(board_id):
+    if (current_user.is_admin):
+        return render_template('show_admin_board.html')
+    board = db_sess.query(Board).filter(Board.id == board_id).first()
+    if board is None:
+        return abort(404)
+    shoots = db_sess.query(UserShoot).filter(UserShoot.board_id == board_id,
+                                             UserShoot.user_id == current_user.id).first()
+    if shoots is None:
+        shoots_data = UserShoot(
+            user_id=current_user.id,
+            board_id=board_id,
+            count=board.default_shoots
+        )
+        db_sess.add(shoots_data)
+    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
+                                                      UserOnBoard.board_id == board_id)
+    if user_on_board is None:
+        user_on_board = UserOnBoard(
+            user_id=current_user.id,
+            board_id=board_id
+        )
+        db_sess.add(user_on_board)
+    db_sess.commit()
+    if not user_on_board.can_join:
+        return 'Вы забанены на этой доске!'
+    return render_template('show_board.html')

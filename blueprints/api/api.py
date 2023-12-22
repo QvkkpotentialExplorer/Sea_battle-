@@ -19,8 +19,9 @@ def get_board(board_id):
 
 
 @api.route('/get_user_shoot')
+@login_required
 def get_user_shoot():
-    shoots = db_sess.query(UserShoot).filter(UserShoot.user_id == request.args.get('user_id', default=0, type=int),
+    shoots = db_sess.query(UserShoot).filter(UserShoot.user_id == current_user.id,
                                              UserShoot.board_id == request.args.get('board_id', default=0,
                                                                                     type=int)).first()
     return str(shoots.count) if shoots is not None else '-1'

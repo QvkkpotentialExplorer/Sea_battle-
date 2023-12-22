@@ -10,3 +10,4 @@ class UserOnBoard(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=True)
     board_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('boards.id'), nullable=True)
+    can_join = sqlalchemy.Column(sqlalchemy.Boolean, default=True)

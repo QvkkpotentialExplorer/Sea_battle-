@@ -1,9 +1,10 @@
 import click
-from flask import Blueprint, render_template, redirect, url_for, abort
+from flask import Blueprint, render_template, redirect, url_for, abort, request
 from data.db_session import db_sess
 from data import db_session
 from data.users import User
 from data.prizes import Prize
+from data.users_shoots import UserShoot
 from forms.add_prize import AddPrizeForm
 from uuid import uuid1
 from flask_login import current_user, login_required
@@ -45,5 +46,19 @@ def add_prize():
         db_sess.commit()
         form.avatar.data.save(f'blueprints/profiles/static/avatars/{file_name}')
         return redirect(url_for('profile.user'))
+
+    return render_template('add_prize.html', form=form)
+
+
+@admin.route('/add_shots')
+@login_required
+def add_prize():
+    if not current_user.is_admin:
+        return abort(401)
+
+    shoots = db_sess.query(UserShoot).filter(UserShoot.user_id == request.args.get('user_id'),
+                                             UserShoot.board_id == request.args.get('board_id')).first()
+    shoots.count += request.args.get('shoots_count')
+    db_sess.commit()
 
     return render_template('add_prize.html', form=form)
