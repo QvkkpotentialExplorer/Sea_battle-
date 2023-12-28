@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+  {{ form.hidden_tag() }}
+  {{ form.validation_code() }}
+    <a href="{{ url_for('auth_page.send_key') }}">Отправить снова</a>
+</form>
+</body>
+</html>

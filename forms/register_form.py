@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, StringField
+from wtforms import PasswordField, SubmitField, StringField, EmailField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from data.users import User
 from data.db_session import db_sess
@@ -15,4 +15,5 @@ class RegisterForm(FlaskForm):
     login = StringField('Логин', validators=[DataRequired(), validate_login])
     password = PasswordField('Пароль', validators=[DataRequired(), EqualTo('confirm', message='Пароли не совпадают')])
     confirm = PasswordField('Подтвердите пароль', validators=[DataRequired()])
+    jid = EmailField('xmpp адрес')
     submit = SubmitField('Регистрация')

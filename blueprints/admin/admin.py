@@ -52,7 +52,7 @@ def add_prize():
 
 @admin.route('/add_shots')
 @login_required
-def add_prize():
+def add_shoot():
     if not current_user.is_admin:
         return abort(401)
 
@@ -61,4 +61,4 @@ def add_prize():
     shoots.count += request.args.get('shoots_count')
     db_sess.commit()
 
-    return render_template('add_prize.html', form=form)
+    return "render_template('add_prize.html', form=form)"
