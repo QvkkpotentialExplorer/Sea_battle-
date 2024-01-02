@@ -1,71 +1,9 @@
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        @import '/static/css/bootstrap.min.css';
-    </style>
-    <title>Привет мир!</title>
-  </head>
-    <body class="h-100 bg-primary" >
-<div class='cover-container w-100 d-flex px-0 flex-column '>
-    <header class="mb-5">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-auto">
-            <div class="container-fluid mt-1">
-                <span class="navbar-brand mx-3 mb-1  h1">Sea Battle</span>
-                <button class="navbar-toggler " type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto ">
-                        <li class="nav-item active ">
-                            <a class="nav-link " href="/">Главная <span
-                                    class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active mr-1">
-                            <a class="nav-link " href="">Редактировать призы<span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active mr-1 ">
-                            <a class="nav-link " href=""><span
-                                    class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active mr-1 ">
-                            <a class="nav-link " href="{{ url_for('auth_page.logout') }}">Выйти <span
-                                    class="sr-only"></span></a>
-                        </li>
+{% extends '../../templates/base_admin.html' %}
 
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main class="container mx-auto  mt-5 align-self-center ">
-        <div class="py-5 text-center">
-            <h1>Начните играть !</h1>
-            <p class="lead"> Чтобы приступить к игре вам нужно получить приглашение в лобби от админа</p>
-            <a class="btn btn-outline-light btn-lg mt-5 px-5" href="{{ url_for('board.add_board') }}"> Создать игру</a>
-        </div>
-    </main>
-
+{% block main_content %}
+<div class="py-5 text-center">
+    <h1>Начните играть !</h1>
+    <p class="lead mb-5"> Чтобы приступить к игре вам нужно получить приглашение в лобби от админа</p>
+    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('board.add_board') }}">Создать игру</a>
 </div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}
