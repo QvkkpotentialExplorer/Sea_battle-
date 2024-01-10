@@ -14,7 +14,7 @@
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="col-12 col-md-8 col-lg-7 col-xl-6">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
@@ -52,9 +52,13 @@
                                     {{ form.confirm.label(class = "form-label")}}
                                     {{ form.confirm(class = "form-control form-control-lg") }}
                                 </div>
+                                <div class="form-outline form-white mb-5    ">
+                                    {{ form.jid.label(class = "form-label")}}
+                                    {{ form.jid(class = "form-control form-control-lg") }}
+                                </div>
 
                                 {{form.submit(class = "btn btn-outline-light btn-lg px-5")}}
-                                {{ form.jid() }}
+
                             </form>
                         </div>
                         <div>
