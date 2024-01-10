@@ -4,7 +4,7 @@ from data.boards import Board
 from data.ships import Ship
 from data.users_shoots import UserShoot
 from data.db_session import db_sess
-from data.prize_data import PrizeData
+from data.no_cells import DeathCell
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -30,15 +30,17 @@ def get_user_shoot():
 @api.route('/shoot_user')
 @login_required
 def shoot():
+    board_id = request.args.get('board_id', default=0, type=int)
+    x = request.args.get('x', default=0, type=int)
+    y = request.args.get('y', default=0, type=int)
+
     shoots = db_sess.query(UserShoot).filter(UserShoot.user_id == current_user.id,
                                              UserShoot.board_id == request.args.get('board_id', default=0,
                                                                                     type=int)).first()
-    if shoots is not None:
+    cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id, DeathCell.x == x, DeathCell.y == y).first()
+    if shoots is not None and cells is not None:
         return 'False'
     if shoots.count > 0:
-        board_id = request.args.get('board_id', default=0, type=int)
-        x = request.args.get('x', default=0, type=int)
-        y = request.args.get('y', default=0, type=int)
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         shoots.count -= 1
         ship.prize_data.is_win = True
