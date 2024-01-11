@@ -1,11 +1,18 @@
-{% extends 'base_user.html' %}
-{%main_content%}
-<form method="post">
-    {{ form.hidden_tag() }}
-    {{ form.n() }}
-    {{ form.default_shoots() }}
-    {{ form.submit() }}
-</form>
+{% extends 'base_admin.html' %}
+{%block main_content%}
+<div class="p-3 mb-2 bg-info text-dark">
+    <div class="mb-2>">
+        <h1 class="text-center">Создайте игру</h1>
+        <form method="post" class="text-center">
+            <div class="row   align-content-center">
+                {{ form.hidden_tag() }}
+                {{ form.n() }}
+                {{ form.default_shoots() }}
+                {{ form.submit(class="btn btn-outline-light btn-lg btn-lg mt-5 px-5") }}
+            </div>
+        </form>
+    </div>
+</div>
 {%endblock%}
 </body>
 </html>
