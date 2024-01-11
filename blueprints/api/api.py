@@ -43,8 +43,17 @@ def shoot():
     if shoots.count > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         shoots.count -= 1
+        cell = DeathCell(
+            board_id=board_id,
+            x=x,
+            y=y
+        )
+        if ship is None:
+            db_sess.add(cell)
+            return 'MIMO'
         ship.prize_data.is_win = True
         ship.prize_data.owner_id = current_user.id
+        db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()
         return str(ship is not None)
