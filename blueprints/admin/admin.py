@@ -9,7 +9,7 @@ from forms.add_prize import AddPrizeForm
 from uuid import uuid1
 from flask_login import current_user, login_required
 
-admin = Blueprint('admin', __name__, url_prefix='/admin/', template_folder='templates')
+admin = Blueprint('admin', __name__, url_prefix='/admin/', template_folder='../templates')
 
 
 @admin.cli.command("addadmin")

@@ -9,7 +9,7 @@ from forms.add_ship_form import AddShipForm
 from data.ships import Ship
 from data.users_shoots import UserShoot
 
-board = Blueprint('board', __name__, template_folder='templates', static_folder='static', url_prefix='/board')
+board = Blueprint('board', __name__, template_folder='../templates', static_folder='static', url_prefix='/board')
 
 
 @board.route('/list')

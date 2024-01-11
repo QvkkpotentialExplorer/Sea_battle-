@@ -9,7 +9,7 @@ import random
 from string import ascii_letters
 import requests
 
-auth_pages = Blueprint('auth_page', __name__, template_folder='templates', static_folder='static', url_prefix='/auth/')
+auth_pages = Blueprint('auth_page', __name__, template_folder='../templates', static_folder='static', url_prefix='/auth/')
 
 
 @auth_pages.route('/register', methods=['GET', 'POST'])

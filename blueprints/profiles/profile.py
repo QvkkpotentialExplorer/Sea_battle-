@@ -5,7 +5,7 @@ from data.db_session import db_sess
 from data.prize_data import PrizeData
 from data.users import User
 
-profile = Blueprint('profile', __name__, template_folder='templates', static_folder='static', url_prefix='/profile')
+profile = Blueprint('profile', __name__, template_folder='../templates', static_folder='static', url_prefix='/profile')
 
 
 @profile.route('/profile_page')
