@@ -1,19 +1,23 @@
 {% extends 'base_admin.html' %}
 {%block main_content%}
-<div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-8 col-md-6 col-lg-7 bg-dark ">
-        <h1 class="text-center">Создайте игру</h1>
+<div class="row d-flex justify-content-center align-items-center h-100" >
+    <div class="col-8 col-md-6 col-lg-7  bg-dark " style="border-radius: 1rem;">
+        <h1 class="text-center text-white">Создайте игру</h1>
         <form method="post" class="text-center mx-lg-5 mx-4">
-            <div class="form-outline form-white mb-4">
-                {{ form.hidden_tag() }}
+            <div class="mt-4">
                 <div class="form-outline form-white mb-4">
-                    {{ form.n(class = "form-control form-control-lg") }}
-                </div>
-                <div class="form-outline form-white mb-4">
-                    {{ form.default_shoots(class = "form-control form-control-lg") }}
-                </div>
+                    <label class="text-white">Укажите сторону квадрата</label>
+                    {{ form.hidden_tag() }}
+                    <div class="form-outline form-white mb-4">
+                        {{ form.n(class = "form-control form-control-lg") }}
+                    </div>
+                    <div class="form-outline form-white mb-4">
+                        <label class="text-white">Укажите количество выстрелов</label>
+                        {{ form.default_shoots(class = "form-control form-control-lg") }}
+                    </div>
 
-                {{ form.submit(class="btn btn-outline-light btn-lg btn-lg mt-5 px-5") }}
+                    {{ form.submit(class="btn btn-outline-light btn-lg btn-lg mt-5 px-5") }}
+                </div>
             </div>
         </form>
     </div>
