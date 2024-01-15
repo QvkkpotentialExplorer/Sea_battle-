@@ -32,7 +32,7 @@ def add_board():
         )
         db_sess.add(board)
         db_sess.commit()
-        return 'Доска создана'
+        return redirect (f'edit/{board.id}')
     return render_template('add_board.html', form=form)
 
 
@@ -63,6 +63,7 @@ def edit_board(board_id: int):
         db_sess.add(ship)
         db_sess.commit()
         board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
+
         return render_template('edit_board.html',
                                ship_form=add_ship_form,
                                board=db_sess.get(Board, board_id),
