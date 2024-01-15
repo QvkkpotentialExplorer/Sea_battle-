@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sea battle</title>
+    <h1>IGRA</h1>
+    <script>
+
+    function changeColor(newColor) {
+        var elem = document.getElementById("para1");
+        elem.style.color = newColor;  
+    } 
+    </script>
 
 
 </head>
@@ -11,8 +19,21 @@
     <div class="content">
 
         <div id="area"></div>
-
+        <p id="el"></p>
         <script src="app.js"></script>
+        <script>
+            function genMap(p){
+            for (let xCord=0; xCord<p; xCord++){
+                for (let yCord=0; yCord<p; yCord++){
+                    const button = document.createElement('button');
+                    button.textContent = 'Нажми меня';
+                    document.body.appendChild(button)
+            }
+        }
+    }
+        </script>
+
+        <button onclick="genMap(3)"></button>
     </div>
 </body>
 </html>
