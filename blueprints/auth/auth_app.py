@@ -28,6 +28,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = db_sess.query(User).filter(User.login == form.login.data).first()
+        print(user)
         login_user(user, remember=form.remember_me.data)
         return redirect(location=url_for('profile.user'))
 

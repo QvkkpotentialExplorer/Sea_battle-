@@ -1,0 +1,25 @@
+{% extends 'base_admin.html' %}
+{%block main_content%}
+
+{% if prizes%}
+<div class="row justify-content-start text-white">
+    {% for prize in prizes%}
+    <div class="col-3 ">
+        <div class="card bg-dark justify-content-center ">
+            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 200px" >
+<!--            <img src="{{ url_for('static', filename='avatars/' + prize[2] )}}" class="img-thumbnail" />-->
+            <div class="">
+                <p> Something </p>
+            </div>
+        </div>
+    </div>
+</div>
+    {%endfor%}
+{%elif not prizes%}
+<div class="py-5 text-center">
+    <h1>Добавьте приз</h1>
+    <p class="lead mb-5">Вы пока еще не создали </p>
+    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить приз</a>
+</div>
+{%endif%}
+{%endblock%}
