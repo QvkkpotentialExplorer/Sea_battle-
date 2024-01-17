@@ -17,7 +17,7 @@
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <div class="container-fluid">
                     <a href="{{ url_for('auth_page.login') }}">login</a>
-                    <a href="{{ url_for('auth_page.register') }}">register</a>-->
+                    <a href="{{ url_for('auth_page.register') }}">register</a>
                     {% if current_user.is_authenticated %}
                     <a href="{{ url_for('profile.user') }}">{{ current_user.login }}</a>
                     {% endif %}
