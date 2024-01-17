@@ -16,34 +16,28 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
+                        <form method="post">
+                            <h1 class="text-white">Введите код подтверждения</h1>
+                            <div class="mt-4">
+                                <div class="form-outline form-white mb-4">
 
-                        <div class="mb-md-5 mt-md-4 pb-5">
-
-                            <form method="post">
-                                <h1 class="text-white">Введите код подтверждения</h1>
-                                <div class="mt-4">
-                                    <div class="form-outline form-white mb-4">
-
-                                        {{ form.hidden_tag() }}
-                                    </div>
-                                    <div class="form-outline form-white mb-4  form-control-lg">
-                                        {{ form.validation_code() }}
-                                    </div>
-                                    <div class="form-outline form-white mb-4">
-
-                                        <a class="text-white btn btn-outline-light btn-lg btn-lg mt-5 px-5"
-                                           href="{{ url_for('auth_page.send_key') }}">Отправить снова</a>
-                                    </div>
+                                    {{ form.hidden_tag() }}
                                 </div>
-                            </form>
-                        </div>
+                                <div class="form-outline form-white mb-4  form-control-lg">
+                                    {{ form.validation_code() }}
+                                </div>
+                                <div class="form-outline form-white mb-4">
+
+                                    <a class="text-white btn btn-outline-light btn-lg btn-lg mt-5 px-5"
+                                       href="{{ url_for('auth_page.send_key') }}">Отправить снова</a>
+                                {{ form.submit() }}
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-
     </div>
 </section>
 </html>
