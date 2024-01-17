@@ -18,21 +18,21 @@
 
     </style>
 <h1>Ваши призы</h1>
-    <ul class ="row justify-content-start text-white mt-5">
+    <div class ="row justify-content-start text-white mt-5">
     {% for prize in prizes%}
-    <li class="col-3 mx-4 mt-3">
+    <div     class="col-3 mx-4 mt-3">
     <div class="galery">
         <div class="card flex-fill bg-dark align-items-center ">
             <p>{{prize[0]}}</p>
-            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 200px ; height:100px" >
+            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 60% ; height : 10rem;" >
 <!--            <img src="{{ url_for('static', filename='avatars/' + prize[2] )}}" class="img-thumbnail" />-->
-            <div class="mx-4">
-                <p>{{prize[1]}}</p>
+            <div class="mx-4 ">
+                <p class="">{{prize[1]}}</p>
 
             </div>
         </div>
       </div>
-    </li>
+    </div>
 
     {%endfor%}
     </ul>
