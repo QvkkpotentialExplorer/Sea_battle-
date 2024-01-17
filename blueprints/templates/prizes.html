@@ -2,19 +2,43 @@
 {%block main_content%}
 
 {% if prizes%}
-<div class="row justify-content-start text-white">
+<div class="justify-content-center text-center">
+    <style>
+
+.gallery {
+  column-count: 2;
+  column-gap: 10px;
+}
+
+.gallery-img {
+  width: 100%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+    </style>
+<h1>Ваши призы</h1>
+    <ul class ="row justify-content-start text-white mt-5">
     {% for prize in prizes%}
-    <div class="col-3 ">
-        <div class="card bg-dark justify-content-center ">
-            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 200px" >
+    <li class="col-3 mx-4 mt-3">
+    <div class="galery">
+        <div class="card flex-fill bg-dark align-items-center ">
+            <p>{{prize[0]}}</p>
+            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 200px ; height:100px" >
 <!--            <img src="{{ url_for('static', filename='avatars/' + prize[2] )}}" class="img-thumbnail" />-->
-            <div class="">
-                <p> Something </p>
+            <div class="mx-4">
+                <p>{{prize[1]}}</p>
+
             </div>
         </div>
-    </div>
-</div>
+      </div>
+    </li>
+
     {%endfor%}
+    </ul>
+</div>
+ <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить приз</a>
+</div>
 {%elif not prizes%}
 <div class="py-5 text-center">
     <h1>Добавьте приз</h1>
