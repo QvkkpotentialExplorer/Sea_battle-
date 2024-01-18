@@ -16,34 +16,42 @@
   object-fit: cover;
 }
 
-    </style>
-<h1>Ваши призы</h1>
-    <div class ="row justify-content-start text-white mt-5">
-    {% for prize in prizes%}
-    <div     class="col-3 mx-4 mt-3">
-    <div class="galery">
-        <div class="card flex-fill bg-dark align-items-center ">
-            <p>{{prize[0]}}</p>
-            <img src="static/avatars/{{prize[2]}}" class = "img-thumbnail align-self-center" style="width: 60% ; height : 10rem;" >
-<!--            <img src="{{ url_for('static', filename='avatars/' + prize[2] )}}" class="img-thumbnail" />-->
-            <div class="mx-4 ">
-                <p class="">{{prize[1]}}</p>
 
+
+
+    </style>
+    <h1>Ваши призы</h1>
+    <div class="row justify-content-center justify-content-md-start justify-content-lg-center
+    text-white mt-5">
+        {% for prize in prizes%}
+        <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
+            <div class="galery">
+                <div class="card flex-fill bg-dark align-items-center ">
+                    <p>{{prize[0]}}</p>
+                    <img src="static/avatars/{{prize[2]}}" class="img-thumbnail align-self-center "
+                         style="width: 60% ; height : 10rem; background: none;">
+                    <!--            <img src="{{ url_for('static', filename='avatars/' + prize[2] )}}" class="img-thumbnail" />-->
+                    <div class="prizes_item mt-3">
+                        <div class="mx-4 ">
+                            <p class="">{{prize[1]}}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
-    </div>
 
-    {%endfor%}
-    </ul>
-</div>
- <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить приз</a>
+        {%endfor%}
+        </ul>
+    </div>
+    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+        приз</a>
 </div>
 {%elif not prizes%}
 <div class="py-5 text-center">
     <h1>Добавьте приз</h1>
     <p class="lead mb-5">Вы пока еще не создали </p>
-    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить приз</a>
+    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+        приз</a>
 </div>
 {%endif%}
 {%endblock%}
