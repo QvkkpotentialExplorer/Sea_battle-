@@ -22,14 +22,14 @@
 </style>
 
 <body class="text-center bg-dark text-white">
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+<div class="cover-container d-flex h-100 p-3  flex-column">
     <header class="mb-auto">
         <div>
             <h3 class="float-md-start mb-0">Sea Battle</h3>
             <nav class="navbar navbar-light ">
-                <div class="container-fluid">
+                <div class="container-fluid justify-content-center justify-content-md-end">
                     <a class="nav-link active" href="{{ url_for('auth_page.login') }}">login</a>
-                    <a class="nav-link" href="{{ url_for('auth_page.register') }}">register</a>
+                    <a class="nav-link active" href="{{ url_for('auth_page.register') }}">register</a>
                     {% if current_user.is_authenticated %}
                     <a class="nav-link" href="{{ url_for('profile.user') }}">{{ current_user.login }}</a>
                     {% endif %}
@@ -38,10 +38,9 @@
         </div>
     </header>
 
-    <main role="main" class="inner cover mt-5">
-        <h1 class="cover-heading">Cover your page.</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the
-            text, and add your own fullscreen background photo to make it your own.</p>
+    <main role="main" class="inner cover mt-5 justify-content-center">
+        <h1 class="cover-heading">Йоу boy это морской бой</h1>
+        <p class="lead">ММОРПГ многопользовательская игра из 2-ух человек убей все корабли противника)))</p>
         <p class="lead">
             <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
         </p>
