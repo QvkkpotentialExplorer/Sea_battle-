@@ -15,20 +15,20 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
+                    <div class="card-body p-5 text-center ">
                         <form method="post">
                             <h1 class="text-white">Введите код подтверждения</h1>
-                            <div class="mt-4">
+                            <div class="mt-4 justify-content-center">
                                 <div class="form-outline form-white mb-4">
 
                                     {{ form.hidden_tag() }}
                                 </div>
-                                <div class="form-outline form-white mb-4  form-control-lg">
-                                    {{ form.validation_code() }}
+                                <div class="form-outline form-white mb-4 mt-4 form-control-lg">
+                                    {{ form.validation_code(class = "form-control form-control-lg") }}
                                 </div>
                                 <div class="form-outline form-white mb-4">
 
-                                    <a class="text-white btn btn-outline-light btn-lg btn-lg mt-5 px-5"
+                                    <a class=" btn btn-outline-light btn-lg btn-lg mt-5 px-5"
                                        href="{{ url_for('auth_page.send_key') }}">Отправить снова</a>
                                 {{ form.submit() }}
                                 </div>

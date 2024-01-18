@@ -9,4 +9,4 @@ class DeathCell(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     board_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('boards.id'), nullable=True)
     x = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
-    u = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    y = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)

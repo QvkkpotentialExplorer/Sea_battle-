@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head class="h-100">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+        @import '../css/bootstrap.min.css';
+        @import '../css/style.css';
+    </style>
     <title>Sea battle</title>
     <h1>IGRA</h1>
     <script>
@@ -15,25 +19,46 @@
 
 
 </head>
-<body>
-    <div class="content">
-
+<body class="h">
+<div class="cover-container mx-5 h-100" id = "hz">
+    <div class="card bg-dark h-100 text-white mx-5" id = "game_window">
+        <p>тщуштмавтиваоымммммммммммммммммм
+        ммылыьыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы
+        ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы</p>
         <div id="area"></div>
         <p id="el"></p>
         <script src="app.js"></script>
         <script>
             function genMap(p){
+            const gameWindow = document.getElementById('game_window');
+            const column = document.createElement('div');
+            column.className = 'row justify-content-center';
             for (let xCord=0; xCord<p; xCord++){
+                    const col = document.createElement('div');
+                    col.className = "col-1 mx-0 px-0";
                 for (let yCord=0; yCord<p; yCord++){
+
                     const button = document.createElement('button');
-                    button.textContent = 'Нажми меня';
-                    document.body.appendChild(button)
+                    button.className="btn btn-outline-light btn-sm px-0 mx-0 bg-primary play_cage";
+                    button.textContent = 'xnjnn';
+                    col.appendChild(button);
+
             }
+            column.appendChild(col);
         }
+        gameWindow.appendChild(column);
+
     }
         </script>
 
-        <button onclick="genMap(3)"></button>
+        <button class="btn btn-outline-light btn-sm  mt-5 px-5" onclick="genMap(10)">Генерация поля</button>
+        </div>
     </div>
+
 </body>
 </html>

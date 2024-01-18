@@ -6,9 +6,10 @@ from data.db_session import db_sess
 
 
 def validate_login(form, data):
-    val = db_sess.query(User).filter(User.login == data.data).first()
-    if val:
+    val_log = db_sess.query(User).filter(User.login == data.data).first()
+    if val_log:
         raise ValidationError('Этот логин уже занят , придумайте другой')
+
 
 
 class RegisterForm(FlaskForm):
