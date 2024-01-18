@@ -30,4 +30,5 @@ def prize():
         return render_template('prizes.html',prizes = prizes)
 
     else:
-        return "fffff"
+        prizes = db_sess.query(Prize.name,Prize.description,Prize.avatar).filter(PrizeData.owner_id == current_user.id).all()
+        return render_template('prizes.html', prizes=prizes)

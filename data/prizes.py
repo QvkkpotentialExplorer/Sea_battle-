@@ -3,6 +3,7 @@ from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
 
+
 class Prize(SqlAlchemyBase):
     __tablename__ = 'prizes'
 
