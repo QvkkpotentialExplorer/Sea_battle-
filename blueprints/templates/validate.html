@@ -20,17 +20,17 @@
                             <h1 class="text-white">Введите код подтверждения</h1>
                             <div class="mt-4 justify-content-center">
                                 <div class="form-outline form-white mb-4">
-
                                     {{ form.hidden_tag() }}
                                 </div>
                                 <div class="form-outline form-white mb-4 mt-4 form-control-lg">
                                     {{ form.validation_code(class = "form-control form-control-lg") }}
                                 </div>
                                 <div class="form-outline form-white mb-4">
-
+                                    {{ form.submit(class=" btn btn-outline-light btn-lg btn-lg mt-5 px-5") }}
                                     <a class=" btn btn-outline-light btn-lg btn-lg mt-5 px-5"
                                        href="{{ url_for('auth_page.send_key') }}">Отправить снова</a>
-                                {{ form.submit() }}
+
+
                                 </div>
                             </div>
                         </form>

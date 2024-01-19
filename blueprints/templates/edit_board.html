@@ -1,11 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>edit</title>
-</head>
-<body>
+{% extends 'base_admin.html' %}
+
+{%block main_content%}
+
+
 {{ ship_form.errors }}
+<div class="container mt-5">
+  <h2>Dropdown List with Accordion Items</h2>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Select an Item
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+      <!-- Section 1 -->
+      <div class="accordion" id="accordionExample">
+        {%for  prize in prizes%}
+        <div class="accordion-item">
+
+
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{prize[0]}}" aria-expanded="true" aria-controls="{{prize[0]}}">
+              {{prize[0]}}
+            </button>
+          </h2>
+          <div id="{{prize[0]}}" class="accordion-collapse collapse show" aria-labelledby="heading{{prize[0]}}" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <p>prize[3]</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+<!--  <div class="accordion-item">-->
+<!--    <h2 class="accordion-header" id="headingTwo">-->
+<!--      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+<!--        Accordion Item #2-->
+<!--      </button>-->
+<!--    </h2>-->
+<!--    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">-->
+<!--      <div class="accordion-body">-->
+<!--        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="accordion-item">-->
+<!--    <h2 class="accordion-header" id="headingThree">-->
+<!--      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+<!--        Accordion Item #3-->
+<!--      </button>-->
+<!--    </h2>-->
+<!--    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">-->
+<!--      <div class="accordion-body">-->
+<!--        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+
+      <!-- Add more sections as needed -->
+
+    </div>
+  </div>
+
+</div>
+
 <form method="post">
     {{ ship_form.hidden_tag() }}
     {{ ship_form.x(max=(board.n - 1))}}
@@ -16,5 +74,7 @@
 {% for i in board_render %}
     <div>{{ i }}</div>
 {% endfor %}
-</body>
-</html>
+{%endblock%}
+
+
+

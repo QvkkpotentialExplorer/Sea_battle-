@@ -47,6 +47,7 @@ def edit_board(board_id: int):
     board_render = [['.'] * board.n for _ in range(board.n)]
     for x, y in ship_coords:
         board_render[y][x] = '#'
+    prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()
     if add_ship_form.validate_on_submit():
         prize_data = PrizeData(
             is_win=False,
@@ -67,10 +68,12 @@ def edit_board(board_id: int):
         return render_template('edit_board.html',
                                ship_form=add_ship_form,
                                board=db_sess.get(Board, board_id),
+                               prizes = prizes,
                                board_render=[''.join(i) for i in board_render])
 
     return render_template('edit_board.html',
                            ship_form=add_ship_form,
+                           prizes = prizes,
                            board=db_sess.get(Board, board_id),
                            board_render=[''.join(i) for i in board_render])
 
