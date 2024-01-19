@@ -1,17 +1,33 @@
-<!doctype html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <title>getElementById example</title>
-    <script>
-      function changeColor(newColor) {
-        var elem = document.getElementById("para1");
-        elem.style.color = newColor;
-      }
-    </script>
-  </head>
-  <body>
-    <p id="para1">Some text here</p>
-    <button onclick="changeColor('blue');">blue</button>
-    <button onclick="changeColor('red');">red</button>
-  </body>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Выравнивание</title>
+  <style type="text/css">
+   TABLE {
+    width: 100%; /* Ширина таблицы */
+   }
+   #col1 {
+    width: 75%; /* Ширина первой колонки */
+    background: #f0f0f0; /* Цвет фона первой колонки */
+   }
+   #col2 {
+    width: 25%; /* Ширина второй колонки */
+    background: #fc5; /* Цвет фона второй колонки */
+    text-align: right; /* Выравнивание по правому краю */
+   }
+   #col1, #col2 {
+    vertical-align: top; /* Выравнивание по верхнему краю */
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+   }
+  </style>
+ </head>
+ <body>
+  <table>
+   <tr>
+    <td id="col1">Колонка 1</td>
+    <td id="col2">Колонка 2</td>
+   </tr>
+  </table> 
+ </body>
 </html>
