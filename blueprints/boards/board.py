@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, redirect, abort
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
+
+from data.prizes import Prize
 from data.users_on_boards import UserOnBoard
 from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
@@ -44,6 +46,7 @@ def edit_board(board_id: int):
     add_ship_form = AddShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
+    print(ship_coords)
     board_render = [['.'] * board.n for _ in range(board.n)]
     for x, y in ship_coords:
         board_render[y][x] = '#'
@@ -69,13 +72,15 @@ def edit_board(board_id: int):
                                ship_form=add_ship_form,
                                board=db_sess.get(Board, board_id),
                                prizes = prizes,
-                               board_render=[''.join(i) for i in board_render])
+                               board_render=[''.join(i) for i in board_render],
+                               size = board.n)
 
     return render_template('edit_board.html',
                            ship_form=add_ship_form,
                            prizes = prizes,
                            board=db_sess.get(Board, board_id),
-                           board_render=[''.join(i) for i in board_render])
+                           board_render=[''.join(i) for i in board_render],
+                           size = board.n)
 
 
 @board.route('/show/<int:board_id>', methods=['GET', 'POST'])
