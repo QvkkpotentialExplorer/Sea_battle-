@@ -67,6 +67,7 @@ def edit_board(board_id: int):
         db_sess.add(ship)
         db_sess.commit()
         board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
+        print(board_render)
 
         return render_template('edit_board.html',
                                ship_form=add_ship_form,
