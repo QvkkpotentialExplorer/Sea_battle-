@@ -39,17 +39,21 @@
             function genMap(p){
             const gameWindow = document.getElementById('game_window');
             const table = document.createElement('table');
+            table.className = "table table-bordered border-light;"
             const tbody = document.createElement('tbody');
             table.appendChild(tbody);
             for (let xCord=0; xCord<p; xCord++){
                     const tr = document.createElement('tr');
-                    
+                    tr.textContent = "xCord";
+                    tr.className = "mx-0";
                 for (let yCord=0; yCord<p; yCord++){
-
                     const th = document.createElement('th');
-                    // button.className="btn btn-outline-light btn-sm-sm btn-lg-lg x px-0 mx-0 bg-primary play_cage";
-                    // button.style = "height:1rem;width:1rem";
-                    th.textContent = 'btn';
+<!--                    const button = document.createElement('btn');-->
+<!--                    button.className="btn btn-outline-light btn-sm-sm btn-lg-lg x px-0 mx-0 bg-primary play_cage";-->
+                    th.style = "height:1rem;width:1rem;"
+                    th.className = "text-white"
+                    th.textContent = "Я ячейка таблицы";
+<!--                    th.appendChild(button);-->
                     tr.appendChild(th);
 
             }
