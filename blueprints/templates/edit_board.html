@@ -1,126 +1,75 @@
-    {% extends 'base_admin.html' %}
+{% extends 'base_admin.html' %}
 
-    {%block main_content%}
+{%block main_content%}
 
-    <div class = "container-fluid">
-        <div class = "card bg-dark text-white">
-            <div class="card-body">
-<!--                {{ ship_form.errors }}-->
-<!--                <div class="container mt-5">-->
-<!--                  <h2>Dropdown List with Accordion Items</h2>-->
-
-<!--                  <div class="dropdown">-->
-<!--                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                      Select an Item-->
-<!--                    </button>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-
-<!--                      &lt;!&ndash; Section 1 &ndash;&gt;-->
-<!--                      <div class="accordion" id="accordionExample">-->
-<!--                        {%for  prize in prizes%}-->
-<!--                        <div class="accordion-item">-->
-
-
-<!--                          <h2 class="accordion-header" id="headingOne">-->
-<!--                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{prize[0]}}" aria-expanded="true" aria-controls="{{prize[0]}}">-->
-<!--                              {{prize[0]}}-->
-<!--                            </button>-->
-<!--                          </h2>-->
-<!--                          <div id="{{prize[0]}}" class="accordion-collapse collapse show" aria-labelledby="heading{{prize[0]}}" data-bs-parent="#accordionExample">-->
-<!--                            <div class="accordion-body">-->
-<!--                                <div class = "prize_item">-->
-<!--                                    <p >{{prize[1]}}</p>-->
-<!--                                </div>-->
-
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        {% endfor %}-->
-<!--    &lt;!&ndash;              <div class="accordion-item">&ndash;&gt;-->
-<!--    &lt;!&ndash;                <h2 class="accordion-header" id="headingTwo">&ndash;&gt;-->
-<!--    &lt;!&ndash;                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">&ndash;&gt;-->
-<!--    &lt;!&ndash;                    Accordion Item #2&ndash;&gt;-->
-<!--    &lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--    &lt;!&ndash;                </h2>&ndash;&gt;-->
-<!--    &lt;!&ndash;                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">&ndash;&gt;-->
-<!--    &lt;!&ndash;                  <div class="accordion-body">&ndash;&gt;-->
-<!--    &lt;!&ndash;                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.&ndash;&gt;-->
-<!--    &lt;!&ndash;                  </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;              <div class="accordion-item">&ndash;&gt;-->
-<!--    &lt;!&ndash;                <h2 class="accordion-header" id="headingThree">&ndash;&gt;-->
-<!--    &lt;!&ndash;                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">&ndash;&gt;-->
-<!--    &lt;!&ndash;                    Accordion Item #3&ndash;&gt;-->
-<!--    &lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--    &lt;!&ndash;                </h2>&ndash;&gt;-->
-<!--    &lt;!&ndash;                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">&ndash;&gt;-->
-<!--    &lt;!&ndash;                  <div class="accordion-body">&ndash;&gt;-->
-<!--    &lt;!&ndash;                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.&ndash;&gt;-->
-<!--    &lt;!&ndash;                  </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--                </div>-->
-
-<!--                      &lt;!&ndash; Add more sections as needed &ndash;&gt;-->
-
-<!--                    </div>-->
-<!--                  </div>-->
-
-<!--                </div>-->
-
-                <form method="post">
-                    {{ ship_form.hidden_tag() }}
-                    {{ ship_form.x(max=(board.n - 1) , id = "xValue")}}
-                    {{ ship_form.y(max=(board.n - 1) , id = "yValue")}}
-                    {{ ship_form.prize() }}
-                    {{ ship_form.submit()}}
-                </form>
-
-                <div class="container">
+<div class="card bg-dark" style="margin: 10px;">
+    <div>
+        <div>
+            <form method="post">
+                {{ ship_form.hidden_tag() }}
+                {{ ship_form.x(max=(board.n - 1) , id = "xValue")}}
+                {{ ship_form.y(max=(board.n - 1) , id = "yValue")}}
+                {{ ship_form.prize() }}
+                {{ ship_form.submit()}}
+            </form>
+            <div class="container bg-dark" style = "width : calc( 25px * {{size+1}}) ; height : calc(25px * {{size+1}});">
                 <table class="table table-bordered border-light ;">
                     <tbody>
-                     <script>function fillFields(cid) {
-
-                            var button = document.getElementById(cid);
-                            if (button.style.color == 'blue') {
-                                button.style.color = 'black';
-                            }
-                            else{
-                            var input_x = document.getElementById("xValue");
-                            var input_y = document.getElementById("yValue");
-                            input_y.value = button.getAttribute('data-positiony');
-                            input_x.value = button.getAttribute('data-positionx');
-                            button.style.color = 'blue';
-                            }
-                          }
-                    </script>
-                     <thead>
-                        <tr >
-                            <th></th>
-                          {% for i in range(size) %}
-                            <th class="text-white" >{{i+1}}</th>
-                            {% endfor %}
-                        </tr>
-                      </thead>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        {% for i in range(size) %}
+                        <th class="text-white" style="width: 25px; height: 25px;">{{i+1}}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
                     {% for y in range(size) %}
-                    <tr >
-                      <th class="text-white" >{{y+1}}</th>
-                        {% for x in range(size)  %}
-                        <th class="text-white p-0" >
-                            <button  style="width: 100%; height: 100%;"  data-positionx = "{{x}}" data-positiony = "{{y}}"  id = "{{x+1}}{{y}}" onclick="fillFields(cid = {{x+1}}{{y}})">{{ board_render[y][x]}}</button>
+                    <tr>
+                        <th class="text-white" style="width: auto; height: auto;">{{y+1}}</th>
+                        {% for x in range(size) %}
+                        <th class="text-white p-0" style="width: 25px;
+                  height: 25px;">
+                            <button style="width: auto; height: auto;" data-positionx={{x}} data-positiony={{y}}
+                                    id="{{x+1}}{{y}}" onclick="fillFields(cid = {{x+1}}{{y}})">{{ board_render[y][x]}}
+                            </button>
                         </th>
-
                         {% endfor %}
 
                     </tr>
                     {% endfor %}
-                </tbody>
+                    </tbody>
                 </table>
-                </div>
-
             </div>
+
+            <script>function fillFields(cid) {
+
+                    var button = document.getElementById(cid);
+
+                    var input_x = document.getElementById("xValue");
+                    var input_y = document.getElementById("yValue");
+                    input_y.value = button.getAttribute('data-positiony');
+                    input_x.value = button.getAttribute('data-positionx');
+
+                    }
+
+            </script>
+<style>
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            width: 25px;
+            height: 25px;
+            text-align: center;
+        }
+
+    </style>
+
         </div>
     </div>
+</div>
 
-    {%endblock%}
+{%endblock%}

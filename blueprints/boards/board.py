@@ -66,6 +66,9 @@ def edit_board(board_id: int):
         db_sess.add(prize_data)
         db_sess.add(ship)
         db_sess.commit()
+
+
+        print(add_ship_form.y.data)
         board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
         print(board_render)
 
