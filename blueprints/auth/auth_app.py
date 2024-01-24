@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, session, abort
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from data.users import User
 from forms.xmpp_validate import XMPPValidate
 from data.db_session import db_sess
@@ -8,6 +8,7 @@ from forms.register_form import RegisterForm
 import random
 from string import ascii_letters
 import requests
+from crypto.gen_url import gen_url
 
 auth_pages = Blueprint('auth_page', __name__, template_folder='../templates', static_folder='static', url_prefix='/auth/')
 
@@ -30,6 +31,7 @@ def login():
         user = db_sess.query(User).filter(User.login == form.login.data).first()
         print(user)
         login_user(user, remember=form.remember_me.data)
+        print(gen_url(current_user.id, 1))
         return redirect(location=url_for('profile.user'))
 
     return render_template('login.html', form=form)
