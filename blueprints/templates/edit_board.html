@@ -1,75 +1,77 @@
 {% extends 'base_admin.html' %}
-
-{%block main_content%}
-
-<div class="card bg-dark" style="margin: 10px;">
-    <div>
-        <div>
-            <form method="post">
-                {{ ship_form.hidden_tag() }}
-                {{ ship_form.x(max=(board.n - 1) , id = "xValue")}}
-                {{ ship_form.y(max=(board.n - 1) , id = "yValue")}}
-                {{ ship_form.prize() }}
-                {{ ship_form.submit()}}
+{% block main_content %}
+<div class="container-fluid bg-dark" style="height: 50vh; width: 50vh;">
+    <div class="card-body bg-dark justify-content-center">
+        <form class="form-inline" method="post" style="display: inline-block; align-items: center;">
+                <div class="row align-items-start">
+                    <div class="col mx-0 px-0">{{ ship_form.hidden_tag() }}</div>
+                    <div class="col mx-0 px-0">{{ ship_form.x(max=(board.n - 1) , id = "xValue")}}</div>
+                    <div class="col mx-0 px-0">{{ ship_form.y(max=(board.n - 1) , id = "yValue")}}</div>
+                    <div class="col mx-0 px-0">{{ ship_form.prize() }}</div>
+                    <div class="col mx-0 px-0">{{ ship_form.submit() }}</div>
+                </div>
             </form>
-            <div class="container bg-dark" style = "width : calc( 25px * {{size+1}}) ; height : calc(25px * {{size+1}});">
-                <table class="table table-bordered border-light ;">
-                    <tbody>
-                    <thead>
-                    <tr>
-                        <th></th>
-                        {% for i in range(size) %}
-                        <th class="text-white" style="width: 25px; height: 25px;">{{i+1}}</th>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                    {% for y in range(size) %}
-                    <tr>
-                        <th class="text-white" style="width: auto; height: auto;">{{y+1}}</th>
-                        {% for x in range(size) %}
-                        <th class="text-white p-0" style="width: 25px;
-                  height: 25px;">
-                            <button style="width: auto; height: auto;" data-positionx={{x}} data-positiony={{y}}
-                                    id="{{x+1}}{{y}}" onclick="fillFields(cid = {{x+1}}{{y}})">{{ board_render[y][x]}}
-                            </button>
-                        </th>
-                        {% endfor %}
+    <div class="container bg-dark"
+         style="align-items: center; width: calc(45px * {{size+1}}); height: calc(45px * {{size+1}}); float: left; margin-top: 20px; margin-right: 20px;">
 
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <table class="table table-bordered border-light">
+            <tbody>
+            <thead>
+            <tr>
+                <th></th>
+                {% for i in range(size) %}
+                <th class="text-white" style="width: 25px; height: 25px;">{{i+1}}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            {% for y in range(size) %}
+            <tr>
+                <th class="text-white" style="width: auto; height: auto;">{{y+1}}</th>
+                {% for x in range(size) %}
+                <th class="text-white p-0" style="width: 25px; height: 25px;">
+                    <button style="width: 100%; height: 100%;" data-positionx={{x}} data-positiony={{y}}
+                            id="{{x+1}}{{y}}" onclick="fillFields(cid = {{x+1}}{{y}})">{{ board_render[y][x] }}
+                    </button>
+                </th>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
 
-            <script>function fillFields(cid) {
 
-                    var button = document.getElementById(cid);
+        </table>
+    </div>
+    <div >
 
-                    var input_x = document.getElementById("xValue");
-                    var input_y = document.getElementById("yValue");
-                    input_y.value = button.getAttribute('data-positiony');
-                    input_x.value = button.getAttribute('data-positionx');
-
-                    }
-
-            </script>
-<style>
-        table {
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            width: 25px;
-            height: 25px;
-            text-align: center;
-        }
-
-    </style>
-
-        </div>
     </div>
 </div>
 
-{%endblock%}
+<script>
+    function fillFields(cid) {
+        var button = document.getElementById(cid);
+        var input_x = document.getElementById("xValue");
+        var input_y = document.getElementById("yValue");
+        input_y.value = button.getAttribute('data-positiony');
+        input_x.value = button.getAttribute('data-positionx');
+    }
+</script>
+<div class = "row">
+    <div></div>
+</div>
+</div>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        width: 25px;
+        height: 25px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
