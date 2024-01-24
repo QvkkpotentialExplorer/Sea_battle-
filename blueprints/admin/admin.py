@@ -62,3 +62,5 @@ def add_shoot():
     db_sess.commit()
 
     return "render_template('add_prize.html', form=form)"
+
+

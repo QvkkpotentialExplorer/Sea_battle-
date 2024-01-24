@@ -5,7 +5,14 @@
     <div class = "container-fluid">
         <div class = "card bg-dark text-white">
             <div class="card-body">
-<!--                {{ ship_form.errors }}-->
+
+                {%if ship_form.errors%}
+                     <div class="alert alert-danger" role="alert">
+                                    <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                                    {{ship_form.errors}}
+                     </div>
+                {%endif%}
+
 <!--                <div class="container mt-5">-->
 <!--                  <h2>Dropdown List with Accordion Items</h2>-->
 

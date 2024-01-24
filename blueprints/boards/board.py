@@ -113,3 +113,17 @@ def show_board(board_id):
     if not user_on_board.can_join:
         return 'Вы забанены на этой доске!'
     return render_template('show_board.html')
+
+@board.route('board/add_user/<int:board_id>/<int:user_id>')
+@login_required
+def add_user(board_id: int,user_id: int ):
+    if not current_user.is_admin:
+        return abort(401)
+
+    if db_sess.query(Ship).filter(board_id == Ship.board_id).all():
+        user_on_board = UserOnBoard(user_id=user_id,board_id = board_id)
+        db_sess.add(user_on_board)
+        return render_template()
+    else:
+        return False
+
