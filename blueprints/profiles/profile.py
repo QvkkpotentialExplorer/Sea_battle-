@@ -65,4 +65,5 @@ def invites(invite):
         board_id=board_id
     )
     db_sess.add(user_on_board)
+    db_sess.commit()
     return redirect(url_for('board.show_board', board_id=board_id))
