@@ -16,9 +16,12 @@ board = Blueprint('board', __name__, template_folder='../templates', static_fold
 
 @board.route('/list')
 def board_list():
-    boards = db_sess.query(Board).all()
-    return render_template('board_list.html', boards=boards)
-
+    if current_user.is_admin:
+        boards = db_sess.query(Board).all()
+        return render_template('board_list.html', boards=boards)
+    else:
+        boards = db_sess.query(Board).filter(UserOnBoard.user_id== current_user.id).all()
+        return render_template('board_list.html', boards=boards)
 
 @board.route('/add', methods=['GET', 'POST'])
 @login_required
@@ -121,7 +124,7 @@ def show_board(board_id):
         return 'Вы забанены на этой доске!'
     return render_template('show_board.html')
 
-@board.route('add_user/<int:board_id>/<int:user_id>')
+@board.route('/add_user/<int:board_id>/<int:user_id>')
 @login_required
 def add_user(board_id: int,user_id: int ):
     if not current_user.is_admin:
@@ -135,7 +138,7 @@ def add_user(board_id: int,user_id: int ):
     else:
         return False
 
-@board.route('board/delete_user/<int:board_id>/<int:user_id>')
+@board.route('/delete_user/<int:board_id>/<int:user_id>')
 @login_required
 def delete_user(board_id: int,user_id: int):
     if not current_user.is_admin:
@@ -144,3 +147,13 @@ def delete_user(board_id: int,user_id: int):
     db_sess.delete(user)
     db_sess.commit()
 
+@board.route('/delete_board/<int:board_id>',methods=['GET', 'POST'])
+@login_required
+def delete_board(board_id:int):
+    if not current_user.is_admin:
+        return abort(401)
+    board = db_sess.query(Board).filter(Board.id == board_id).first()
+    user = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).first()
+    db_sess.delete(board)
+    db_sess.delete(user)
+    db_sess.commit()
