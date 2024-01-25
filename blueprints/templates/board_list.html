@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for board in boards %}
-<div>board.id, {{ board.id }}</div>
+{% extends 'base_admin.html'%}
+{%block main_content%}
+{% for board in boards%}
+    <p>board_id: {{board.id}} with size {{board.n}}</p>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

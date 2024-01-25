@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, abort
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
-
+from data.users import User
 from data.prizes import Prize
 from data.users_on_boards import UserOnBoard
 from data.prize_data import PrizeData
@@ -46,6 +46,7 @@ def edit_board(board_id: int):
     add_ship_form = AddShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
+    users = db_sess.query(User.id,User.login).filter(current_user.is_admin == False)
     print(ship_coords)
     board_render = [['.'] * board.n for _ in range(board.n)]
     for x, y in ship_coords:
@@ -75,6 +76,7 @@ def edit_board(board_id: int):
         return render_template('edit_board.html',
                                ship_form=add_ship_form,
                                board=db_sess.get(Board, board_id),
+                               users = users,
                                prizes = prizes,
                                board_render=[''.join(i) for i in board_render],
                                size = board.n)
@@ -82,6 +84,7 @@ def edit_board(board_id: int):
     return render_template('edit_board.html',
                            ship_form=add_ship_form,
                            prizes = prizes,
+                           users = users,
                            board=db_sess.get(Board, board_id),
                            board_render=[''.join(i) for i in board_render],
                            size = board.n)
@@ -91,6 +94,7 @@ def edit_board(board_id: int):
 @login_required
 def show_board(board_id):
     if (current_user.is_admin):
+
         return render_template('show_admin_board.html')
     board = db_sess.query(Board).filter(Board.id == board_id).first()
     if board is None:
@@ -117,7 +121,7 @@ def show_board(board_id):
         return 'Вы забанены на этой доске!'
     return render_template('show_board.html')
 
-@board.route('board/add_user/<int:board_id>/<int:user_id>')
+@board.route('add_user/<int:board_id>/<int:user_id>')
 @login_required
 def add_user(board_id: int,user_id: int ):
     if not current_user.is_admin:
