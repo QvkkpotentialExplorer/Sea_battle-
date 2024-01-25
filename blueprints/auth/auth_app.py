@@ -62,7 +62,7 @@ def send_key():
         return abort(404)
     url = "http://nekopara.ru:5443/api/send_message"
     data = {
-        "type": "headline",
+        "type": "normal",
         "from": "chokolla@nekopara.ru",
         "to": f"{session.get('jid')}",
         "subject": "Restart",
@@ -70,6 +70,7 @@ def send_key():
     }
 
     res = requests.post(url, json=data, auth=("api@nekopara.ru", "wTr7Rw_QUSeV_SAR"))
+    print(res.json())
     return redirect(url_for('auth_page.xmpp_validate'))
 
 
