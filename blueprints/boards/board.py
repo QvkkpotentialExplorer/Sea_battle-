@@ -48,9 +48,9 @@ def edit_board(board_id: int):
         return abort(401)
     add_ship_form = AddShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
-    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
+    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id)
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
-    users = db_sess.query(User).filter(User.id i).all()
+    users = db_sess.query(User).all()
     print(users)
     print(ship_coords)
     board_render = [['.'] * board.n for _ in range(board.n)]
