@@ -7,17 +7,15 @@
       <div class="col-12 col-md-6 col-lg-4 text-center mb-3">
         <div class="card bg-dark" style="border-radius: 1rem;">
           <div class="card-body">
-            <p class="card-text text-white">Номер комнаты:{{ board.id }}</p>
+            <p class="card-text  text-white">Номер id:{{ board.id }}</p>
+              <div>
+                  <p class=" text-white">Размер поля:{{ board.n }}X{{ board.n }}</p>
+              </div>
+            <div class="form-outline form-white mb-4 mt-4 form-control-lg">
+              <button class="form-control form-control-lg">Войти!</button>
+            </div>
           </div>
-          <div class="card-body">
-            <p class="card-text text-white">Размер поля:{{ board.n }}X{{ board.n}} </p>
-          </div>
-          <div class="form-outline form-white mb-4 mt-4 form-control-lg">
-            <button class=" btn btn-outline-light btn-lg btn-lg px-5">Войти</button>
-          </div>
-          <div class="form-outline form-white mb-4 mt-4 form-control-lg">
-            <a class="btn btn-outline-light btn-lg btn-lg px-5" href = "{{url_for('board.delete_board',board_id = board.id)}}">Удалить</a>
-          </div>
+
         </div>
       </div>
     {% endfor %}
