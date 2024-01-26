@@ -12,7 +12,10 @@
                   <p class=" text-white">Размер поля:{{ board.n }}X{{ board.n }}</p>
               </div>
             <div class="form-outline form-white mb-4 mt-4 form-control-lg">
-              <button class="form-control form-control-lg">Войти!</button>
+              <a class="form-control form-control-lg">Войти!</a>
+            </div>
+            <div class="form-outline form-white mb-4 mt-4 form-control-lg">
+              <a class="form-control form-control-lg" href = "{{url_for('board.delete_board', board_id = board.id)}}">Удалить</a>
             </div>
           </div>
 

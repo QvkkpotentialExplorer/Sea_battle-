@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, abort
+from flask import Blueprint, render_template, redirect, abort, url_for
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
@@ -153,8 +153,17 @@ def delete_user(board_id: int,user_id: int):
 def delete_board(board_id:int):
     if not current_user.is_admin:
         return abort(401)
-    board = db_sess.query(Board).filter(Board.id == board_id).first()
+    print(board_id)
+    board = db_sess.get(Board, board_id)
+    print(board)
     user = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).first()
-    db_sess.delete(board)
-    db_sess.delete(user)
-    db_sess.commit()
+    if not user:
+
+        db_sess.delete(board)
+        db_sess.commit()
+    else:
+        db_sess.delete(user)
+        db_sess.delete(board)
+        db_sess.commit()
+    return redirect(url_for('board.board_list'))
+
