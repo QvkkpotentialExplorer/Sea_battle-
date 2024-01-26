@@ -37,19 +37,20 @@ def add_board():
         )
         db_sess.add(board)
         db_sess.commit()
-        return redirect (f'edit/{board.id}')
+        return redirect (f'game_room/{board.id}')
     return render_template('add_board.html', form=form)
 
 
-@board.route('/edit/<int:board_id>', methods=['GET', 'POST'])
+@board.route('/game_room/<int:board_id>', methods=['GET', 'POST'])
 @login_required
 def edit_board(board_id: int):
     if not current_user.is_admin:
         return abort(401)
     add_ship_form = AddShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
+    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
-    users = db_sess.query(User).filter(User.is_admin == False).all()
+    users = db_sess.query(User).filter(User.id i).all()
     print(users)
     print(ship_coords)
     board_render = [['.'] * board.n for _ in range(board.n)]
@@ -77,18 +78,20 @@ def edit_board(board_id: int):
         board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
         print(board_render)
 
-        return render_template('edit_board.html',
+        return render_template('game_room.html',
                                ship_form=add_ship_form,
                                board=db_sess.get(Board, board_id),
                                users = users,
+                               user_on_board = user_on_board,
                                prizes = prizes,
                                board_render=[''.join(i) for i in board_render],
                                size = board.n)
 
-    return render_template('edit_board.html',
+    return render_template('game_room.html',
                            ship_form=add_ship_form,
                            prizes = prizes,
                            users = users,
+                           user_on_board=user_on_board,
                            board=db_sess.get(Board, board_id),
                            board_render=[''.join(i) for i in board_render],
                            size = board.n)
@@ -128,14 +131,15 @@ def show_board(board_id):
 @board.route('/add_user/<int:board_id>/<int:user_id>')
 @login_required
 def add_user(board_id: int,user_id: int ):
-    if not current_user.is_admin:
-        return abort(401)
+    # if not current_user.is_admin:
+    #     return abort(401)
 
     if db_sess.query(Ship).filter(board_id == Ship.board_id).all():
         user_on_board = UserOnBoard(user_id=user_id,board_id = board_id)
+
         db_sess.add(user_on_board)
         db_sess.commit()
-        return render_template('game_room.html')
+        return redirect(url_for('board.edit_board', board_id =board_id))
     else:
         return False
 

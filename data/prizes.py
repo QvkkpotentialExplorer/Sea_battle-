@@ -13,5 +13,3 @@ class Prize(SqlAlchemyBase):
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     description = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
-    def get_prizes(self):
-        return self.id,self.avatar,self.name,self.description

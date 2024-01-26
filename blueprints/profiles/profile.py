@@ -23,7 +23,7 @@ def user():
     if current_user.is_admin:
         return render_template('admin.html')
     else:
-        return render_template('user.html', user=user, prizes=prizes)
+        return render_template('user.html', user=user)
 
 
 @profile.route('/prizes', methods=['GET', 'POST'])
@@ -38,6 +38,12 @@ def prize():
         prizes = db_sess.query(Prize.name,Prize.description,Prize.avatar).filter(PrizeData.owner_id == current_user.id).all()
         print(prizes)
         return render_template('prizes.html', prizes=prizes)
+
+@profile.route('/client')
+@login_required
+def client():
+    user =  db_sess.query(User).filter(User.login == current_user.login).first()
+    return render_template('clients.html',user = user)
 
 
 @profile.route('/invite/<string:invite>')
