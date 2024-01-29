@@ -51,7 +51,7 @@ def xmpp_validate():
         user.set_password(session.get('password'))
         db_sess.add(user)
         db_sess.commit()
-        return redirect('/')
+        return redirect(url_for('profile.user'))
     return render_template('validate.html', form=form)
 
 
