@@ -50,7 +50,7 @@ def edit_board(board_id: int):
     add_ship_form = AddShipForm(board_id=board_id)
     delete_ship_form = DeleteShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
-    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id)
+    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
     users = db_sess.query(User).all()
 
@@ -132,14 +132,20 @@ def show_board(board_id):
         return 'Вы забанены на этой доске!'
     return render_template('show_board.html')
 
-@board.route('/add_user/<int:board_id>/<int:user_id>')
+@board.route('/add_user/<int:board_id>/<int:user_id>',methods=['GET', 'POST'])
 @login_required
 def add_user(board_id: int,user_id: int ):
     # if not current_user.is_admin:
     #     return abort(401)
+    print(db_sess.query(Ship).filter(board_id == Ship.board_id).all())
 
     if db_sess.query(Ship).filter(board_id == Ship.board_id).all():
-        user_on_board = UserOnBoard(user_id=user_id,board_id = board_id)
+        count = db_sess.query(Board.default_shoots).filter(Board.id == board_id).first()
+        print(count)
+        user_on_board = UserOnBoard(user_id=user_id,
+                                    board_id = board_id,
+                                    can_join = True,
+                                    count=count[0])
 
         db_sess.add(user_on_board)
         db_sess.commit()
@@ -152,7 +158,7 @@ def add_user(board_id: int,user_id: int ):
 def delete_user(board_id: int,user_id: int):
     if not current_user.is_admin:
         return abort(401)
-    user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == user_id,UserOnBoard.board_id ==  board_id)
+    user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == user_id,UserOnBoard.board_id ==  board_id).first()
     db_sess.delete(user)
     db_sess.commit()
 
@@ -166,6 +172,7 @@ def delete_board(board_id:int):
     print(board)
     users = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ships = db_sess.query(Ship).filter(Ship.board_id == board_id).all()
+
     print(ships)
     if ships:
         for ship in ships:
