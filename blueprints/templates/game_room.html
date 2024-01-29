@@ -51,11 +51,12 @@
           <th>{{ y+1 }}</th>
           {% for x in range(size) %}
           <td>
-            <button class="btn btn-outline-dark" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+              {% if board_render[y][x] == "." %}
+                <button class="btn btn-outline-dark" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+                {%endif%}
               {% if board_render[y][x] == "#" %}
-              <div class="contant"><img src="https://sergeychikin.ru/365/028-transport/sea/cruiser.svg" alt="карабликкк">
-<button class="btn btn-outline-dark contant" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
-              <img></div>
+                <button class="btn btn-outline-dark contant" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+              <img>
 
               {%endif%}
             </button>
