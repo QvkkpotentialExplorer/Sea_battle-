@@ -10,6 +10,7 @@ from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
 from data.users_shoots import UserShoot
+from forms.delete_ship_form import DeleteShipForm
 
 board = Blueprint('board', __name__, template_folder='../templates', static_folder='static', url_prefix='/board')
 
@@ -47,16 +48,17 @@ def edit_board(board_id: int):
     if not current_user.is_admin:
         return abort(401)
     add_ship_form = AddShipForm(board_id=board_id)
+    delete_ship_form = DeleteShipForm(board_id=board_id)
     board = db_sess.get(Board, board_id)
     user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id)
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
     users = db_sess.query(User).all()
-    print(users)
-    print(ship_coords)
+
     board_render = [['.'] * board.n for _ in range(board.n)]
     for x, y in ship_coords:
         board_render[y][x] = '#'
     prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()
+
     if add_ship_form.validate_on_submit():
         prize_data = PrizeData(
             is_win=False,
@@ -79,7 +81,8 @@ def edit_board(board_id: int):
         print(board_render)
 
         return render_template('game_room.html',
-                               ship_form=add_ship_form,
+                               add_ship_form=add_ship_form,
+                               delete_ship_form=delete_ship_form,
                                board=db_sess.get(Board, board_id),
                                users = users,
                                user_on_board = user_on_board,
@@ -88,7 +91,8 @@ def edit_board(board_id: int):
                                size = board.n)
 
     return render_template('game_room.html',
-                           ship_form=add_ship_form,
+                           add_ship_form=add_ship_form,
+                           delete_ship_form =delete_ship_form,
                            prizes = prizes,
                            users = users,
                            user_on_board=user_on_board,
@@ -160,13 +164,21 @@ def delete_board(board_id:int):
     print(board_id)
     board = db_sess.get(Board, board_id)
     print(board)
-    user = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).first()
-    if not user:
+    users = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
+    ships = db_sess.query(Ship).filter(Ship.board_id == board_id).all()
+    print(ships)
+    if ships:
+        for ship in ships:
+            print(ship)
+            db_sess.delete(ship)
+            db_sess.commit()
+    if not users:
 
         db_sess.delete(board)
         db_sess.commit()
     else:
-        db_sess.delete(user)
+        for user in users:
+            db_sess.delete(user)
         db_sess.delete(board)
         db_sess.commit()
     return redirect(url_for('board.board_list'))

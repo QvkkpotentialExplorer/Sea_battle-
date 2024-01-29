@@ -7,7 +7,11 @@
                {% if form.errors%}
                     <div class="alert alert-danger" role="alert">
                         <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                        {{form.errors['name'][0]}}
+                        {%for error in form.errors%}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                        {%endfor%}
                     </div>
                 {%endif%}
             <form action="" method="post" name="simple" enctype="multipart/form-data" class="text-center mx-lg-5 mx-4">
