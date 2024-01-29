@@ -4,7 +4,8 @@ from data.db_session import db_sess
 from data import db_session
 from data.users import User
 from data.prizes import Prize
-from data.users_shoots import UserShoot
+from data.users_on_boards import UserOnBoard
+
 from forms.add_prize import AddPrizeForm
 from uuid import uuid1
 from flask_login import current_user, login_required
@@ -56,8 +57,8 @@ def add_shoot():
     if not current_user.is_admin:
         return abort(401)
 
-    shoots = db_sess.query(UserShoot).filter(UserShoot.user_id == request.args.get('user_id'),
-                                             UserShoot.board_id == request.args.get('board_id')).first()
+    shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == request.args.get('user_id'),
+                                             UserOnBoardboard_id == request.args.get('board_id')).first()
     shoots.count += request.args.get('shoots_count')
     db_sess.commit()
 

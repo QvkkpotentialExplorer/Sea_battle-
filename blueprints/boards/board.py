@@ -9,7 +9,6 @@ from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
-from data.users_shoots import UserShoot
 from forms.delete_ship_form import DeleteShipForm
 
 board = Blueprint('board', __name__, template_folder='../templates', static_folder='static', url_prefix='/board')
@@ -105,28 +104,20 @@ def edit_board(board_id: int):
 @login_required
 def show_board(board_id):
     if (current_user.is_admin):
-
         return render_template('show_admin_board.html')
     board = db_sess.query(Board).filter(Board.id == board_id).first()
+
     if board is None:
         return abort(404)
-    shoots = db_sess.query(UserShoot).filter(UserShoot.board_id == board_id,
-                                             UserShoot.user_id == current_user.id).first()
+    shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id,UserOnBoard.user_id == current_user.id).first()
     if shoots is None:
-        shoots_data = UserShoot(
+        shoots_data = UserOnBoard(
             user_id=current_user.id,
-            board_id=board_id,
+            board_id = board_id,
             count=board.default_shoots
         )
         db_sess.add(shoots_data)
-    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
-                                                      UserOnBoard.board_id == board_id)
-    if user_on_board is None:
-        user_on_board = UserOnBoard(
-            user_id=current_user.id,
-            board_id=board_id
-        )
-        db_sess.add(user_on_board)
+    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,  UserOnBoard.board_id == board_id).first()
     db_sess.commit()
     if not user_on_board.can_join:
         return 'Вы забанены на этой доске!'
@@ -174,7 +165,7 @@ def delete_board(board_id:int):
     ships = db_sess.query(Ship).filter(Ship.board_id == board_id).all()
 
     print(ships)
-    if ships:
+    if ships: #Проверяем , были ли на поле корабли
         for ship in ships:
             print(ship)
             db_sess.delete(ship)

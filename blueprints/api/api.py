@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from data.boards import Board
 from data.ships import Ship
 from data.users_on_boards import UserOnBoard
-from data.users_shoots import UserShoot
+
 from data.db_session import db_sess
 from data.no_cells import DeathCell
 
