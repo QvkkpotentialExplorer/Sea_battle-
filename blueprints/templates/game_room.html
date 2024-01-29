@@ -50,14 +50,34 @@
         <tr>
           <th>{{ y+1 }}</th>
           {% for x in range(size) %}
-          <td><button class="btn btn-outline-dark" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">{{ board_render[y][x] }}</button></td>
+          <td>
+            <button class="btn btn-outline-dark" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+              {% if board_render[y][x] == "#" %}
+              <div class="contant"><img src="https://sergeychikin.ru/365/028-transport/sea/cruiser.svg" alt="карабликкк">
+<button class="btn btn-outline-dark contant" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+              <img></div>
+
+              {%endif%}
+            </button>
+
+          </td>
           {% endfor %}
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+<style>
+  .contant{
+  background: url(https://sergeychikin.ru/365/028-transport/sea/cruiser.svg);
+  width: 10%;
+  height: 10%;
+  }
+  body{
+    background: linear-gradient(to bottom right, #87CEFA, #20B2AA);
+  }
 
+</style>
   <script>
     function fillFields(cid) {
       var button = document.getElementById(cid);
