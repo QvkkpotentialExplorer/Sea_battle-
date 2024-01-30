@@ -1,7 +1,8 @@
 {% extends 'base_admin.html' %}
 {% block main_content %}
-  <div class="container">
-    <div class="container">
+<div class="row bg-dark justify-content-center">
+    <h1 class="text-white text-center">Игровое поле</h1>
+    <div class="col-2">
       <form class="form-inline" method="post" style="display: inline-block;">
         <div class="row align-items-start">
           <div class="col mx-0 px-0">{{ add_ship_form.hidden_tag() }}</div>
@@ -12,7 +13,8 @@
         </div>
       </form>
 
-    </div>
+    </div >
+    <div class = "col-2">
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-heading">
@@ -20,11 +22,11 @@
         </h2>
           <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-heading">
           <div class="accordion-body bg-dark text-white">
+
       {% for user in users %}
 
-
             <p>Имя пользователя: {{ user.login }}</p>
-            <a data-id="{{ user.id }}" id="{{ user.id }}" href = "{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}" class="btn btn-secondary" >Добавить пользователя</a>
+            <a data-id="{{ user.id }}" id="{{ user.id }}" href = "{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}" class="btn btn-sm btn-secondary" >Добавить пользователя</a>
 
       {% endfor %}
 
@@ -32,31 +34,35 @@
         </div>
       </div>
     </div>
+    </div>
     {%for user in user_on_board%}
       <p>{{user.login}}</p>
     {%endfor%}
-    <h2>Игровое поле</h2>
-    <table class="table table-bordered border-dark">
+
+
+    <div class=" col-8 justify-content-center" style="overflow:auto;overflow-y:auto;">
+
+    <table class="table table-bordered border-dark bg-light" style = "width:calc(25px*{{size+1}});">
       <thead>
         <tr>
           <th></th>
           {% for i in range(size) %}
-          <th>{{ i+1 }}</th>
+          <th class="text-dark">{{ i+1 }}</th>
           {% endfor %}
         </tr>
       </thead>
-      <tbody>
+      <tbody >
         {% for y in range(size) %}
-        <tr>
+        <tr class="text-dark bg-light">
           <th>{{ y+1 }}</th>
           {% for x in range(size) %}
           <td>
               {% if board_render[y][x] == "." %}
-                <button class="btn btn-outline-dark" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+                <button class="btn btn-outline-dark" style="width:100%;height:100%;" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
                 {%endif%}
               {% if board_render[y][x] == "#" %}
-                <button class="btn btn-outline-dark contant" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
-              <img>
+                <button class="btn btn-outline-dark contant" style="width:100%;height:100%;" data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+
 
               {%endif%}
             </button>
@@ -67,8 +73,12 @@
         {% endfor %}
       </tbody>
     </table>
-  </div>
+    </div>
+</div>
 <style>
+    td{
+        padding:0;
+    }
   .contant{
   background: url(https://sergeychikin.ru/365/028-transport/sea/cruiser.svg);
   width: 10%;

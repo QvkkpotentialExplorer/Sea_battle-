@@ -142,7 +142,7 @@ def add_user(board_id: int,user_id: int ):
         db_sess.commit()
         return redirect(url_for('board.edit_board', board_id =board_id))
     else:
-        return False
+        return redirect(url_for('board.edit_board',board_id=board_id))
 
 @board.route('/delete_user/<int:board_id>/<int:user_id>')
 @login_required
