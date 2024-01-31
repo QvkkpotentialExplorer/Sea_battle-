@@ -3,14 +3,14 @@
 <div class="row bg-dark justify-content-center">
     <h1 class="text-white text-center">Игровое поле</h1>
     <div class="col-4">
-        <div class="col-6">
+        <div class="col-10">
       <form class="form-inline" method="post" style="display: inline-block;">
         <div class="row align-items-start">
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.hidden_tag() }}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.x(max=(board.n - 1) , id = "xValue")}}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.y(max=(board.n - 1) , id = "yValue")}}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.prize() }}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.submit() }}</div>
+            <div class="col">{{add_ship_form.hidden_tag()}}</div>
+          <div class="col mx-2 px-0">{{ add_ship_form.x(max=(board.n - 1) , id = "xValue")}}</div>
+          <div class="col mx-2 px-0">{{ add_ship_form.y(max=(board.n - 1) , id = "yValue")}}</div>
+          <div class="col mx-2 px-0">{{ add_ship_form.prize() }}</div>
+          <div class="col mx-2 px-0">{{ add_ship_form.submit() }}</div>
         </div>
       </form>
 
