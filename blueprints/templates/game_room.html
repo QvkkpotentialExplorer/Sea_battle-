@@ -2,19 +2,28 @@
 {% block main_content %}
 <div class="row bg-dark justify-content-center">
     <h1 class="text-white text-center">Игровое поле</h1>
-    <div class="col-4">
-        <div class="col-6">
-      <form class="form-inline" method="post" style="display: inline-block;">
-        <div class="row align-items-start">
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.hidden_tag() }}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.x(max=(board.n - 1) , id = "xValue")}}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.y(max=(board.n - 1) , id = "yValue")}}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.prize() }}</div>
-          <div class="col-12 mx-0 px-0">{{ add_ship_form.submit() }}</div>
+    <div class="col-12">
+        <div class="row">
+  <div class="col-6">
+    <form class="form-inline" method="post" style="display: inline-block;">
+      <div class="row align-items-center">
+        <div class="col-12 mx-2 px-0 text-white-50 mb-0">{{ add_ship_form.hidden_tag() }}</div>
+        <div class="col-12 mx-2 px-0">
+          {{ add_ship_form.x(max=(board.n - 1), id="xValue", class="form-control") }}
         </div>
-      </form>
+        <div class="col-12 mx-2 px-0">
+          {{ add_ship_form.y(max=(board.n - 1), id="yValue", class="form-control") }}
+        </div>
+        <div class="col-12 mx-2 px-0">
+          {{ add_ship_form.prize(class="form-control") }}
+        </div>
+        <div class="px-5" style="align-items: center;">
+              {{ add_ship_form.submit(class="btn btn-primary") }}
+        </div>
+      </div>
+    </form>
+  </div>
 
-    </div >
     <div class = "col-6">
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <div class="accordion-item">
@@ -36,15 +45,12 @@
       </div>
     </div>
     </div>
-
-    {%for user in user_on_board%}
-      <p class ="text-white">{{user.user_id}}</p>
-    {%endfor%}
+</div>
 
 </div>
 
-    <div class=" col-8 justify-content-center" style="overflow:auto;overflow-y:auto;">
-
+    <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
+    <center style="overflow:auto;">
     <table class="table table-bordered border-dark bg-light" style = "width:calc(25px*{{size+1}});">
       <thead>
         <tr>
@@ -75,7 +81,7 @@
         </tr>
         {% endfor %}
       </tbody>
-    </table>
+    </table></center>
     </div>
 
 </div>
