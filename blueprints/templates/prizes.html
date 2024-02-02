@@ -1,4 +1,9 @@
+{% if current_user.is_admin%}
 {% extends 'base_admin.html' %}
+{% else %}
+{% extends 'base_user.html' %}
+{% endif %}
+
 {%block main_content%}
 
 {% if prizes%}
@@ -46,12 +51,19 @@
     <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
         приз</a>
 </div>
+
 {%elif not prizes%}
-<div class="py-5 text-center">
-    <h1>Добавьте приз</h1>
-    <p class="lead mb-5">Вы пока еще не создали </p>
-    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
-        приз</a>
-</div>
+    {%if current_user.is_admin%}
+    <div class="py-5 text-center">
+        <h1>Добавьте приз</h1>
+        <p class="lead mb-5">Вы пока еще не создали </p>
+        <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+            приз</a>
+    </div>
+    {%else%}
+    <div class="py-5 text-center">
+        <h1>Призы</h1>
+        <p class="lead mb-5">У вас пока еще нет выигранных призов</p>
+    {%endif%}
 {%endif%}
 {%endblock%}
