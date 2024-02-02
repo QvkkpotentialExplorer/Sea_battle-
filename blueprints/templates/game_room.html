@@ -2,7 +2,7 @@
 {% block main_content %}
 <div class="backk">
     <div class="row justify-content-center" style="background-color: none;">
-        <h1 class="text-white text-center">Игровое поле</h1>
+        <h1 class="text-white text-center my-5">Игровое поле</h1>
         <div class="col-4">
             <div class="col-6">
                 <form class="form-inline" method="post" style="display: inline-block;">
@@ -20,7 +20,7 @@
                 <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-heading">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapse" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapse">Пользователи
                             </button>
@@ -55,20 +55,20 @@
             <table class="table table-bordered border-dark bg-light" style="width:calc(35px*{{size+1}});">
                 <thead>
                 <tr>
-                    <th style="width: 35px; height: 35px;"></th>
+                    <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
                     {% for i in range(size) %}
-                    <th class="text-dark" style="width: 35px; height: 35px;">{{ i+1 }}</th>
+                    <th class="text-dark" style="width: 35px; height: 35px;  background: #e8ecef;">{{ i+1 }}</th>
                     {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for y in range(size) %}
-                <tr class="text-dark bg-light" style="width: 35px; height: 35px;">
-                    <th style="width: 35px; height: 35px;">{{ y+1 }}</th>
+                <tr class="text-dark bg-light" style="width: 35px; height: 35px; background: #e8ecef;">
+                    <th style="width: 35px; height: 35px;  background: #e8ecef;">{{ y+1 }}</th>
                     {% for x in range(size) %}
                     <td>
                         {% if board_render[y][x] == "." %}
-                        <button class="btn" style="width: 35px; height: 35px;" data-positionx="{{ x }}"
+                        <button class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
                                 data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
                             {%endif%}
                             {% if board_render[y][x] == "#" %}
@@ -91,9 +91,9 @@
     </div>
 </div>
 <style>
-    th{
-        width: 35px; height: 35px;
-    }
+    tr{
+     background: #e8ecef;
+     }
   .contant{
   background: url(https://sergeychikin.ru/365/150-clothes/sneakers.svg);
   background-size: cover;
@@ -114,12 +114,6 @@
 	border-color: rgba(255, 0, 0, 255);
 	border-width: 5px;
 }
-.
-
-
-
-
-
 </style>
 <script>
     function fillFields(cid) {
