@@ -18,10 +18,14 @@ board = Blueprint('board', __name__, template_folder='../templates', static_fold
 def board_list():
     if current_user.is_admin:
         boards = db_sess.query(Board).all()
-        return render_template('board_list.html', boards=boards)
+        return render_template('board_list.html', boards=boards,current_user=current_user)
     else:
-        boards = db_sess.query(Board).filter(UserOnBoard.user_id == current_user.id).all()
-        return render_template('board_list.html', boards=boards)
+        boards_id =db_sess.query(UserOnBoard.board_id).filter(UserOnBoard.user_id == current_user.id).all()
+        print(boards_id)
+        boards = []
+        for board_id in boards_id:
+            boards.append(db_sess.get(Board,board_id))
+        return render_template('board_list.html', boards=boards,current_user=current_user)
 
 
 @board.route('/add', methods=['GET', 'POST'])
@@ -135,16 +139,17 @@ def add_user(board_id: int, user_id: int):
     # if not current_user.is_admin:
     #     return abort(401)
     print(db_sess.query(Ship).filter(board_id == Ship.board_id).all())
-    if not (db_sess.query(UserOnBoard).filter(board_id == UserOnBoard.board_id, UserOnBoard.user_id == user_id)):
+    if not db_sess.query(UserOnBoard).filter( UserOnBoard.user_id == user_id, UserOnBoard.board_id== board_id).first():
         errors = "Еще "
         if db_sess.query(Ship).filter(board_id == Ship.board_id).all():
+
             count = db_sess.query(Board.default_shoots).filter(Board.id == board_id).first()
             print(count)
             user_on_board = UserOnBoard(user_id=user_id,
                                         board_id=board_id,
                                         can_join=True,
                                         count=count[0])
-
+            print(user_on_board)
             db_sess.add(user_on_board)
             db_sess.commit()
             return redirect(url_for('board.edit_board', board_id=board_id))

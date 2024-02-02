@@ -11,7 +11,7 @@
 
     <title>Profile</title>
 </head>
-<body class="h-100">
+<body class="h-100 bg-secondary">
 <div class='cover-container w-100 d-flex px-0 flex-column '>
     <header class="mb-5">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-auto">
@@ -29,10 +29,10 @@
                                     class="sr-only"></span></a>
                         </li>
                         <li class="nav-item active mr-1">
-                            <a class="nav-link " href="">Профиль <span class="sr-only"></span></a>
+                            <a class="nav-link " href="{{url_for('profile.prize')}}">Призы <span class="sr-only"></span></a>
                         </li>
-                        <li class="nav-item active mr-1">
-                            <a class="nav-link " href="">Призы <span class="sr-only"></span></a>
+                          <li class="nav-item active mr-1">
+                            <a class="nav-link " href = "{{url_for('board.board_list')}}"> Игровые поля <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item active mr-1 ">
                             <a class="nav-link " href="{{ url_for('auth_page.logout') }}">Выйти <span
