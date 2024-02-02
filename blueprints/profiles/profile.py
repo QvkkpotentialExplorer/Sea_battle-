@@ -32,12 +32,12 @@ def prize():
     if current_user.is_admin:
         prizes = db_sess.query(Prize.name,Prize.description,Prize.avatar).all()
         print(prizes)
-        return render_template('prizes.html',prizes = prizes)
+        return render_template('prizes.html',prizes = prizes,current_user=current_user)
 
     else:
-        prizes = db_sess.query(Prize.name,Prize.description,Prize.avatar).filter(PrizeData.owner_id == current_user.id).all()
+        prizes = db_sess.query(PrizeData.prize_id,PrizeData.data_win).filter(PrizeData.owner_id == current_user.id).all()
         print(prizes)
-        return render_template('prizes.html', prizes=prizes)
+        return render_template('prizes.html', prizes=prizes,template = 'base_user.html',current_user=current_user)
 
 @profile.route('/client')
 @login_required

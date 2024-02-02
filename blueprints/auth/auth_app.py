@@ -40,7 +40,9 @@ def login():
 @auth_pages.route('/xmpp_validate', methods=['GET', 'POST'])
 def xmpp_validate():
     form = XMPPValidate()
+    print(session['validation_key'])
     if form.validate_on_submit():
+
         if session['validation_key'] != form.validation_code.data:
             return 'не верный код'
         user = User(
@@ -51,7 +53,7 @@ def xmpp_validate():
         user.set_password(session.get('password'))
         db_sess.add(user)
         db_sess.commit()
-        return redirect(url_for('profile.user'))
+        return redirect(url_for('auth_page.login'))
     return render_template('validate.html', form=form)
 
 

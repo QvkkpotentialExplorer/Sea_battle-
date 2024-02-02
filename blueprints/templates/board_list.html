@@ -1,4 +1,10 @@
+
+{% if current_user.is_admin%}
 {% extends 'base_admin.html' %}
+{% else %}
+{% extends 'base_user.html' %}
+{% endif %}
+
 
 {%block main_content%}
 <div class="justify-content-center text-center">
@@ -15,9 +21,11 @@
               <div class="form-outline form-white mb-4 mt-4 form-control-lg">
                 <a class="form-control form-control-lg" href = "{{url_for('board.edit_board', board_id = board.id)}}">Войти!</a>
               </div>
+              {% if current_user.is_admin%}
               <div class="form-outline form-white mb-4 mt-4 form-control-lg">
                 <a class="form-control form-control-lg" href = "{{url_for('board.delete_board', board_id = board.id)}}">Удалить</a>
               </div>
+              {% endif %}
             </div>
 
           </div>
@@ -25,6 +33,8 @@
       {% endfor %}
 
   </div>
-  <a class="btn btn-outline-light btn-lg mt-3 px-5 "  href="{{ url_for('board.add_board') }}">Создать доску</a>>
+   {% if current_user.is_admin%}
+    <a class="btn btn-outline-light btn-lg mt-3 px-5 "  href="{{ url_for('board.add_board') }}">Создать доску</a>
+    {% endif %}
 </div>
 {% endblock %}

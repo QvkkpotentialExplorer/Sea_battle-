@@ -5,7 +5,7 @@ from flask import session
 
 
 def code_validation(form, data):
-    if form.data != session.get('validation_key'):
+    if form.validation_code.data != session.get('validation_key'):
         raise ValidationError('Не верный код')
 
 
