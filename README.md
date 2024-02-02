@@ -11,8 +11,8 @@
 код
 ```
 ## 4. Скриншоты интерфейса
-Логин
-|![Login interface](images/Screenshots/Login.png)|
-Регистрация
-|![Registration](images/Screenshots/Registration.png)|
+|Логин|
+![Login interface](images/Screenshots/Login.png)
+|Регистрация|
+![Registration](images/Screenshots/Registration.png)
 ## 5. Ссылка на [видео](https://www.youtube.com/) с работой
