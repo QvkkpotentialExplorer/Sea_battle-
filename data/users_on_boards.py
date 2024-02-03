@@ -13,5 +13,5 @@ class UserOnBoard(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer,sqlalchemy.ForeignKey('users.id'))
     board_id = sqlalchemy.Column(sqlalchemy.Integer,sqlalchemy.ForeignKey('boards.id'))
-    count = sqlalchemy.Column(sqlalchemy.Integer,nullable=True)
+    count = sqlalchemy.Column(sqlalchemy.Integer)
     can_join = sqlalchemy.Column(sqlalchemy.BOOLEAN)

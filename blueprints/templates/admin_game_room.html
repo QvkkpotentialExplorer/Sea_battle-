@@ -1,50 +1,15 @@
- {% extends 'base_admin.html' %}
+
+{% extends 'base_admin.html' %}
 {% block main_content %}
 <div class="backk">
     <div class="row justify-content-center" style="background-color: none;">
+
         <h1 class="text-white text-center my-1">Игровое поле</h1>
-        <center>
-        <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
-            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
-                <thead>
-                <tr>
-                    <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
-                    {% for i in range(size) %}
-                    <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
-                    {% endfor %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for y in range(size) %}
-                <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
-                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
-                    {% for x in range(size) %}
-                    <td style="background: #e8ecef;">
-                        {% if board_render[y][x] == "." %}
-                        <button class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
-                                data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
-                            {%endif%}
-                            {% if board_render[y][x] == "#" %}
-                            <button class="btn contant" style="width: 35px; height: 35px;"
-                                    data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
-                                    onclick="fillFields('{{ x+1 }}{{ y }}')">
-
-
-                                {%endif%}
-                            </button>
-
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
         </center>
         <div class="col-12 my-2">
             <div class="row">
             <div class="col-6">
-                <form class="form-inline" method="post" style="display: inline-block;">
+                <form class="form-inline" method="post" style="display: inline-block; width : 30%;">
                     <div class="row align-items-start">
                         <div class="col-12 mx-0 px-0 ">{{ add_ship_form.hidden_tag() }}</div>
                         <div class="col-1">{{ add_ship_form.x(style="width: 1px; height: 1px; opacity: 0;", max=(board.n - 1) , id = "xValue")}}</div>
@@ -88,12 +53,61 @@
             {%endfor%}
             </div>
         </div>
+        <center>
+        <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
+            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
+                <thead>
+                <tr>
+                    <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
+                    {% for i in range(size) %}
+                    <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for y in range(size) %}
+                <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
+                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
+                    {% for x in range(size) %}
+                    <td style="background: #e8ecef;">
+                        {% if board_render[y][x] == "." %}
+                        <button class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
+                                data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
+                        </button>
+                            {%endif%}
+                        {% if board_render[y][x] == "#" %}
+                        <button class="btn contant" style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
+                                onclick="fillFields('{{ x+1 }}{{ y }}')">
+                        </button>
+                        {%endif%}
+                         {% if board_render[y][x] == "x" %}
+                        <button class="btn contant_shoots" style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
+                                onclick="fillFields('{{ x+1 }}{{ y }}')">
+                        </button>
+                        {%endif%}
+
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+        </div>
+        </center>
+
     </div>
 </div>
 <style>
     tr{
      background: #e8ecef;
      }
+  .contant_shoots{
+    background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
   .contant{
   background: url(https://sergeychikin.ru/365/150-clothes/sneakers.svg);
   background-size: cover;

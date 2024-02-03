@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, redirect, abort, url_for
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
+
+from data.no_cells import DeathCell
 from data.users import User
 from data.prizes import Prize
 from data.users_on_boards import UserOnBoard
@@ -50,61 +52,77 @@ def add_board():
 @board.route('/game_room/<int:board_id>', methods=['GET', 'POST'])
 @login_required
 def edit_board(board_id: int, errors=None):
-    if not current_user.is_admin:
-        return abort(401)
-    add_ship_form = AddShipForm(board_id=board_id)
-    delete_ship_form = DeleteShipForm(board_id=board_id)
-    board = db_sess.get(Board, board_id)
-    user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
-    users = db_sess.query(User).all()
-
+    shoots_coords = [(shoots.x,shoots.y) for shoots in db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).all()]
+    board = db_sess.get(Board, board_id)
     board_render = [['.'] * board.n for _ in range(board.n)]
+
     for x, y in ship_coords:
         board_render[y][x] = '#'
-    prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()
+    for x,y in  shoots_coords:
+        board_render[y][x] = 'x'
 
-    if add_ship_form.validate_on_submit():
-        prize_data = PrizeData(
-            is_win=False,
-            owner_id=current_user.id,
-            prize_id=add_ship_form.prize.data
-        )
-        ship = Ship(
-            board_id=board_id,
-            prize_id=add_ship_form.prize.data,
-            x=add_ship_form.x.data,
-            y=add_ship_form.y.data
-        )
-        db_sess.add(prize_data)
-        db_sess.add(ship)
-        db_sess.commit()
 
-        print(add_ship_form.y.data)
-        board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
-        print(board_render)
+    if not current_user.is_admin:
+        user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,UserOnBoard.board_id == board_id).first()
+        return render_template('user_game_room.html', board_render = board_render,
+                               user = user,
+                               current_user = current_user,
+                               size = len(board_render))
 
-        return render_template('game_room.html',
+    else:
+        add_ship_form = AddShipForm(board_id=board_id)
+        delete_ship_form = DeleteShipForm(board_id=board_id)
+        board = db_sess.get(Board, board_id)
+        user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
+
+        users = db_sess.query(User).all()
+
+        for x, y in ship_coords:
+            board_render[y][x] = '#'
+        prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()
+
+        if add_ship_form.validate_on_submit():
+            prize_data = PrizeData(
+                is_win=False,
+                owner_id=current_user.id,
+                prize_id=add_ship_form.prize.data
+            )
+            ship = Ship(
+                board_id=board_id,
+                prize_id=add_ship_form.prize.data,
+                x=add_ship_form.x.data,
+                y=add_ship_form.y.data
+            )
+            db_sess.add(prize_data)
+            db_sess.add(ship)
+            db_sess.commit()
+
+            print(add_ship_form.y.data)
+            board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
+            print(board_render)
+
+            return render_template('admin_game_room.html',
+                                   add_ship_form=add_ship_form,
+                                   delete_ship_form=delete_ship_form,
+                                   board=db_sess.get(Board, board_id),
+                                   users=users,
+                                   errors = errors,
+                                   user_on_board=user_on_board,
+                                   prizes=prizes,
+                                   board_render=[''.join(i) for i in board_render],
+                                   size=board.n)
+
+        return render_template('admin_game_room.html',
                                add_ship_form=add_ship_form,
                                delete_ship_form=delete_ship_form,
-                               board=db_sess.get(Board, board_id),
+                               prizes=prizes,
                                users=users,
                                errors = errors,
                                user_on_board=user_on_board,
-                               prizes=prizes,
+                               board=db_sess.get(Board, board_id),
                                board_render=[''.join(i) for i in board_render],
                                size=board.n)
-
-    return render_template('game_room.html',
-                           add_ship_form=add_ship_form,
-                           delete_ship_form=delete_ship_form,
-                           prizes=prizes,
-                           users=users,
-                           errors = errors,
-                           user_on_board=user_on_board,
-                           board=db_sess.get(Board, board_id),
-                           board_render=[''.join(i) for i in board_render],
-                           size=board.n)
 
 
 @board.route('/show/<int:board_id>', methods=['GET', 'POST'])

@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import current_user, login_required
 from data.boards import Board
 from data.ships import Ship
@@ -31,19 +31,23 @@ def get_board(board_id):
 @api.route('/shoot_user')
 @login_required
 def shoot():
+
     board_id = request.args.get('board_id', default=0, type=int)
     x = request.args.get('x', default=0, type=int)
     y = request.args.get('y', default=0, type=int)
-
-    shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
+    print(x, y)
+    print(board_id)
+    user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
                                              UserOnBoard.board_id == request.args.get('board_id', default=0,
                                                                                     type=int)).first()
+    print(user.count)
     cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id, DeathCell.x == x, DeathCell.y == y).first()
-    if shoots is not None and cells is not None:
+
+    if user.count is not None and cells is not None:
         return 'False'
-    if UserOnBoard.count > 0:
+    if int(user.count) > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
-        UserOnBoard.count -= 1
+        user.count -= 1
         cell = DeathCell(
             board_id=board_id,
             x=x,
@@ -51,11 +55,11 @@ def shoot():
         )
         if ship is None:
             db_sess.add(cell)
-            return 'MIMO'
+            return redirect(url_for('board.edit_board',board_id = board_id))
         ship.prize_data.is_win = True
         ship.prize_data.owner_id = current_user.id
         db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()
         return str(ship is not None)
-    return 'no_shoots'
+    return

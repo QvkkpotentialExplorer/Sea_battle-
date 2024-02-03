@@ -58,7 +58,7 @@ def add_shoot():
         return abort(401)
 
     shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == request.args.get('user_id'),
-                                             UserOnBoardboard_id == request.args.get('board_id')).first()
+                                             UserOnBoard.board_id == request.args.get('board_id')).first()
     shoots.count += request.args.get('shoots_count')
     db_sess.commit()
 
