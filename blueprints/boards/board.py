@@ -115,7 +115,7 @@ def edit_board(board_id: int, errors=None):
                                    board_render=[''.join(i) for i in board_render],
                                    size=board.n)
 
-        return render_template('admin_game_room.html',
+        return render_template('admin_game_room_vbz.html',
                                add_ship_form=add_ship_form,
                                delete_ship_form=delete_ship_form,
                                prizes=prizes,
