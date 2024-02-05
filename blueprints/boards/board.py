@@ -67,8 +67,10 @@ def edit_board(board_id: int, errors=None):
         user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,UserOnBoard.board_id == board_id).first()
         return render_template('user_game_room.html', board_render = board_render,
                                user = user,
+
                                current_user = current_user,
-                               size = len(board_render))
+                               size = len(board_render),
+                               errors= errors)
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)

@@ -48,6 +48,7 @@ def shoot():
     if int(user.count) > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         user.count -= 1
+        print(user.count)
         cell = DeathCell(
             board_id=board_id,
             x=x,
@@ -55,6 +56,7 @@ def shoot():
         )
         if ship is None:
             db_sess.add(cell)
+            db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))
         ship.prize_data.is_win = True
         ship.prize_data.owner_id = current_user.id
@@ -62,4 +64,6 @@ def shoot():
         db_sess.delete(ship)
         db_sess.commit()
         return str(ship is not None)
+    else :
+        return redirect(url_for('board.edit_board',board_id = board_id,errors ="У тебя недостаточно выстрелов"))
     return
