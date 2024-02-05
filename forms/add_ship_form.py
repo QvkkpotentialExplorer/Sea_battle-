@@ -11,10 +11,11 @@ def coords_validator(form, field):
     ships = db_sess.query(Ship).filter(Ship.x == form.x.data, Ship.y == form.y.data,
                                        Ship.board_id == form.board_id.data).first()
     if ships is not None:
-        raise ValidationError('Ship already in this coords')
+        raise ValidationError('На этих координатах уже есть корабль')
 
 
 class AddShipForm(FlaskForm):
+
     board_id = HiddenField()
     x = IntegerField('x', validators=[NumberRange(min=0)])
     y = IntegerField('y', validators=[NumberRange(min=0)])
