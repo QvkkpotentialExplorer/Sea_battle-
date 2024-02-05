@@ -3,13 +3,12 @@
 {% block main_content %}
 <div class="backk">
     <div class="row justify-content-center" style="background-color: none;">
-
         <h1 class="text-white text-center my-1">Игровое поле</h1>
         </center>
         <div class="col-12 my-2">
             <div class="row">
-            <div class="col-6">
-                <form class="form-inline" method="post" style="display: inline-block; width : 30%;">
+            <div class="col-6" style="width : 30%;">
+                <form class="form-inline" method="post" style="display: inline-block; width : 100%;">
                     <div class="row align-items-start">
                         <div class="col-12 mx-0 px-0 ">{{ add_ship_form.hidden_tag() }}</div>
                         <div class="col-1">{{ add_ship_form.x(style="width: 1px; height: 1px; opacity: 0;", max=(board.n - 1) , id = "xValue")}}</div>
@@ -18,10 +17,7 @@
                         <div class="col-12" style=" align-text: center;">{{ add_ship_form.submit(class="input-group-text my-2", style="width: 100%;") }}</div>
                     </div>
                 </form>
-
-            </div>
-            <div class="col-6 my-5">
-                <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-heading">
                             <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse"
@@ -44,15 +40,13 @@
 
                             </div>
                         </div>
+                        {%for user in user_on_board%}
+            <p class="text-white">{{user.user_id}}</p>
+            {%endfor%}
                     </div>
                 </div>
             </div>
-
-            {%for user in user_on_board%}
-            <p class="text-white">{{user.user_id}}</p>
-            {%endfor%}
-            </div>
-        </div>
+    <div style="width : 70%;">
         <center>
         <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
             <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
@@ -93,8 +87,9 @@
                 </tr>
                 {% endfor %}
                 </tbody>
-        </div>
-        </center>
+            </div>
+    </div>
+    </center>
 
     </div>
 </div>
