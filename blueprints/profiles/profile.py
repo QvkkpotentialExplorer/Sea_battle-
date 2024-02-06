@@ -37,6 +37,7 @@ def prize():
     else:
         prize_data = db_sess.query(PrizeData.prize_id).filter(PrizeData.owner_id == current_user.id).all()
         prizes = {}
+        print(len(prize_data))
         for prizes_id in prize_data:
 
             prizes[f"{db_sess.get(Prize,prizes_id)}"] = [db_sess.get(PrizeData,prizes_id)]

@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from data.boards import Board
 from data.ships import Ship
 from data.users_on_boards import UserOnBoard
-
+from data.prize_data import PrizeData
 from data.db_session import db_sess
 from data.no_cells import DeathCell
 
@@ -48,7 +48,7 @@ def shoot():
     if int(user.count) > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         user.count -= 1
-        print(user.count)
+
         cell = DeathCell(
             board_id=board_id,
             x=x,
@@ -58,8 +58,10 @@ def shoot():
             db_sess.add(cell)
             db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))
-        ship.prize_data.is_win = True
-        ship.prize_data.owner_id = current_user.id
+        print(ship.prize_id)
+        prize_data = db_sess.get(PrizeData,ship.prize_id)
+        prize_data.is_win = True
+        prize_data.owner_id = current_user.id
         db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()

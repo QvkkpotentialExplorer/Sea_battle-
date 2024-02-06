@@ -92,9 +92,10 @@ def edit_board(board_id: int, errors=None):
                 owner_id=current_user.id,
                 prize_id=add_ship_form.prize.data
             )
+            print(prize_data.id)
             ship = Ship(
                 board_id=board_id,
-                prize_id=add_ship_form.prize.data,
+                prize_id=prize_data.id,
                 x=add_ship_form.x.data,
                 y=add_ship_form.y.data
             )
