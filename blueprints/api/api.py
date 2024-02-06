@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import current_user, login_required
 from data.boards import Board
@@ -62,6 +63,7 @@ def shoot():
         prize_data = db_sess.get(PrizeData,ship.prize_id)
         prize_data.is_win = True
         prize_data.owner_id = current_user.id
+        prize_data.date_win = datetime.now()
         db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()

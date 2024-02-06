@@ -35,12 +35,11 @@ def prize():
         return render_template('prizes.html',prizes = prizes,current_user=current_user)
 
     else:
-        prize_data = db_sess.query(PrizeData.prize_id).filter(PrizeData.owner_id == current_user.id).all()
-        prizes = {}
-        print(len(prize_data))
-        for prizes_id in prize_data:
-
-            prizes[f"{db_sess.get(Prize,prizes_id)}"] = [db_sess.get(PrizeData,prizes_id)]
+        prizes_data = db_sess.query(PrizeData.prize_id,PrizeData.date_win).filter(PrizeData.owner_id == current_user.id).all()
+        prizes = []
+        for prize_id,prize_date_win in prizes_data:
+            prize = db_sess.get(Prize, prize_id)
+            prizes.append((prize.name,prize.description,prize.avatar,prize_date_win))
         print(prizes)
         return render_template('prizes.html', prizes=prizes,template = 'base_user.html' ,current_user=current_user.id)
 

@@ -92,18 +92,19 @@ def edit_board(board_id: int, errors=None):
                 owner_id=current_user.id,
                 prize_id=add_ship_form.prize.data
             )
-            print(prize_data.id)
+            db_sess.add(prize_data)
+            db_sess.commit()
+
             ship = Ship(
                 board_id=board_id,
                 prize_id=prize_data.id,
                 x=add_ship_form.x.data,
                 y=add_ship_form.y.data
             )
-            db_sess.add(prize_data)
             db_sess.add(ship)
             db_sess.commit()
 
-            print(add_ship_form.y.data)
+            print(prize_data.id)
             board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
             print(board_render)
             add_ship_form = AddShipForm(board_id=board_id)
@@ -245,3 +246,10 @@ def delete_board(board_id: int):
         db_sess.delete(board)
         db_sess.commit()
     return redirect(url_for('board.board_list'))
+@board.route('/delete_ship/<int:board_id>/<int:x>/<int:y>', methods=['GET', 'POST'])
+@login_required
+def delete_ship(board_id : int ,x :int,y: int):
+    if not current_user.is_admin:
+        return abort(401)
+
+

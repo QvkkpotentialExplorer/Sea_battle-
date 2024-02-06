@@ -10,6 +10,6 @@ class PrizeData(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     is_win = sqlalchemy.Column(sqlalchemy.Boolean, nullable=True)
     owner_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=True)
-    data_win = sqlalchemy.Column(sqlalchemy.Text)
+    date_win = sqlalchemy.Column(sqlalchemy.Text)
     prize_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('prizes.id'), nullable=True)
     prize = orm.relationship('Prize')

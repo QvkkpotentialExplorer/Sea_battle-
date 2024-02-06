@@ -38,6 +38,9 @@
                     <div class="prizes_item mt-3">
                         <div class="mx-4 ">
                             <p class="">{{prize[1]}}</p>
+                            {% if not current_user.is_admin%}
+                                <p>{{prize[3]}}</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -47,8 +50,10 @@
         {%endfor%}
         </ul>
     </div>
-    <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
-        приз</a>
+    {%if current_user.is_admin%}
+        <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+            приз</a>
+    {% endif %}
 </div>
 
 {%elif not prizes%}

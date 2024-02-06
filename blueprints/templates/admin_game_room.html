@@ -88,24 +88,11 @@
                         style="width: 100%;") }}
                     </div>
                 </div>
-            </form>
-            <form class="form-inline" method="post"
-                  style="display: inline-block; width : 100%;">
-                <div class="col-12 mx-0 px-0 ">{{ delete_ship_form.hidden_tag() }}
-                </div>
-                 <div class = "row">
-                    <div class="col-1">{{ delete_ship_form.x(style="width: 1px; height:
-                        1px; opacity: 0;", max=(board.n - 1) , id = "xValue")}}
+                    <div class="col-12" style=" align-text: center;">
+                        <a class="input-group-text" id="delete_button"> Удалить</a>
                     </div>
-                    <div class="col-1">{{ delete_ship_form.y( style="width: 1px; height:
-                        1px; opacity: 0;", max=(board.n - 1) , id = "yValue")}}
-                    </div>
-                    <div class="col-12" style=" align-text: center;">{{
-                        delete_ship_form.submit(class="input-group-text my-2",
-                        style="width: 100%;") }}
-                    </div>
-                 </div>
-            </form>
+
+
 
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
@@ -190,6 +177,8 @@
       var button = document.getElementById(cid);
       var input_x = document.getElementById("xValue");
       var input_y = document.getElementById("yValue");
+      var input_delete = document.getElementById("delete_button");
+      input_delete.href = ""
       input_y.value = button.getAttribute('data-positiony');
       input_x.value = button.getAttribute('data-positionx');
     }
