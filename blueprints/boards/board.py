@@ -118,27 +118,27 @@ def edit_board(board_id: int, errors=None):
                                    board_render=[''.join(i) for i in board_render],
                                    size=board.n)
 
-        if delete_ship_form.validate_on_submit():
-            ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == delete_ship_form.x.data,
-                                              Ship.y == delete_ship_form.y.data).first()# Ищем корабли по данным переданной в форму.
-            prize_data = db_sess.query(PrizeData).filter(PrizeData.id == ship.prize_data.id).first()#Находим приз , привязанный к нему
-            print(prize_data)
-            db_sess.delete(ship)
-            db_sess.delete(prize_data)
-            db_sess.commit()
-
-            board_render[delete_ship_form.y.data][delete_ship_form.x.data] = '.'
-
-            return render_template('admin_game_room.html',
-                                   add_ship_form=add_ship_form,
-                                   delete_ship_form=delete_ship_form,
-                                   board=db_sess.get(Board, board_id),
-                                   users=users,
-                                   errors=errors,
-                                   user_on_board=user_on_board,
-                                   prizes=prizes,
-                                   board_render=[''.join(i) for i in board_render],
-                                   size=board.n)
+        # if delete_ship_form.validate_on_submit():
+        #     ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == delete_ship_form.x.data,
+        #                                       Ship.y == delete_ship_form.y.data).first()# Ищем корабли по данным переданной в форму.
+        #     prize_data = db_sess.query(PrizeData).filter(PrizeData.id == ship.prize_data.id).first()#Находим приз , привязанный к нему
+        #     print(prize_data)
+        #     db_sess.delete(ship)
+        #     db_sess.delete(prize_data)
+        #     db_sess.commit()
+        #
+        #     board_render[delete_ship_form.y.data][delete_ship_form.x.data] = '.'
+        #
+        #     return render_template('admin_game_room.html',
+        #                            add_ship_form=add_ship_form,
+        #                            delete_ship_form=delete_ship_form,
+        #                            board=db_sess.get(Board, board_id),
+        #                            users=users,
+        #                            errors=errors,
+        #                            user_on_board=user_on_board,
+        #                            prizes=prizes,
+        #                            board_render=[''.join(i) for i in board_render],
+        #                            size=board.n)
 
         return render_template('admin_game_room.html',
                                add_ship_form=add_ship_form,

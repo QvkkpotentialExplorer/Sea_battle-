@@ -35,9 +35,13 @@ def prize():
         return render_template('prizes.html',prizes = prizes,current_user=current_user)
 
     else:
-        prizes = db_sess.query(PrizeData.prize_id,PrizeData.data_win).filter(PrizeData.owner_id == current_user.id).all()
+        prize_data = db_sess.query(PrizeData.prize_id).filter(PrizeData.owner_id == current_user.id).all()
+        prizes = {}
+        for prizes_id in prize_data:
+
+            prizes[f"{db_sess.get(Prize,prizes_id)}"] = [db_sess.get(PrizeData,prizes_id)]
         print(prizes)
-        return render_template('prizes.html', prizes=prizes,template = 'base_user.html',current_user=current_user)
+        return render_template('prizes.html', prizes=prizes,template = 'base_user.html' ,current_user=current_user.id)
 
 @profile.route('/client')
 @login_required
