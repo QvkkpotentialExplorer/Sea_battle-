@@ -246,10 +246,22 @@ def delete_board(board_id: int):
         db_sess.delete(board)
         db_sess.commit()
     return redirect(url_for('board.board_list'))
+
+
 @board.route('/delete_ship/<int:board_id>/<int:x>/<int:y>', methods=['GET', 'POST'])
 @login_required
 def delete_ship(board_id : int ,x :int,y: int):
     if not current_user.is_admin:
         return abort(401)
+    ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
+    if not ship :
+        errors = "На этих координатах нет корабля "
+        return redirect(url_for('board.edit_board', board_id=board_id, errors=errors))
+    prize_data = db_sess.query(PrizeData).filter(PrizeData.id == ship.prize_id).first()
+    db_sess.delete(ship)
+    db_sess.delete(prize_data)
+    db_sess.commit()
+    return redirect(url_for('board.edit_board',board_id = board_id))
+
 
 
