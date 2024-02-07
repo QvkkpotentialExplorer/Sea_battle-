@@ -1,20 +1,19 @@
 {%extends 'base_user.html'%}
 {% block main_content%}
-<div>
-    <center>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
+<div class="row">
+    <div class="col-8">
+
         <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
-            {% if errors %}
-                {{errors}}
-            {% endif %}
+            <center>
             {{user.count}}
+            <div class="col-4">
+            {% if errors%}
+            <div class="alert alert-danger" role="alert">
+                <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                {{errors}}
+            </div>
+            {%endif%}
+            </div>
             <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
                 <thead>
                 <tr>
@@ -52,9 +51,32 @@
                 </tr>
                 {% endfor %}
                 </tbody>
-        </div>
-        </center>
+            </table>
+            </center>
+            </div>
 </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col-3">
+        <div class="col-12">
+
+            <div class="container-fluid bg-dark">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                <li class="text-white">{{ message }}</li>
+
+                {% endfor %}
+            </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
 .contant_shoots{
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);

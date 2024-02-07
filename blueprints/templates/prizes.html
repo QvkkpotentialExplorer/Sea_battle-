@@ -32,14 +32,14 @@
         <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
             <div class="galery">
                 <div class="card flex-fill bg-dark align-items-center ">
-                    <p>{{prize[0]}}</p>
-                    <img src="static/avatars/{{prize[2]}}" class="img-thumbnail align-self-center "
+                    <p>{{prize['name']}}</p>
+                    <img src="static/avatars/{{prize['avatar']}}" class="img-thumbnail align-self-center "
                          style="width: 60% ; height : 10rem; background: none;">
                     <div class="prizes_item mt-3">
                         <div class="mx-4 ">
-                            <p class="">{{prize[1]}}</p>
+                            <p class="">{{prize['description']}}</p>
                             {% if not current_user.is_admin%}
-                                <p>{{prize[3]}}</p>
+                                <p>{{prize['data_win']}}</p>
                             {% endif %}
                         </div>
                     </div>

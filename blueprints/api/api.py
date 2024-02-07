@@ -61,7 +61,6 @@ def shoot():
             db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))
         cell.status_ship = True
-        print(ship.prize_id)
         prize_data = db_sess.get(PrizeData,ship.prize_id)
         prize_data.is_win = True
         prize_data.owner_id = current_user.id
@@ -69,8 +68,7 @@ def shoot():
         db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()
-        flash("Вы выиграли приз")
+        flash('Вы попали')
         return redirect(url_for('board.edit_board', board_id=board_id, msg = "Вы попали"))
     else :
         return redirect(url_for('board.edit_board',board_id = board_id,errors ="У тебя недостаточно выстрелов"))
-    return

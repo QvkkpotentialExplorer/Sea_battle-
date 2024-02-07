@@ -37,10 +37,13 @@ def prize():
     else:
         prizes_data = db_sess.query(PrizeData.prize_id,PrizeData.date_win).filter(PrizeData.owner_id == current_user.id).all()
         prizes = []
+        count = 0
         for prize_id,prize_date_win in prizes_data:
+            count +=1
+
             prize = db_sess.get(Prize, prize_id)
-            prizes.append((prize.name,prize.description,prize.avatar,prize_date_win))
-            # prizes.append({ 'name' : f'{prize.name}','decreption' : f'{prize.description}','prize_avatar' : f'{prize.avatar}','prize_data_win':f'{prize_date_win}'})
+            # prizes.append((prize.name,prize.description,prize.avatar,prize_date_win))
+            prizes.append( {'id' : f'{prize_id}' , 'name' : f'{prize.name}','description' : f'{prize.description}','prize_avatar' : f'{prize.avatar}','prize_data_win':f'{prize_date_win}'})
         print(prizes)
         print(prizes)
         return render_template('prizes.html', prizes=prizes,template = 'base_user.html' ,current_user=current_user.id)
