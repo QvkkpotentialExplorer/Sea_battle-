@@ -43,7 +43,7 @@ def prize():
 
             prize = db_sess.get(Prize, prize_id)
             # prizes.append((prize.name,prize.description,prize.avatar,prize_date_win))
-            prizes.append( {'id' : f'{prize_id}' , 'name' : f'{prize.name}','description' : f'{prize.description}','prize_avatar' : f'{prize.avatar}','prize_data_win':f'{prize_date_win}'})
+            prizes.append( {'id' : f'{prize_id}' , 'name' : f'{prize.name}','description' : f'{prize.description}','avatar' : f'{prize.avatar}','prize_data_win':f'{prize_date_win}'})
         print(prizes)
         print(prizes)
         return render_template('prizes.html', prizes=prizes,template = 'base_user.html' ,current_user=current_user.id)
