@@ -10,3 +10,4 @@ class DeathCell(SqlAlchemyBase):
     board_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('boards.id'), nullable=True)
     x = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     y = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    status_ship = sqlalchemy.Column(sqlalchemy.BOOLEAN,nullable=True)

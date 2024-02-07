@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, jsonify, request, redirect, url_for
+from flask import Blueprint, jsonify, request, redirect, url_for, flash
 from flask_login import current_user, login_required
 from data.boards import Board
 from data.ships import Ship
@@ -53,12 +53,14 @@ def shoot():
         cell = DeathCell(
             board_id=board_id,
             x=x,
-            y=y
+            y=y,
         )
         if ship is None:
+            cell.status_ship = False
             db_sess.add(cell)
             db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))
+        cell.status_ship = True
         print(ship.prize_id)
         prize_data = db_sess.get(PrizeData,ship.prize_id)
         prize_data.is_win = True
@@ -67,7 +69,8 @@ def shoot():
         db_sess.add(cell)
         db_sess.delete(ship)
         db_sess.commit()
-        return str(ship is not None)
+        flash("Вы выиграли приз")
+        return redirect(url_for('board.edit_board', board_id=board_id, msg = "Вы попали"))
     else :
         return redirect(url_for('board.edit_board',board_id = board_id,errors ="У тебя недостаточно выстрелов"))
     return

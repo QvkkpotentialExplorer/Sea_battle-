@@ -53,6 +53,15 @@
                                 onclick="fillFields('{{ x+1 }}{{ y }}')">
                         </button>
                         {%endif%}
+                        {% if board_render[y][x] == "!" %}
+                        <button class="btn contant_shot_down"
+                                style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}"
+                                data-positiony="{{ y }}"
+                                id="{{ x+1 }}{{ y }}"
+                                onclick="fillFields('{{ x+1 }}{{ y }}')">
+                        </button>
+                        {%endif%}
 
                     </td>
                     {% endfor %}
@@ -68,6 +77,11 @@
             <div class="alert alert-danger" role="alert">
                 <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
                 {{add_ship_form.errors['submit'][0]}}
+            </div>
+            {%elif errors%}
+            <div class="alert alert-danger" role="alert">
+                <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                {{errors}}
             </div>
             {%endif%}
             <form class="form-inline mb-0" method="post"
@@ -89,8 +103,9 @@
                     </div>
                 </div>
                     <div class="col-12" style=" align-text: center;">
-                        <a class="input-group-text" id="delete_button"> Удалить</a>
+                        <a class="input-group-text" style = "text_decoration:none;" id="delete_button" data-board_id = "{{board_id}}"> Удалить</a>
                     </div>
+                    <p>{{board_id}}</p>
 
 
 
@@ -136,14 +151,20 @@
     tr{
      background: #e8ecef;
      }
+.contant_shot_down{
+    background: url(https://sergeychikin.ru/365/028-transport/sea/titanic.svg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
   .contant_shoots{
-    background: url(https://sergeychikin.ru/365/360-symbols/religions/swastika.svg);
+    background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
   }
   .contant{
-  background: url(https://sergeychikin.ru/365/150-clothes/sneakers.svg);
+  background: url(https://sergeychikin.ru/365/028-transport/sea/steamboat.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -178,9 +199,10 @@
       var input_x = document.getElementById("xValue");
       var input_y = document.getElementById("yValue");
       var input_delete = document.getElementById("delete_button");
-
+      var board_id = input_delete.getAttribute('data-board_id')
       input_y.value = button.getAttribute('data-positiony');
       input_x.value = button.getAttribute('data-positionx');
+      input_delete.href = `/board/delete_ship/${board_id}/${input_x.value}/${input_y.value}`;
     }
 
 

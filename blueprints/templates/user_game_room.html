@@ -1,7 +1,15 @@
 {%extends 'base_user.html'%}
 {% block main_content%}
 <div>
-       <center>
+    <center>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
             {% if errors %}
                 {{errors}}
@@ -27,6 +35,10 @@
                         <button class="btn contant_shoots" style="width: 35px; height: 35px;"
                                 data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
                         </button>
+                        {% elif board_render[y][x] == "!" %}
+                        <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
+                        </button>
                         {% else %}
                          <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
                                 data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"  href = "{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
@@ -50,5 +62,11 @@
     background-position: center center;
     background-repeat: no-repeat;
   }
+.contant_shot_down{
+    background: url(https://sergeychikin.ru/365/028-transport/sea/titanic.svg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 </style>
 {% endblock %}

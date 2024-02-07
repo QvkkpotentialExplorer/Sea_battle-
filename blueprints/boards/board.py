@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, abort, url_for, flash
+from flask import Blueprint, render_template, redirect, abort, url_for, flash, request
 from data.boards import Board
 from data.db_session import db_sess
 from flask_login import login_required, current_user
@@ -51,17 +51,21 @@ def add_board():
 
 @board.route('/game_room/<int:board_id>', methods=['GET', 'POST'])
 @login_required
-def edit_board(board_id: int, errors=None):
+def edit_board(board_id: int):
+    errors = request.args.get('errors', default=None, type=str)
     ship_coords = [(ship.x, ship.y) for ship in db_sess.query(Ship).filter(Ship.board_id == board_id).all()]
-    shoots_coords = [(shoots.x, shoots.y) for shoots in
+    shoots_coords = [(shoots.x, shoots.y,shoots.status_ship) for shoots in
                      db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).all()]
     board = db_sess.get(Board, board_id)
     board_render = [['.'] * board.n for _ in range(board.n)]
 
     for x, y in ship_coords:
         board_render[y][x] = '#'
-    for x, y in shoots_coords:
-        board_render[y][x] = 'x'
+    for x, y , status_ship in shoots_coords:
+        if status_ship == True:
+            board_render[y][x] = '!'
+        else:
+            board_render[y][x] = 'x'
 
     if not current_user.is_admin:
         user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
@@ -70,7 +74,8 @@ def edit_board(board_id: int, errors=None):
                                user=user,
                                current_user=current_user,
                                size=len(board_render),
-                               errors=errors)
+                               errors=errors,
+                               board_id = board_id)
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)
@@ -114,7 +119,8 @@ def edit_board(board_id: int, errors=None):
                                    delete_ship_form=delete_ship_form,
                                    board=db_sess.get(Board, board_id),
                                    users=users,
-                                   errors=errors,
+                                   errors=None,
+                                   board_id = board_id,
                                    user_on_board=user_on_board,
                                    prizes=prizes,
                                    board_render=[''.join(i) for i in board_render],
@@ -148,6 +154,7 @@ def edit_board(board_id: int, errors=None):
                                prizes=prizes,
                                users=users,
                                errors=errors,
+                               board_id = board_id,
                                user_on_board=user_on_board,
                                board=db_sess.get(Board, board_id),
                                board_render=[''.join(i) for i in board_render],
@@ -258,6 +265,7 @@ def delete_ship(board_id : int ,x :int,y: int):
         errors = "На этих координатах нет корабля "
         return redirect(url_for('board.edit_board', board_id=board_id, errors=errors))
     prize_data = db_sess.query(PrizeData).filter(PrizeData.id == ship.prize_id).first()
+    print(prize_data.id)
     db_sess.delete(ship)
     db_sess.delete(prize_data)
     db_sess.commit()
