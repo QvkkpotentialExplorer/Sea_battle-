@@ -1,20 +1,44 @@
 {%extends 'base_user.html'%}
 {% block main_content%}
-<div class="row">
-    <div class="col-8">
+<div class="col">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-3">
+                <div class="col-12">
 
-        <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
-            <center>
-            {{user.count}}
-            <div class="col-4">
-            {% if errors%}
-            <div class="alert alert-danger" role="alert">
-                <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                {{errors}}
+                    <div class="container-fluid bg-dark ">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul class=flashes>
+                            {% for message in messages %}
+                            <li class="text-white">{{ message }}</li>
+
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
             </div>
-            {%endif%}
+            <div class="col-4 bg-dark text-white" style="width: max-content;">
+                <p style="margin: auto;">Количество выстрелов:</p> {{user.count}}
             </div>
-            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
+            <div class="col-5">
+                {% if errors%}
+                <div class="alert alert-danger" role="alert">
+                    <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+                    {{errors}}
+                </div>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+<div class="col-12">
+    <div class="col-12">
+        <center>
+            <table class=" col-12 table table-bordered border-dark bg-light my-4"
+                   style="width:calc(35px*({{size+1}} + 1));">
                 <thead>
                 <tr>
                     <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
@@ -30,20 +54,22 @@
                     {% for x in range(size) %}
                     <td style="background: #e8ecef;">
 
-                         {% if board_render[y][x] == "x" %}
+                        {% if board_render[y][x] == "x" %}
                         <button class="btn contant_shoots" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
                         </button>
                         {% elif board_render[y][x] == "!" %}
                         <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
                         </button>
                         {% else %}
-                         <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
-                                data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"  href = "{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
+                        <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;"
+                           data-positionx="{{ x }}"
+                           data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
+                           href="{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
 
-                        <a>
-                        {%endif%}
+                            <a>
+                                {%endif%}
 
 
                     </td>
@@ -52,29 +78,11 @@
                 {% endfor %}
                 </tbody>
             </table>
-            </center>
-            </div>
+        </center>
+    </div>
 </div>
-    <div class="col-1">
 
-    </div>
-    <div class="col-3">
-        <div class="col-12">
-
-            <div class="container-fluid bg-dark">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul class=flashes>
-                {% for message in messages %}
-                <li class="text-white">{{ message }}</li>
-
-                {% endfor %}
-            </ul>
-                {% endif %}
-                {% endwith %}
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 
 <style>
@@ -83,12 +91,22 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+
   }
 .contant_shot_down{
     background: url(https://sergeychikin.ru/365/028-transport/sea/titanic.svg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
+
 }
+.contant:hover{
+    border-color: rgba(255, 0, 0, 255);
+	border-width: 4px;
+	}
+
+
+
+
 </style>
 {% endblock %}

@@ -1,64 +1,83 @@
+
 {% extends 'base_admin.html' %}
 {% block main_content %}
-<h1 class="text-white text-center my-1">Игровое поле</h1>
-<div class="row">
-    <div class="col-8">
-        <div style="overflow:auto;overflow-y:auto;">
-            <table class="table table-bordered border-dark bg-light my-4"
-                   style="width:calc(35px*({{size+1}} + 1));">
+<div class="backk">
+    <div class="row justify-content-center" style="background-color: none;">
+        <h1 class="text-white text-center my-1">Игровое поле</h1>
+        </center>
+        <div class="col-12 my-2">
+            <div class="row">
+            <div class="col-6" style="width : 30%;">
+                <form class="form-inline" method="post" style="display: inline-block; width : 100%;">
+                    <div class="row align-items-start">
+                        <div class="col-12 mx-0 px-0 ">{{ add_ship_form.hidden_tag() }}</div>
+                        <div class="col-1">{{ add_ship_form.x(style="width: 1px; height: 1px; opacity: 0;", max=(board.n - 1) , id = "xValue")}}</div>
+                        <div class="col-1" >{{ add_ship_form.y( style="width: 1px; height: 1px; opacity: 0;", max=(board.n - 1) , id = "yValue")}}</div>
+                        <div class="col-12" >{{ add_ship_form.prize(class="input-group-text my-2",style="width: 100%;") }}</div>
+                        <div class="col-12" style=" align-text: center;">{{ add_ship_form.submit(class="input-group-text my-2", style="width: 100%;") }}</div>
+                    </div>
+                </form>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-heading">
+                            <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapse" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapse">Пользователи
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapse" class="accordion-collapse collapse show"
+                             aria-labelledby="panelsStayOpen-heading">
+                            <div class="accordion-body bg-dark text-white">
+
+                                {% for user in users %}
+
+                                <p class="text-white">Имя пользователя: {{ user.login }}</p>
+                                <a data-id="{{ user.id }}" id="{{ user.id }}"
+                                   href="{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}"
+                                   class="accordion-body my-3">Добавить пользователя</a>
+
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        {%for user in user_on_board%}
+            <p class="text-dark">Добавлен пользователь с id: {{user.user_id}}</p>
+            {%endfor%}
+                    </div>
+                </div>
+            </div>
+    <div style="width : 70%;">
+        <center>
+        <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
+            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
                 <thead>
                 <tr>
                     <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
                     {% for i in range(size) %}
-                    <th class="text-dark"
-                        style="width: 35px; height: 35px; background: #e8ecef;">
-                        {{ i+1 }}
-                    </th>
+                    <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
                     {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for y in range(size) %}
-                <tr class="text-dark bg-light"
-                    style="width: 41.8px; height: 35px; background: #e8ecef;">
-                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">
-                        {{ y+1 }}
-                    </th>
+                <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
+                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
                     {% for x in range(size) %}
                     <td style="background: #e8ecef;">
                         {% if board_render[y][x] == "." %}
-                        <button class="btn"
-                                style="width: 35px; height: 35px;  background: #e8ecef;"
-                                data-positionx="{{ x }}"
-                                data-positiony="{{ y }}"
-                                id="{{ x+1 }}{{ y }}"
-                                onclick="fillFields('{{ x+1 }}{{ y }}')">
+                        <button class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
+                                data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" onclick="fillFields('{{ x+1 }}{{ y }}')">
                         </button>
-                        {%endif%}
+                            {%endif%}
                         {% if board_render[y][x] == "#" %}
-                        <button class="btn contant"
-                                style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}"
-                                data-positiony="{{ y }}"
-                                id="{{ x+1 }}{{ y }}"
+                        <button class="btn contant" style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
                                 onclick="fillFields('{{ x+1 }}{{ y }}')">
                         </button>
                         {%endif%}
-                        {% if board_render[y][x] == "x" %}
-                        <button class="btn contant_shoots"
-                                style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}"
-                                data-positiony="{{ y }}"
-                                id="{{ x+1 }}{{ y }}"
-                                onclick="fillFields('{{ x+1 }}{{ y }}')">
-                        </button>
-                        {%endif%}
-                        {% if board_render[y][x] == "!" %}
-                        <button class="btn contant_shot_down"
-                                style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}"
-                                data-positiony="{{ y }}"
-                                id="{{ x+1 }}{{ y }}"
+                         {% if board_render[y][x] == "x" %}
+                        <button class="btn contant_shoots" style="width: 35px; height: 35px;"
+                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
                                 onclick="fillFields('{{ x+1 }}{{ y }}')">
                         </button>
                         {%endif%}
@@ -68,95 +87,16 @@
                 </tr>
                 {% endfor %}
                 </tbody>
-            </table>
             </div>
-
-        </div>
-        <div class="col-3">
-            {% if add_ship_form.errors%}
-            <div class="alert alert-danger" role="alert">
-                <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                {{add_ship_form.errors['submit'][0]}}
-            </div>
-            {%elif errors%}
-            <div class="alert alert-danger" role="alert">
-                <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                {{errors}}
-            </div>
-            {%endif%}
-            <form class="form-inline mb-0" method="post"
-                  style="display: inline-block; width : 100%;">
-                <div class="col-12 mx-0 px-0 ">{{ add_ship_form.hidden_tag() }}
-                <div class = "row">
-                    <div class="col-1">{{ add_ship_form.x(style="width: 1px; height:
-                        1px; opacity: 0;", max=(board.n - 1) , id = "xValue")}}
-                    </div>
-                    <div class="col-1">{{ add_ship_form.y( style="width: 1px; height:
-                        1px; opacity: 0;", max=(board.n - 1) , id = "yValue")}}
-                    </div>
-                    <div class="col-12">{{ add_ship_form.prize(class="input-group-text
-                        my-2",style="width: 100%;") }}
-                    </div>
-                    <div class="col-12" style=" align-text: center;">{{
-                        add_ship_form.submit(class="input-group-text my-2",
-                        style="width: 100%;") }}
-                    </div>
-                </div>
-                    <div class="col-12" style=" align-text: center;">
-                        <a class="input-group-text" style = "text_decoration:none;" id="delete_button" data-board_id = "{{board_id}}"> Удалить</a>
-                    </div>
-                    <p>{{board_id}}</p>
-
-
-
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-heading">
-                        <button class="accordion-button text-dark" type="button"
-                                data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapse"
-                            aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapse">
-                        Пользователи
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapse"
-                     class="accordion-collapse collapse show"
-                     aria-labelledby="panelsStayOpen-heading">
-                    <div class="accordion-body bg-dark text-white">
-
-                        {% for user in users %}
-
-                        <p class="text-white">Имя пользователя: {{ user.login
-                            }}</p>
-                        <a data-id="{{ user.id }}" id="{{ user.id }}"
-                           href="{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}"
-                           class="accordion-body my-3">Добавить
-                            пользователя</a>
-
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-<!--        {%for user in user_on_board%}-->
-<!--        <p class="text-white">{{user.user_id}}</p>-->
-<!--        {%endfor%}-->
     </div>
-    <div class="col-1">
-    </div>
+    </center>
 
+    </div>
 </div>
 <style>
     tr{
      background: #e8ecef;
      }
-.contant_shot_down{
-    background: url(https://sergeychikin.ru/365/028-transport/sea/titanic.svg);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
   .contant_shoots{
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
     background-size: cover;
@@ -164,7 +104,7 @@
     background-repeat: no-repeat;
   }
   .contant{
-  background: url(https://sergeychikin.ru/365/028-transport/sea/steamboat.svg);
+  background: url(https://sergeychikin.ru/365/028-transport/sea/schooner.svg);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -190,26 +130,18 @@
 
 }
 }
-
-
 </style>
 <script>
     function fillFields(cid) {
       var button = document.getElementById(cid);
       var input_x = document.getElementById("xValue");
       var input_y = document.getElementById("yValue");
-      var input_delete = document.getElementById("delete_button");
-      var board_id = input_delete.getAttribute('data-board_id')
       input_y.value = button.getAttribute('data-positiony');
       input_x.value = button.getAttribute('data-positionx');
-      input_delete.href = `/board/delete_ship/${board_id}/${input_x.value}/${input_y.value}`;
     }
-
-
 
 
 
 </script>
 
 {% endblock %}
-

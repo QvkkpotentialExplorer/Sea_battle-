@@ -20,10 +20,6 @@
   margin-bottom: 10px;
   object-fit: cover;
 }
-
-
-
-
     </style>
     <h1>Ваши призы</h1>
     <div class="row justify-content-center justify-content-md-start justify-content-lg-center
@@ -32,11 +28,11 @@
         <button onclick="getMassive()" id="filter" data-massive="{{prizes}}">
         <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
             <div class="galery">
-                <div class="card flex-fill bg-dark align-items-center ">
+                <div class="card flex-fill bg-dark align-items-center">
                     <p>{{prize['name']}}</p>
                     <img src="static/avatars/{{prize['avatar']}}" class="img-thumbnail align-self-center "
                          style="width: 60% ; height : 10rem; background: none;">
-                    <div class="prizes_item mt-3">
+                    <div class="prizes_item ">
                         <div class="mx-4 ">
                             <p class="">{{prize['description']}}</p>
                             {% if not current_user.is_admin%}
@@ -71,7 +67,8 @@
         <p class="lead mb-5">У вас пока еще нет выигранных призов</p>
     {%endif%}
 {%endif%}
-<srcript>
+
+{%endblock%}<srcript>
     function getMassive(){
         var button = getElementById('filter')
         var massive = button.getAttribute('data-massive')
@@ -79,7 +76,6 @@
     }
 
     function filter(mass){
-        
+
     }
 </srcript>
-{%endblock%}
