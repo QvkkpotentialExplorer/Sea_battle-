@@ -58,6 +58,7 @@ def edit_board(board_id: int):
                      db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).all()]
     board = db_sess.get(Board, board_id)
     board_render = [['.'] * board.n for _ in range(board.n)]
+    status_shoot = (db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).first() is not None)
 
     for x, y in ship_coords:
         board_render[y][x] = '#'
@@ -79,12 +80,13 @@ def edit_board(board_id: int):
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)
-        delete_ship_form = DeleteShipForm(board_id=board_id)
 
         board = db_sess.get(Board, board_id)
-        user_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
+        users_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
+        print(users_on_board)
 
-        users = db_sess.query(User).all()
+        users = db_sess.query(User).filter(User.is_admin == False).all()
+        print(users)
 
         for x, y in ship_coords:
             board_render[y][x] = '#'
@@ -92,6 +94,8 @@ def edit_board(board_id: int):
         print(prizes)
 
         if add_ship_form.validate_on_submit():
+            if shoots_coords:
+                return redirect(url_for("board.edit_board",board_id = board_id,errors= "Игра началась , редактирование запрещено"))
             prize_data = PrizeData(
                 is_win=False,
                 owner_id=current_user.id,
@@ -113,53 +117,28 @@ def edit_board(board_id: int):
             board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
             print(board_render)
             add_ship_form = AddShipForm(board_id=board_id)
-
             return render_template('admin_game_room.html',
                                    add_ship_form=add_ship_form,
-                                   delete_ship_form=delete_ship_form,
+                                   status_shoot = status_shoot,
                                    board=db_sess.get(Board, board_id),
                                    users=users,
                                    errors=None,
                                    board_id = board_id,
-                                   user_on_board=user_on_board,
+                                   users_on_board=users_on_board,
                                    prizes=prizes,
                                    board_render=[''.join(i) for i in board_render],
                                    size=board.n)
-
-        # if delete_ship_form.validate_on_submit():
-        #     ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == delete_ship_form.x.data,
-        #                                       Ship.y == delete_ship_form.y.data).first()# Ищем корабли по данным переданной в форму.
-        #     prize_data = db_sess.query(PrizeData).filter(PrizeData.id == ship.prize_data.id).first()#Находим приз , привязанный к нему
-        #     print(prize_data)
-        #     db_sess.delete(ship)
-        #     db_sess.delete(prize_data)
-        #     db_sess.commit()
-        #
-        #     board_render[delete_ship_form.y.data][delete_ship_form.x.data] = '.'
-        #
-        #     return render_template('admin_game_room.html',
-        #                            add_ship_form=add_ship_form,
-        #                            delete_ship_form=delete_ship_form,
-        #                            board=db_sess.get(Board, board_id),
-        #                            users=users,
-        #                            errors=errors,
-        #                            user_on_board=user_on_board,
-        #                            prizes=prizes,
-        #                            board_render=[''.join(i) for i in board_render],
-        #                            size=board.n)
-
         return render_template('admin_game_room.html',
                                add_ship_form=add_ship_form,
-                               delete_ship_form=delete_ship_form,
+                               status_shoot = status_shoot,
                                prizes=prizes,
                                users=users,
                                errors=errors,
                                board_id = board_id,
-                               user_on_board=user_on_board,
+                               users_on_board=users_on_board,
                                board=db_sess.get(Board, board_id),
                                board_render=[''.join(i) for i in board_render],
                                size=board.n)
-
 
 @board.route('/show/<int:board_id>', methods=['GET', 'POST'])
 @login_required
@@ -221,9 +200,12 @@ def delete_user(board_id: int, user_id: int):
     if not current_user.is_admin:
         return abort(401)
     user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == user_id, UserOnBoard.board_id == board_id).first()
-
+    if not user:
+        return redirect(url_for('board.edit_board', board_id=board_id,errors = "Пользователя нет на поле"))
     db_sess.delete(user)
+
     db_sess.commit()
+    return redirect(url_for('board.edit_board',board_id=board_id))
 
 
 @board.route('/delete_board/<int:board_id>', methods=['GET', 'POST'])

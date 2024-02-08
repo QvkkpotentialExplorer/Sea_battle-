@@ -13,3 +13,4 @@ class Ship(SqlAlchemyBase):
     y = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     prize_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('prize_data.id'), nullable=True)
     prize_data = sqlalchemy.orm.relationship('PrizeData')
+
