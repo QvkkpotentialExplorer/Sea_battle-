@@ -3,16 +3,18 @@
 <div class="col">
     <div class="col-12">
         <div class="row">
-            <div class="col-3">
+            <div class="col-4 bg-dark text-white" style="width: max-content;">
+                <p style="margin: auto; font-size: 20px;">Количество выстрелов:</p>
+                <center style="font-size: 25px;">{{user.count}}</center>
+            </div>
+            <div class="col-4">
                 <div class="col-12">
-
                     <div class="container-fluid bg-dark ">
                         {% with messages = get_flashed_messages() %}
                         {% if messages %}
-                        <ul class=flashes>
+                        <ul class="flashes">
                             {% for message in messages %}
-                            <li class="text-white">{{ message }}</li>
-
+                            <center><li class="text-white" style="font-size: 25px;">{{ message }}</li></center>
                             {% endfor %}
                         </ul>
                         {% endif %}
@@ -20,72 +22,74 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4 bg-dark text-white" style="width: max-content;">
-                <p style="margin: auto;">Количество выстрелов:</p> {{user.count}}
-            </div>
-            <div class="col-5">
+
+            <div class="col-4">
                 {% if errors%}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger text-danger" role="alert">
                     <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-                    {{errors}}
+                    <center> {{errors}}</center>
                 </div>
                 {%endif%}
             </div>
         </div>
     </div>
 
-<div class="col-12">
     <div class="col-12">
-        <center>
-            <table class=" col-12 table table-bordered border-dark bg-light my-4"
-                   style="width:calc(35px*({{size+1}} + 1));">
-                <thead>
-                <tr>
-                    <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
-                    {% for i in range(size) %}
-                    <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
+        <div class="col-12">
+            <center>
+                <table class=" col-12 table table-bordered border-dark bg-light my-4"
+                       style="width:calc(35px*({{size+1}} + 1));">
+                    <thead>
+                    <tr>
+                        <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
+                        {% for i in range(size) %}
+                        <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for y in range(size) %}
+                    <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
+                        <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
+                        {% for x in range(size) %}
+                        <td style="background: #e8ecef;">
+
+                            {% if board_render[y][x] == "x" %}
+                            <button class="btn contant_shoots" style="width: 35px; height: 35px;"
+                                    data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
+                            </button>
+                            {% elif board_render[y][x] == "!" %}
+                            <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
+                                    data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
+                            </button>
+                            {% else %}
+                            <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;"
+                               data-positionx="{{ x }}"
+                               data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
+                               href="{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
+
+                                <a>
+                                    {%endif%}
+
+
+                        </td>
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for y in range(size) %}
-                <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
-                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
-                    {% for x in range(size) %}
-                    <td style="background: #e8ecef;">
-
-                        {% if board_render[y][x] == "x" %}
-                        <button class="btn contant_shoots" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
-                        </button>
-                        {% elif board_render[y][x] == "!" %}
-                        <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
-                        </button>
-                        {% else %}
-                        <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;"
-                           data-positionx="{{ x }}"
-                           data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
-                           href="{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
-
-                            <a>
-                                {%endif%}
-
-
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </center>
+                    </tbody>
+                </table>
+            </center>
+        </div>
     </div>
-</div>
 
 </div>
 </div>
 
 <style>
+.alert{
+    height: 100%;
+    font-size: 20px;
+    }
 .contant_shoots{
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
     background-size: cover;
@@ -104,6 +108,9 @@
     border-color: rgba(255, 0, 0, 255);
 	border-width: 4px;
 	}
+
+
+
 
 
 
