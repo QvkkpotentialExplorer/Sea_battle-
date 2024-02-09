@@ -24,8 +24,10 @@
     <h1>Ваши призы</h1>
     <div class="row justify-content-center justify-content-md-start justify-content-lg-center
     text-white mt-5">
+        <p id = "text"></p>
+        <button onclick='filter(getMassive())' id="filter" data-massive="{{prizes}}"></button>
         {% for prize in prizes%}
-        <button onclick="getMassive()" id="filter" data-massive="{{prizes}}">
+
         <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
             <div class="galery">
                 <div class="card flex-fill bg-dark align-items-center">
@@ -43,7 +45,7 @@
                 </div>
             </div>
         </div>
-    </button>
+
         {%endfor%}
         </ul>
     </div>
@@ -67,15 +69,32 @@
         <p class="lead mb-5">У вас пока еще нет выигранных призов</p>
     {%endif%}
 {%endif%}
-
-{%endblock%}<srcript>
+<script>
     function getMassive(){
-        var button = getElementById('filter')
-        var massive = button.getAttribute('data-massive')
-        console.log(massive)
-    }
 
-    function filter(mass){
+        var button = document.getElementById('filter');
+        var massive = button.getAttribute('data-massive');
+        return massive;
 
     }
-</srcript>
+    function filter(massive){
+    const data = Array.from(massive);
+
+                function filterByPrizeCount(data, count) {
+                    return data.filter(item => {
+                        const prizes = item.prize_data_win.split(' ');
+                        return prizes.length >= count;
+                    }).sort((a, b) => {
+                        const aPrizes = a.prize_data_win.split(' ');
+                        const bPrizes = b.prize_data_win.split(' ');
+                        return bPrizes.length - aPrizes.length;
+            });
+}
+
+            const filteredData = filterByPrizeCount(data, 4);
+            var p = document.getElementById('text');
+            p.innerText = JSON.stringify(filteredData);
+    }
+
+</script>
+{%endblock%}

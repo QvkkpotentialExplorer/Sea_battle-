@@ -151,7 +151,17 @@
                 <div class="text-white">
 
                     {%for user in users_on_board%}
-                    <p>{{user.count}}</p>
+                        {%for usr in users%}
+                        {%if user.user_id == usr.id%}
+                            <div class = "card bg-dark mb-1 border-light">
+                                <div class = "card-body">
+                                <p>Имя пользователя : {{usr.login}}</p>
+                                <p>Кол-во выстрелов : {{user.count}}</p>
+
+                                </div>
+                            </div>
+                        {%endif%}
+                        {%endfor%}
                     {%endfor%}
                 </div>
             </div>
