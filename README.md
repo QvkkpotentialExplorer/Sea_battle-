@@ -1,4 +1,4 @@
-# Sea Battle README
+# Sea Battle README 🇺🇦🇺🇦🇺🇦
 ## 1. Запуск проекта из репозитория
 1) Для начала нужно [скачать](https://github.com/QvkkpotentialExplorer/Sea_battle-) репозиторий
 2) Открыть редактор кода(Pycharm)
