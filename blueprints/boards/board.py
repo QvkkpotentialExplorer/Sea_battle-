@@ -118,6 +118,7 @@ def edit_board(board_id: int):
             board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
             print(board_render)
             add_ship_form = AddShipForm(board_id=board_id)
+            print(add_ship_form)
             return render_template('admin_game_room.html',
                                    add_ship_form=add_ship_form,
                                    status_shoot = status_shoot,
