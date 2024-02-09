@@ -3,37 +3,35 @@
 <div>
     <div class="col">
         <div class="row">
-            <div class="col-3" style="height: 30px;">
+            <div class="col-3">
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                <div class="bg-dark text-white" style="height: 30px;">
-                    <ul class="flashes">
+                    <ul class="flashes bg-dark text-white">
                         {% for message in messages %}
                         <center>
                             <li>{{ message }}</li>
                         </center>
-
                         {% endfor %}
                         {% endif %}
                         {% endwith %}
                     </ul>
-                </div>
-                <div class="col-5  bg-dark text-white" style="height: 30px;">
-                    <center><p>Количество выстрелов: {{user.count}}</p></center>
-                </div>
-                <div class="col-4">
-                    {% if errors %}
-                    <center>
-                        <div class="bg-danger text-white" style="height: 30px;"> {{errors}}</div>
-                    </center>
-                    {% endif %}
-                </div>
             </div>
-
-
+            <div class="col-5  bg-dark text-white">
+                <center><p>Количество выстрелов: {{user.count}}</p></center>
+            </div>
+            <div class="col-4">
+                {% if errors %}
+                <center>
+                    <div class="bg-danger text-white">{{errors}}</div>
+                </center>
+                {% endif %}
+            </div>
         </div>
+    </div>
+    </div>
         <center>
-            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
+            <table class="table table-bordered border-dark bg-light my-4"
+                   style="width:calc(35px*({{size+1}} + 1));">
                 <thead>
                 <tr>
                     <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
@@ -57,7 +55,8 @@
                                 data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
                         </button>
                         {% else %}
-                        <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
+                        <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;"
+                           data-positionx="{{ x }}"
                            data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
                            href="{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
                             <a>
@@ -67,10 +66,9 @@
                 </tr>
                 {% endfor %}
                 </tbody>
+        </center>
     </div>
-    </center>
-</div>
-</div>
+
 <style>
 .contant_shoots{
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
@@ -90,6 +88,10 @@
     border-color: rgba(255, 0, 0, 255);
 	border-width: 4px;
 	}
+
+
+
+
 
 
 
