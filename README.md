@@ -1,15 +1,23 @@
-# Sea Battle README 🇺🇦🇺🇦🇺🇦
+# Sea Battle README
 ## 1. Запуск проекта из репозитория
 1) Для начала нужно [скачать](https://github.com/QvkkpotentialExplorer/Sea_battle-) репозиторий
 2) Открыть редактор кода(Pycharm)
 3) Открыть  файл app.py
 4) Запустить данный файл
-5) Ох максим как много спермы вышло!!!
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
+|Модуль разграничения админ/юзер|(images/Codeblocks/demarcation_module.png)
+Пример
 ```
-код
+def user():
+    user = db_sess.query(User).filter(User.login == current_user.login).first()
+    prizes = [db_sess.query(PrizeData).filter(PrizeData.owner_id == current_user.id).all()]
+
+    if current_user.is_admin:
+        return render_template('admin.html')
+    else:
+        return render_template('user.html', user=user)
 ```
 ## 4. Скриншоты интерфейса
 |Логин|
