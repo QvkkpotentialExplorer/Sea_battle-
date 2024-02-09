@@ -23,4 +23,4 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001
 ![Login interface](images/Screenshots/Login.png)
 ### Регистрация
 ![Registration](images/Screenshots/Registration.png)
-## 5. Ссылка на [видео](https://www.youtube.com/) с работой
+## 5. [Видео](https://www.youtube.com/) с работой
