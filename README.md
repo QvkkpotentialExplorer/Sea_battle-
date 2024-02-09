@@ -7,7 +7,8 @@
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
-|Модуль разграничения админ/юзер|(images/Codeblocks/demarcation_module.png)
+|Модуль разграничения прав|
+![demarcation system](images/Codeblocks/demarcation_module.png)
 Пример
 ```
 def user():
