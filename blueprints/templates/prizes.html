@@ -29,6 +29,7 @@
     </button> 
     <div id="sortmassive"></div>  
         {% for prize in prizes%}
+        <button onclick="getMassive()" id="filter" data-massive="{{prizes}}">
         <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
             <div class="galery">
                 <div class="card flex-fill bg-dark align-items-center">
@@ -46,6 +47,7 @@
                 </div>
             </div>
         </div>
+    </button>
         {%endfor%}
         </ul>
     </div>
@@ -70,10 +72,14 @@
     {%endif%}
 {%endif%}
 
-<srcript>
-    document.addEventListener("BimBim", function(){
-        var button
-    })
-</srcript>
+{%endblock%}<srcript>
+    function getMassive(){
+        var button = getElementById('filter')
+        var massive = button.getAttribute('data-massive')
+        console.log(massive)
+    }
 
-{%endblock%}
+    function filter(mass){
+
+    }
+</srcript>

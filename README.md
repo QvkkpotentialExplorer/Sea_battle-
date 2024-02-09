@@ -1,18 +1,26 @@
 # Sea Battle README
 ## 1. Запуск проекта из репозитория
-1) Для начала нужно [скачать](https://github.com/QvkkpotentialExplorer/Sea_battle-) репозиторий
-2) Открыть редактор кода(Pycharm)
-3) Открыть  файл app.py
-4) Запустить данный файл
+1) Скачать репозиторий - ```git clone https://github.com/QvkkpotentialExplorer/Sea_battle-.git```
+2) Перейти в папку Sea_battle- - ```cd Sea_battle-```
+3) Скачать все требования - ```pip install -r requirements.txt```
+4) Запустить файл app.py - ```python app.py```
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
-```
-код
-```
+### Модуль разграничения прав
+
+![demarcation system](images/Codeblocks/demarcation_module.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L19-L26
+
+### Модуль пользователя
+
+![user module](images/Codeblocks/user_interface.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L31-L49
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001887428663fbe8422a1/blueprints/boards/board.py#L20-L30
+
 ## 4. Скриншоты интерфейса
-|Логин|
+### Логин
 ![Login interface](images/Screenshots/Login.png)
-|Регистрация|
+### Регистрация
 ![Registration](images/Screenshots/Registration.png)
-## 5. Ссылка на [видео](https://www.youtube.com/) с работой
+## 5. [Видео](https://www.youtube.com/) с работой

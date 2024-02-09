@@ -80,6 +80,7 @@ def edit_board(board_id: int):
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)
+        add_ship_form.prize.choices = [(prize.id, prize.name) for prize in db_sess.query(Prize).all()]
 
         board = db_sess.get(Board, board_id)
         users_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
@@ -117,6 +118,7 @@ def edit_board(board_id: int):
             board_render[add_ship_form.y.data][add_ship_form.x.data] = '#'
             print(board_render)
             add_ship_form = AddShipForm(board_id=board_id)
+            print(add_ship_form)
             return render_template('admin_game_room.html',
                                    add_ship_form=add_ship_form,
                                    status_shoot = status_shoot,
@@ -218,9 +220,15 @@ def delete_board(board_id: int):
     print(board)
     users = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ships = db_sess.query(Ship).filter(Ship.board_id == board_id).all()
-
+    cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).all()
     print(ships)
+    print(cells)
+    if cells:
+        for cell in cells:
+            db_sess.delete(cell)
+            db_sess.commit()
     if ships:  # Проверяем , были ли на поле корабли
+
         for ship in ships:
             print(ship)
             db_sess.delete(ship)

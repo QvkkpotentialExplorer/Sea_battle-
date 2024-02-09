@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-8 col-12">
         <center>
-            <h1 class="text-white text-center my-1">Игровое поле</h1>
+            <h1 class="text-white text-center mb-2">Игровое поле</h1>
         <div style="overflow:auto;overflow-y:auto;">
             <table class="table table-bordered border-dark bg-light my-4"
                    style="width:calc(35px*({{size+1}} + 1));">
@@ -111,11 +111,10 @@
                     <div class="col-12" style=" align-text: center;">
                         <a class="input-group-text" style = "text_decoration:none;" id="delete_button" data-board_id = "{{board_id}}"> Удалить</a>
                     </div>
-                    <p>{{board_id}}</p>
 
 
 
-            <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-heading">
                         <button class="accordion-button text-dark" type="button"
@@ -134,9 +133,13 @@
                         <p class="text-white">Имя пользователя: {{ user.login
                             }}</p>
                         <div class="accordion-body">
-                            <a data-id="{{ user.id }}" id="{{ user.id }}"
+                            <a class = "mt-o "data-id="{{ user.id }}" id="{{ user.id }}"
                                href="{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}">
                                 Добавить пользователя
+                            </a>
+                            <a data-id="{{ user.id }}" id="{{ user.id }}"
+                               href="{{url_for('board.delete_user',board_id = board.id,user_id = user.id )}}">
+                                Удалить пользователя
                             </a>
 
                         </div>
@@ -151,7 +154,18 @@
                 <div class="text-white">
 
                     {%for user in users_on_board%}
-                    <p>{{user.count}}</p>
+                        {%for usr in users%}
+                        {%if user.user_id == usr.id%}
+                            <div class = "card bg-dark mb-1 border-light">
+                                <div class = "card-body">
+                                <p>Имя пользователя : {{usr.login}}</p>
+                                <p>Кол-во выстрелов : {{user.count}}</p>
+                                <a class = "btn-"href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id,shoots_count = 1)}}">Начислить выстрелы</a>
+
+                                </div>
+                            </div>
+                        {%endif%}
+                        {%endfor%}
                     {%endfor%}
                 </div>
             </div>
@@ -173,15 +187,15 @@
     background-repeat: no-repeat;
 }
   .contant_shoots{
-    background: url(https://sergeychikin.ru/365/360-symbols/religions/swastika.svg);
+
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
   }
   .contant{
-  background: url(https://sergeychikin.ru/365/150-clothes/sneakers.svg);
   background: url(https://sergeychikin.ru/365/028-transport/sea/steamboat.svg);
+
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

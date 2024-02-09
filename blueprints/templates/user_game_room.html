@@ -1,57 +1,116 @@
 {%extends 'base_user.html'%}
 {% block main_content%}
-<div>
-    <div>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        </ul>
-    </div>
-        <div class=" col-12 justify-content-center" style="overflow:auto;overflow-y:auto;">
-            {% if errors %}
-                {{errors}}
-            {% endif %}
-            {{user.count}}
-            <table class="table table-bordered border-dark bg-light my-4" style="width:calc(35px*({{size+1}} + 1));">
-                <thead>
-                <tr>
-                    <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
-                    {% for i in range(size) %}
-                    <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
-                    {% endfor %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for y in range(size) %}
-                <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
-                    <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
-                    {% for x in range(size) %}
-                    <td style="background: #e8ecef;">
-                         {% if board_render[y][x] == "x" %}
-                        <button class="btn contant_shoots" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
-                        </button>
-                        {% elif board_render[y][x] == "!" %}
-                        <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
-                                data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}" >
-                        </button>
-                        {% else %}
-                         <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;" data-positionx="{{ x }}"
-                                data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"  href = "{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
-                        <a>
-                        {%endif%}
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-                </tbody>
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Правила игры
+</button>
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Правила игры</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <br>1. Цель игры: попасть в корабль противника и получить приз.
+                <br>2. Каждый игрок получает определенное количество выстрелов, которые он может потратить на поле морского боя.
+                <br>3. Игровое поле представляет собой квадратную сетку, на которой расставлены корабли противника.
+                <br>4. Каждый корабль имеет свой уникальный приз.
+                <br>5. Игроки могут совершать выстрелы по кораблям, нажимая на клетки игрового поля.
+                <br>6. Если игрок попадает в корабль, он получает приз, который был назначен за этим кораблем.
+                <br>7. Если игрок попадает в пустую клетку, он теряет выстрел.
+                <br>8. Игра продолжается до тех пор, пока все корабли не будут уничтожены или пока не закончатся выстрелы у игроков.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть
+                </button>
+            </div>
         </div>
+    </div>
 </div>
+<div>
+    <div class="col">
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <!-- Кнопка-триггер модального окна -->
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashes bg-dark text-white">
+                    {% for message in messages %}
+                    <center>
+                        <li>{{ message }}</li>
+                    </center>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </ul>
+            </div>
+            <div class="col-5  bg-dark text-white">
+                <center><p>Количество выстрелов: {{user.count}}</p></center>
+            </div>
+            <div class="col-4">
+                {% if errors %}
+                <center>
+                    <div class="bg-danger text-white">{{errors}}</div>
+                </center>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<center>
+    <table class="table table-bordered border-dark bg-light my-4"
+           style="width:calc(35px*({{size+1}} + 1));">
+        <thead>
+        <tr>
+            <th style="width: 35px; height: 35px;  background: #e8ecef;"></th>
+            {% for i in range(size) %}
+            <th class="text-dark" style="width: 35px; height: 35px; background: #e8ecef;">{{ i+1 }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for y in range(size) %}
+        <tr class="text-dark bg-light" style="width: 41.8px; height: 35px; background: #e8ecef;">
+            <th style="width: 41.8px; height: 38px;  background: #e8ecef;">{{ y+1 }}</th>
+            {% for x in range(size) %}
+            <td style="background: #e8ecef;">
+                {% if board_render[y][x] == "x" %}
+                <button class="btn contant_shoots" style="width: 35px; height: 35px;"
+                        data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
+                </button>
+                {% elif board_render[y][x] == "!" %}
+                <button class="btn contant_shot_down" style="width: 35px; height: 35px;"
+                        data-positionx="{{ x }}" data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}">
+                </button>
+                {% else %}
+                <a class="btn" style="width: 35px; height: 35px;  background: #e8ecef;"
+                   data-positionx="{{ x }}"
+                   data-positiony="{{ y }}" id="{{ x+1 }}{{ y }}"
+                   href="{{url_for('api.shoot',x = x, y = y,board_id =user.board_id)}}">
+                    <a>
+                        {%endif%}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+</center>
+</div>
+
 <style>
 .contant_shoots{
     background: url(https://sergeychikin.ru/365/360-symbols/no.svg);
@@ -71,5 +130,15 @@
     border-color: rgba(255, 0, 0, 255);
 	border-width: 4px;
 	}
+
+
 </style>
+<script>
+    var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
 {% endblock %}

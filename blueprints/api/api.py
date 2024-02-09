@@ -44,12 +44,11 @@ def shoot():
     print(user.count)
     cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id, DeathCell.x == x, DeathCell.y == y).first()
 
-    if user.count is not None and cells is not None:
-        return 'False'
     if int(user.count) > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         user.count -= 1
-
+        if cells is not None:
+            return redirect(url_for('board.edit_board', board_id=board_id,errors = "На эту координату уже стреляли"))
         cell = DeathCell(
             board_id=board_id,
             x=x,
@@ -57,6 +56,7 @@ def shoot():
         )
         if ship is None:
             cell.status_ship = False
+            flash('Вы не попали')
             db_sess.add(cell)
             db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))
