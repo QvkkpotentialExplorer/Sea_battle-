@@ -15,7 +15,8 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c
 ### Модуль пользователя
 
 ![user module](images/Codeblocks/user_interface.jpg)
-https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/data/users.py#L11-L14
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L31-L49
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001887428663fbe8422a1/blueprints/boards/board.py#L20-L30
 
 ## 4. Скриншоты интерфейса
 ### Логин
