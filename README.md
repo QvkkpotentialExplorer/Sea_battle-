@@ -2,12 +2,8 @@
 ## 1. Запуск проекта из репозитория
 1) Скачать репозиторий - ```git clone https://github.com/QvkkpotentialExplorer/Sea_battle-.git```
 2) Перейти в папку Sea_battle- - ```cd Sea_battle-```
-3) Установить виртуальное окружение - ```python -m venv venv```
-4) Зайти в папку с активацией - ```cd venv/Scripts```
-5) Активировать окружение - ```activate.bat```
-6) Выйти в папку Sea_battle- - ```cd ../../```
-7) Скачать все требования - ```pip install -r requirements.txt```
-8) Запустить файл app.py - ```python app.py```
+3) Скачать все требования - ```pip install -r requirements.txt```
+4) Запустить файл app.py - ```python app.py```
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
