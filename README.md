@@ -8,15 +8,15 @@
 *Схема бд*
 ## 3. Функциональные блоки
 ### Модуль разграничения прав
+
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L19-L26
 
 ### Модуль пользователя
 
 ![user module](images/Codeblocks/user_interface.jpg)
-
-### Пример
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/data/users.py#L11-L14
+
 ## 4. Скриншоты интерфейса
 ### Логин
 ![Login interface](images/Screenshots/Login.png)
