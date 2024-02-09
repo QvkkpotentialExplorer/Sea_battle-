@@ -23,6 +23,7 @@ def user():
 ```
 
 |Модуль пользователя|
+
 ![user module](images/Codeblocks/user module.jpg)
 
 |Пример|
