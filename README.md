@@ -1,9 +1,11 @@
 # Sea Battle README
 ## 1. Запуск проекта из репозитория
-1) Для начала нужно [скачать](https://github.com/QvkkpotentialExplorer/Sea_battle-) репозиторий
-2) Открыть редактор кода(Pycharm)
-3) Открыть  файл app.py
-4) Запустить данный файл
+1) Скачать репозиторий - ```git clone https://github.com/QvkkpotentialExplorer/Sea_battle-.git```
+2) Перейти в папку Sea_battle- - ```cd Sea_battle-```
+3) Установить виртуальное окружение - ```python3 -m venv venv```
+4) Активировать виртуальное окружение - ```call venv/Scripts/activate```
+5) Скачать все требования - ```pip install -r requirements.txt```
+6) Запустить файл app.py - ```python3 app.py```
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
