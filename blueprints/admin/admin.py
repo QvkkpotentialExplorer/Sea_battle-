@@ -58,9 +58,10 @@ def add_shoot():
         return abort(401)
     board_id = request.args.get('board_id')
     shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == request.args.get('user_id'),
-                                             UserOnBoard.board_id == board_id).first()
+                                               UserOnBoard.board_id == board_id).first()
     print(shoots)
-    shoots.count += request.args.get('shoots_count')
+    print(request.args.get('shoots_count'))
+    shoots.count += int(request.args.get('shoots_count'))
     db_sess.commit()
 
-    return redirect(url_for("board.edit_board", board_id = board_id))
+    return redirect(url_for("board.edit_board", board_id=board_id))
