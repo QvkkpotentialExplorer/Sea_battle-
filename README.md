@@ -7,31 +7,20 @@
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
-|Модуль разграничения прав|
+### Модуль разграничения прав
+
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L19-L26
 
-|Пример|
-```
-def user():
-    user = db_sess.query(User).filter(User.login == current_user.login).first()
-    prizes = [db_sess.query(PrizeData).filter(PrizeData.owner_id == current_user.id).all()]
+### Модуль пользователя
 
-    if current_user.is_admin:
-        return render_template('admin.html')
-    else:
-        return render_template('user.html', user=user)
-```
+![user module](images/Codeblocks/user_interface.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L31-L49
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001887428663fbe8422a1/blueprints/boards/board.py#L20-L30
 
-|Модуль пользователя|
-
-![user module](images/Codeblocks/user module.jpg)
-
-|Пример|
-```
-```
 ## 4. Скриншоты интерфейса
-|Логин|
+### Логин
 ![Login interface](images/Screenshots/Login.png)
-|Регистрация|
+### Регистрация
 ![Registration](images/Screenshots/Registration.png)
-## 5. Ссылка на [видео](https://www.youtube.com/) с работой
+## 5. [Видео](https://www.youtube.com/) с работой
