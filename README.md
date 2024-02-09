@@ -8,7 +8,7 @@
 *Схема бд*
 ## 3. Функциональные блоки
 |Модуль разграничения прав|
-![demarcation system](images/Codeblocks/demarcation_module.png)
+![demarcation system](images/Codeblocks/demarcation_module.jpg)
 Пример
 ```
 def user():
