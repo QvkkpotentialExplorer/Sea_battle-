@@ -56,10 +56,12 @@ def add_prize():
 def add_shoot():
     if not current_user.is_admin:
         return abort(401)
-
+    board_id = request.args.get('board_id')
     shoots = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == request.args.get('user_id'),
-                                             UserOnBoard.board_id == request.args.get('board_id')).first()
-    shoots.count += request.args.get('shoots_count')
+                                               UserOnBoard.board_id == board_id).first()
+    print(shoots)
+    print(request.args.get('shoots_count'))
+    shoots.count += int(request.args.get('shoots_count'))
     db_sess.commit()
 
-    return "render_template('add_prize.html', form=form)"
+    return redirect(url_for("board.edit_board", board_id=board_id))
