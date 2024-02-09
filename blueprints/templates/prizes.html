@@ -1,85 +1,93 @@
 {% if current_user.is_admin%}
-{% extends 'base_admin.html' %}
+    {% extends 'base_admin.html' %}
 {% else %}
-{% extends 'base_user.html' %}
+    {% extends 'base_user.html' %}
 {% endif %}
 
 {%block main_content%}
+    {% if prizes%}
+    <div class="justify-content-center text-center">
+        <style>
+            .gallery {
+            column-count: 2;
+            column-gap: 10px;
+            }
 
-{% if prizes%}
-<div class="justify-content-center text-center">
-    <style>
+            .gallery-img {
+            width: 100%;
+            margin-bottom: 10px;
+            object-fit: cover;
+            }
+        </style>
+        <h1>Ваши призы</h1>
+        
+        <div class="row justify-content-center justify-content-md-start justify-content-lg-center
+        text-white mt-5">
+        <button onclick="getMassive()" id="filter"  data-massive="{{prizes}}">
+            KNOPKA
+        </button> 
+        <script>
+            function getMassive(){
+                var button = document.getElementById('filter')
+                var massive = button.getAttribute('data-massive')
+                let newPrizes = prizes.sort((p1, p2) => {
+                    if (p1.name > p2.name){
+                        return 1;
+                    }
+                    if (p1.name > p2.name){
+                        return -1;
+                    }
+                    if (p1.prize_data_win > p2.prize_data_win){
+                        return 1;
+                    }
+                    return -1;    
+                });
 
-.gallery {
-  column-count: 2;
-  column-gap: 10px;
-}
-
-.gallery-img {
-  width: 100%;
-  margin-bottom: 10px;
-  object-fit: cover;
-}
-    </style>
-    <h1>Ваши призы</h1>
-    <div class="row justify-content-center justify-content-md-start justify-content-lg-center
-    text-white mt-5">
-    <button onclick="getMassive()" id="filter"  data-massive="{{prizes}}">
-        KNOPKA
-    </button> 
-    <div id="sortmassive"></div>  
-        {% for prize in prizes%}
-        <button onclick="getMassive()" id="filter" data-massive="{{prizes}}">
-        <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
-            <div class="galery">
-                <div class="card flex-fill bg-dark align-items-center">
-                    <p>{{prize['name']}}</p>
-                    <img src="static/avatars/{{prize['avatar']}}" class="img-thumbnail align-self-center "
-                         style="width: 60% ; height : 10rem; background: none;">
-                    <div class="prizes_item ">
-                        <div class="mx-4 ">
-                            <p class="">{{prize['description']}}</p>
-                            {% if not current_user.is_admin%}
-                                <p>{{prize['data_win']}}</p>
-                            {% endif %}
+                console.log(prizes) 
+                // Функция сортирует массив сначала в лексикографическом порядке (по алфавиту), 
+                // после чего одинаковые элементы проверяет по времени получению (по возрастанию).                
+                // Осталось дописать, чтобы оно изменяло на самой странице призы (допишите правильно return).   
+            }
+            
+        </script>
+        <div id="sortmassive"></div>  
+            {% for prize in prizes%}
+                <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
+                    <div class="galery">
+                        <div class="card flex-fill bg-dark align-items-center">
+                            <p>{{prize['name']}}</p>
+                            <img src="static/avatars/{{prize['avatar']}}" class="img-thumbnail align-self-center "
+                                style="width: 60% ; height : 10rem; background: none;">
+                            <div class="prizes_item ">
+                                <div class="mx-4 ">
+                                    <p class="">{{prize['description']}}</p>
+                                    {% if not current_user.is_admin%}
+                                        <p>{{prize['data_win']}}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {%endfor%}
         </div>
-    </button>
-        {%endfor%}
-        </ul>
+        {%if current_user.is_admin%}
+            <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+                приз</a>
+        {% endif %}
     </div>
-    {%if current_user.is_admin%}
-        <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
-            приз</a>
-    {% endif %}
-</div>
-
-{%elif not prizes%}
-    {%if current_user.is_admin%}
-    <div class="py-5 text-center">
-        <h1>Добавьте приз</h1>
-        <p class="lead mb-5">Вы пока еще не создали </p>
-        <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
-            приз</a>
-    </div>
-    {%else%}
-    <div class="py-5 text-center">
-        <h1>Призы</h1>
-        <p class="lead mb-5">У вас пока еще нет выигранных призов</p>
+    {%elif not prizes%}
+        {%if current_user.is_admin%}
+            <div class="py-5 text-center">
+                <h1>Добавьте приз</h1>
+                <p class="lead mb-5">Вы пока еще не создали </p>
+                <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+                    приз</a>
+            </div>
+        {%else%}
+            <div class="py-5 text-center">
+            <h1>Призы</h1>
+            <p class="lead mb-5">У вас пока еще нет выигранных призов</p>
+        {%endif%}
     {%endif%}
-{%endif%}
-
-{%endblock%}<srcript>
-    function getMassive(){
-        var button = getElementById('filter')
-        var massive = button.getAttribute('data-massive')
-        console.log(massive)
-    }
-
-    function filter(mass){
-
-    }
-</srcript>
+{%endblock%}
