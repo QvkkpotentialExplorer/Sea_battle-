@@ -219,9 +219,15 @@ def delete_board(board_id: int):
     print(board)
     users = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
     ships = db_sess.query(Ship).filter(Ship.board_id == board_id).all()
-
+    cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id).all()
     print(ships)
+    print(cells)
+    if cells:
+        for cell in cells:
+            db_sess.delete(cell)
+            db_sess.commit()
     if ships:  # Проверяем , были ли на поле корабли
+
         for ship in ships:
             print(ship)
             db_sess.delete(ship)
