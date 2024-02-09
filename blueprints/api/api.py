@@ -56,6 +56,7 @@ def shoot():
         )
         if ship is None:
             cell.status_ship = False
+            flash('Вы не попали')
             db_sess.add(cell)
             db_sess.commit()
             return redirect(url_for('board.edit_board',board_id = board_id))

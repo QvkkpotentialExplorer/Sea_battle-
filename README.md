@@ -7,8 +7,27 @@
 ## 2. Структура данных
 *Схема бд*
 ## 3. Функциональные блоки
+|Модуль разграничения прав|
+![demarcation system](images/Codeblocks/demarcation_module.jpg)
+
+|Пример|
 ```
-код
+def user():
+    user = db_sess.query(User).filter(User.login == current_user.login).first()
+    prizes = [db_sess.query(PrizeData).filter(PrizeData.owner_id == current_user.id).all()]
+
+    if current_user.is_admin:
+        return render_template('admin.html')
+    else:
+        return render_template('user.html', user=user)
+```
+
+|Модуль пользователя|
+
+![user module](images/Codeblocks/user module.jpg)
+
+|Пример|
+```
 ```
 ## 4. Скриншоты интерфейса
 |Логин|
