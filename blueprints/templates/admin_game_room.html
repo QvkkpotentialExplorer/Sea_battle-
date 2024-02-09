@@ -157,6 +157,7 @@
                                 <div class = "card-body">
                                 <p>Имя пользователя : {{usr.login}}</p>
                                 <p>Кол-во выстрелов : {{user.count}}</p>
+                                <a href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id)}}">Начислить выстрелы</a>
 
                                 </div>
                             </div>
