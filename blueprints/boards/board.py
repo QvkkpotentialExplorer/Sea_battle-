@@ -88,7 +88,8 @@ def edit_board(board_id: int):
 
         users = db_sess.query(User).filter(User.is_admin == False).all()
         print(users)
-
+        print(users_on_board)
+        print(users)
         for x, y in ship_coords:
             board_render[y][x] = '#'
         prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()
