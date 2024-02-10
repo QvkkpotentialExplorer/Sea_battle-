@@ -30,4 +30,14 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572d
 ![Login interface](images/Screenshots/Login.png)
 ### Регистрация
 ![Registration](images/Screenshots/Registration.png)
+### Добавление поля
+![Addboard](images/6_1-usercase/2.addfield.PNG)
+### Выбор поля для игры
+![board_list](images/6_2-usercase/fields.PNG)
+### Игровое поле
+![game_room](images/6_2-usercase/field.PNG)
+### Добваление приза
+![add_prize](images/Screenshots/add_prize.png)
+### Список призов
+![prize_list](images/Screenshots/prize_list.png)
 ## 5. [Видео](https://www.youtube.com/) с работой
