@@ -36,17 +36,16 @@ def shoot():
     board_id = request.args.get('board_id', default=0, type=int)
     x = request.args.get('x', default=0, type=int)
     y = request.args.get('y', default=0, type=int)
-    print(x, y)
-    print(board_id)
+
     user = db_sess.query(UserOnBoard).filter(UserOnBoard.user_id == current_user.id,
                                              UserOnBoard.board_id == request.args.get('board_id', default=0,
                                                                                     type=int)).first()
-    print(user.count)
     cells = db_sess.query(DeathCell).filter(DeathCell.board_id == board_id, DeathCell.x == x, DeathCell.y == y).first()
 
     if int(user.count) > 0:
         ship = db_sess.query(Ship).filter(Ship.board_id == board_id, Ship.x == x, Ship.y == y).first()
         user.count -= 1
+
         if cells is not None:
             return redirect(url_for('board.edit_board', board_id=board_id,errors = "На эту координату уже стреляли"))
         cell = DeathCell(

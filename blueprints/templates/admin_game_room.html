@@ -80,6 +80,7 @@
             {% if add_ship_form.errors%}
             <div class="alert alert-danger" role="alert">
                 <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
+
                 {{add_ship_form.errors['submit'][0]}}
             </div>
             {%elif errors%}
@@ -133,7 +134,13 @@
                         <p class="text-white">Имя пользователя: {{ user.login
                             }}</p>
                         <div class="accordion-body">
-                            <a class = "mt-o "data-id="{{ user.id }}" id="{{ user.id }}"
+                             {%for user_on_board in users_on_board%}
+                                {% if user_on_board.user_id == user.id%}
+                                <p class = "text-white">Кол-во выстрелов :{{user_on_board.count}}</p>
+                              <a href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = user.id,shoots_count = 1)}}">Начислить выстрелы</a>
+                                {%endif%}
+                            {%endfor%}
+                            <a class = "mt-o" data-id="{{ user.id }}" id="{{ user.id }}"
                                href="{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}">
                                 Добавить пользователя
                             </a>
@@ -141,6 +148,7 @@
                                href="{{url_for('board.delete_user',board_id = board.id,user_id = user.id )}}">
                                 Удалить пользователя
                             </a>
+
 
                         </div>
                         {% endfor %}
@@ -160,7 +168,7 @@
                                 <div class = "card-body">
                                 <p>Имя пользователя : {{usr.login}}</p>
                                 <p>Кол-во выстрелов : {{user.count}}</p>
-                                <a class = "btn-"href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id,shoots_count = 1)}}">Начислить выстрелы</a>
+                                <a class = "btn" href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id,shoots_count = 1)}}">Начислить выстрелы</a>
 
                                 </div>
                             </div>
