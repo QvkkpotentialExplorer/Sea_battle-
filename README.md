@@ -8,7 +8,7 @@
 *Схема бд*
 ## 3. Функциональные блоки
 ### Модуль разграничения прав
-
+*Пример*
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L19-L26
 
