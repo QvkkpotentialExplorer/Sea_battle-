@@ -5,10 +5,10 @@
 3) Скачать все требования - ```pip install -r requirements.txt```
 4) Запустить файл app.py - ```python app.py```
 ## 2. Структура данных
-*Схема бд*
+### Схема бд
+![db](images/Codeblocks/dbsystem.jpg)
 ## 3. Функциональные блоки
 ### Модуль разграничения прав
-
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L19-L26
 
@@ -17,6 +17,13 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c
 ![user module](images/Codeblocks/user_interface.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/614fe94604ccdea180005c22a9133def1fa2c69c/blueprints/profiles/profile.py#L31-L49
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001887428663fbe8422a1/blueprints/boards/board.py#L20-L30
+
+### Модуль игрового поля
+![playfield module](images/Codeblocks/playfield_module.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572dada64f37a7d32ef30a/blueprints/boards/board.py#L35-L49
+
+### Модуль выстрелов
+![shoot module](images/Codeblocks/shoot_module.jpg)
 
 ## 4. Скриншоты интерфейса
 ### Логин
