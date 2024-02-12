@@ -40,9 +40,7 @@ def prize():
         count = 0
         for prize_id,prize_date_win in prizes_data:
             count +=1
-
             prize = db_sess.get(Prize, prize_id)
-            # prizes.append((prize.name,prize.description,prize.avatar,prize_date_win))
             prizes.append( {'id' : f'{prize_id}' , 'name' : f'{prize.name}','description' : f'{prize.description}','avatar' : f'{prize.avatar}','prize_data_win':f'{prize_date_win}'})
         print(prizes)
         print(prizes)

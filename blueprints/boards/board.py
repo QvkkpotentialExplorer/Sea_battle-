@@ -11,7 +11,7 @@ from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
-from forms.delete_ship_form import DeleteShipForm
+
 
 board = Blueprint('board', __name__, template_folder='../templates', static_folder='static', url_prefix='/board')
 
