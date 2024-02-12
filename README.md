@@ -27,10 +27,15 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572d
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/ba2bb57e30f45c35a83698779b47baa561b15d65/blueprints/api/api.py#L34-L73
 
 ### Регистрация пользователя
-![user_registration_module]()
+![user_registration_module](images/Codeblocks/user_registration.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L16-L24
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L27-L37
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L40-L57
 
 ### Регистрация админа
 ![admin_registration_module]()
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/admin/admin.py#L16-L30
+
 ## 4. Скриншоты интерфейса
 ### Логин
 ![Login interface](images/Screenshots/Login.png)
