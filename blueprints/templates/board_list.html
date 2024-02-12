@@ -38,7 +38,7 @@
 
   </div>
    {% if current_user.is_admin%}
-    <a class="btn btn-outline-light btn-lg mt-3 px-5 "  href="{{ url_for('board.add_board') }}">Создать доску</a>
+    <a class="btn btn-outline-light btn-lg mt-3 px-5 text-dark"  href="{{ url_for('board.add_board') }}">Создать доску</a>
     {% endif %}
 </div>
 {% endblock %}

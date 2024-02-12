@@ -1,51 +1,27 @@
 {%extends 'base_user.html'%}
 {% block main_content%}
-<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Правила игры
-</button>
-<!-- Модальное окно -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Правила игры</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Закрыть"></button>
-            </div>
-            <div class="modal-body">
-                <br>1. Цель игры: попасть в корабль противника и получить приз.
-                <br>2. Каждый игрок получает определенное количество выстрелов, которые он может потратить на поле морского боя.
-                <br>3. Игровое поле представляет собой квадратную сетку, на которой расставлены корабли противника.
-                <br>4. Каждый корабль имеет свой уникальный приз.
-                <br>5. Игроки могут совершать выстрелы по кораблям, нажимая на клетки игрового поля.
-                <br>6. Если игрок попадает в корабль, он получает приз, который был назначен за этим кораблем.
-                <br>7. Если игрок попадает в пустую клетку, он теряет выстрел.
-                <br>8. Игра продолжается до тех пор, пока все корабли не будут уничтожены или пока не закончатся выстрелы у игроков.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <div>
-    <div class="col">
-        <div class="row">
-            <div class="col-3">
-            </div>
-            <div class="col-3">
-            </div>
-            <div class="col-6">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <!-- Кнопка-триггер модального окна -->
+    <center>
+        <div class="col">
+            <div class="col-4"></div>
 
+            <div class="col-4">
+                <div class="my-4">
+                    <center><h1>Игровое поле</h1></center>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
+
+
+                <div class="col-12 my-3">
+                    {% if errors %}
+                    <center>
+                        <div class="alert alert-danger">{{errors}}</div>
+                    </center>
+                    {% endif %}
+                </div>
+                <div class="bg-dark text-white my-1">
+                    <center><p>Количество выстрелов: {{user.count}}</p></center>
+                </div>
+
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                 <ul class="flashes bg-dark text-white">
@@ -57,19 +33,47 @@
                     {% endif %}
                     {% endwith %}
                 </ul>
-            </div>
-            <div class="col-5  bg-dark text-white">
-                <center><p>Количество выстрелов: {{user.count}}</p></center>
-            </div>
-            <div class="col-4">
-                {% if errors %}
-                <center>
-                    <div class="bg-danger text-white">{{errors}}</div>
-                </center>
-                {% endif %}
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Правила игры
+                </button>
+                <!-- Модальное окно -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Правила игры</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                <br>1. Цель игры: попасть в корабль противника и получить приз.
+                                <br>2. Каждый игрок получает определенное количество выстрелов, которые он может
+                                потратить
+                                на поле
+                                морского боя.
+                                <br>3. Игровое поле представляет собой квадратную сетку, на которой расставлены корабли
+                                противника.
+                                <br>4. Каждый корабль имеет свой уникальный приз.
+                                <br>5. Игроки могут совершать выстрелы по кораблям, нажимая на клетки игрового поля.
+                                <br>6. Если игрок попадает в корабль, он получает приз, который был назначен за этим
+                                кораблем.
+                                <br>7. Если игрок попадает в пустую клетку, он теряет выстрел.
+                                <br>8. Игра продолжается до тех пор, пока все корабли не будут уничтожены или пока не
+                                закончатся
+                                выстрелы у игроков.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4"></div>
             </div>
         </div>
-    </div>
+    </center>
 </div>
 <center>
     <table class="table table-bordered border-dark bg-light my-4"
@@ -130,6 +134,10 @@
     border-color: rgba(255, 0, 0, 255);
 	border-width: 4px;
 	}
+    .modal-body{
+        text-align: left;
+    }
+
 
 
 </style>
@@ -140,5 +148,8 @@ var myInput = document.getElementById('myInput')
 myModal.addEventListener('shown.bs.modal', function () {
   myInput.focus()
 })
+
+
+
 </script>
 {% endblock %}
