@@ -24,10 +24,26 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572d
 
 ### Модуль выстрелов
 ![shoot module](images/Codeblocks/shoot_module.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/ba2bb57e30f45c35a83698779b47baa561b15d65/blueprints/api/api.py#L34-L73
 
+### Регистрация пользователя
+![user_registration_module]()
+
+### Регистрация админа
+![admin_registration_module]()
 ## 4. Скриншоты интерфейса
 ### Логин
 ![Login interface](images/Screenshots/Login.png)
 ### Регистрация
 ![Registration](images/Screenshots/Registration.png)
+### Добавление поля
+![Addboard](images/6_1-usercase/2.addfield.PNG)
+### Выбор поля для игры
+![board_list](images/6_2-usercase/fields.PNG)
+### Игровое поле
+![game_room](images/6_2-usercase/field.PNG)
+### Добваление приза
+![add_prize](images/Screenshots/add_prize.png)
+### Список призов
+![prize_list](images/Screenshots/prize_list.png)
 ## 5. [Видео](https://www.youtube.com/) с работой
