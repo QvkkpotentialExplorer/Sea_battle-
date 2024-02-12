@@ -23,7 +23,7 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572dada64f37a7d32ef30a/blueprints/boards/board.py#L35-L49
 
 ### Модуль выстрелов
-![shoot module](images/Codeblocks/shoot_module.jpg)
+![shoot module](images/Codeblocks/shot_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/ba2bb57e30f45c35a83698779b47baa561b15d65/blueprints/api/api.py#L34-L73
 
 ### Регистрация пользователя
