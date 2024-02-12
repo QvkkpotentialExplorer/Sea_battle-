@@ -20,12 +20,12 @@
             }
         </style>
         <h1>Ваши призы</h1>
-        
+
         <div class="row justify-content-center justify-content-md-start justify-content-lg-center
         text-white mt-5">
         <button class="btn text-start " onclick="getMassive()" id="filter"  data-massive="{{prizes}}">
             ФИЛЬТРАЦИЯ ПО ИМЕНИ
-        </button> 
+        </button>
         <script>
             function getMassive(){
                 var button = document.getElementById('filter')
@@ -50,7 +50,7 @@
             }
             
         </script>
-        <div id="sortmassive"></div>  
+        <div id="sortmassive"></div>
             {% for prize in prizes%}
                 <div class=" col-9 col-md-5 col-lg-3 mx-4 mt-3">
                     <div class="galery">
@@ -72,7 +72,7 @@
             {%endfor%}
         </div>
         {%if current_user.is_admin%}
-            <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5" href="{{ url_for('admin.add_prize') }}">Добавить
+            <a class="btn btn-outline-light btn-lg btn-lg mt-5 px-5 my-5 text-dark" href="{{ url_for('admin.add_prize') }}">Добавить
                 приз</a>
         {% endif %}
     </div>
