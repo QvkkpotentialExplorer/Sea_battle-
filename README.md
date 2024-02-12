@@ -30,7 +30,7 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572dada64f37a7d32ef30a/blueprints/boards/board.py#L35-L49
 
 ### Модуль взаимодействия админа с кораблями
-![action_module]()
+![action_module](images/Codeblocks/action_user_ship.jpeg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/458150183253d68d7966209db8fc88ec157cf43a/blueprints/boards/board.py#L54-L142
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/458150183253d68d7966209db8fc88ec157cf43a/blueprints/boards/board.py#L247-L261
 
