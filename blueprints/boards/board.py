@@ -11,7 +11,7 @@ from data.prize_data import PrizeData
 from forms.add_board_form import AddBoardForm
 from forms.add_ship_form import AddShipForm
 from data.ships import Ship
-from forms.delete_ship_form import DeleteShipForm
+
 
 board = Blueprint('board', __name__, template_folder='../templates', static_folder='static', url_prefix='/board')
 
@@ -80,16 +80,14 @@ def edit_board(board_id: int):
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)
+        print([(prize.id, prize.name) for prize in db_sess.query(Prize).all()])
         add_ship_form.prize.choices = [(prize.id, prize.name) for prize in db_sess.query(Prize).all()]
 
         board = db_sess.get(Board, board_id)
         users_on_board = db_sess.query(UserOnBoard).filter(UserOnBoard.board_id == board_id).all()
-        print(users_on_board)
 
         users = db_sess.query(User).filter(User.is_admin == False).all()
-        print(users)
-        print(users_on_board)
-        print(users)
+
         for x, y in ship_coords:
             board_render[y][x] = '#'
         prizes = db_sess.query(Prize.name, Prize.description, Prize.avatar).all()

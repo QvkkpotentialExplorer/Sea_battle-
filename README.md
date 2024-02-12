@@ -7,6 +7,13 @@
 ## 2. Структура данных
 ### Схема бд
 ![db](images/Codeblocks/dbsystem.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/boards.py#L6-L13
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/no_cells.py#L5-L13
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/prize_data.py#L6-L15
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/prizes.py#L7-L14
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/ships.py#L6-L15
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/users.py#L9-L23
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/users_on_boards.py#L9-L17
 ## 3. Функциональные блоки
 ### Модуль разграничения прав
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
@@ -23,7 +30,18 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572dada64f37a7d32ef30a/blueprints/boards/board.py#L35-L49
 
 ### Модуль выстрелов
-![shoot module](images/Codeblocks/shoot_module.jpg)
+![shoot module](images/Codeblocks/shot_module.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/ba2bb57e30f45c35a83698779b47baa561b15d65/blueprints/api/api.py#L34-L73
+
+### Регистрация пользователя
+![user_registration_module](images/Codeblocks/user_registration.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L16-L24
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L27-L37
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/auth/auth_app.py#L40-L57
+
+### Регистрация админа
+![admin_registration_module]()
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317054c44726cbb10a093/blueprints/admin/admin.py#L16-L30
 
 ## 4. Скриншоты интерфейса
 ### Логин

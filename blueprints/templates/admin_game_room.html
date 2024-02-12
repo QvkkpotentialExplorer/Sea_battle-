@@ -80,8 +80,12 @@
             {% if add_ship_form.errors%}
             <div class="alert alert-danger" role="alert">
                 <!--                                    #Обращаемся к ошибкам form(RegisterForm), достаем по ключу ошибки(название колонки) первый элемент-->
-
+                {%if add_ship_form.errors['x']%}
+                <p>Вы не выбрали ячейку игрового поля </p>
+                {% elif add_ship_form.errors['submit'][0] %}
                 {{add_ship_form.errors['submit'][0]}}
+                {% endif %}
+
             </div>
             {%elif errors%}
             <div class="alert alert-danger" role="alert">
@@ -168,7 +172,7 @@
                                 <div class = "card-body">
                                 <p>Имя пользователя : {{usr.login}}</p>
                                 <p>Кол-во выстрелов : {{user.count}}</p>
-                                <a class = "btn" href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id,shoots_count = 1)}}">Начислить выстрелы</a>
+                                <a class = "btn btn-outline-light btn-sm px-5" href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = usr.id,shoots_count = 1)}}">Начислить выстрелы</a>
 
                                 </div>
                             </div>
