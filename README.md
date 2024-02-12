@@ -7,6 +7,13 @@
 ## 2. Структура данных
 ### Схема бд
 ![db](images/Codeblocks/dbsystem.jpg)
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/boards.py#L6-L13
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/no_cells.py#L5-L13
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/prize_data.py#L6-L15
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/prizes.py#L7-L14
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/ships.py#L6-L15
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/users.py#L9-L23
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/7a4e4e446f49d7e21c9aa3802d5257294d7b59e6/data/users_on_boards.py#L9-L17
 ## 3. Функциональные блоки
 ### Модуль разграничения прав
 ![demarcation system](images/Codeblocks/demarcation_module.jpg)
