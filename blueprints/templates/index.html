@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
@@ -19,8 +20,10 @@
 </head>
 <style>
         @import '/static/css/bootstrap.min.css';
-</style>
 
+
+
+</style>
 <body class="text-center bg-dark text-white">
 <div class="cover-container d-flex h-100 p-3  flex-column">
     <header class="mb-auto">
@@ -41,34 +44,62 @@
     <main role="main" class="inner cover mt-5 justify-content-center">
         <h1 class="cover-heading">Веб-игра морской бой</h1>
         <p class="lead">Здесь пока нет информации , но скоро ее будет больше</p>
-        <p class="lead"></p>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Как зарегистрироваться пользователю
+            </button>
+            <!-- Модальное окно -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Правила игры</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Закрыть"></button>
-            </div>
-            <div class="modal-body">
-                <br>1. Завести почтовый ящик на https://www.jabber.ru/
-                <br>2. Скачать conversations.im https://conversations.im/ и зарегистрироваться там
-                <br>3. Ввести в форму регистрации (xmmp адресс) свою почту , прикрепленную к аккаутну на conversations.im
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть
-                </button>
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="exampleModalLabel">Как зарегистрироваться пользователю</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        <br>1. Завести почтовый ящик на https://www.jabber.ru/
+                        <br>2. Скачать conversations.im https://conversations.im/ и зарегистрироваться там
+                        <br>3. Ввести в форму регистрации (xmmp адресс) свою почту, прикрепленную к аккаутну на conversations.im
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
-
 
     </main>
 </div>
 </body>
+<style>
+    .modal-body{
+        text-align: left;
+    }
+</style>
+<script>
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
 </html>
 <!--<body>-->
 <!--<a href="{{ url_for('auth_page.login') }}">login</a>-->
