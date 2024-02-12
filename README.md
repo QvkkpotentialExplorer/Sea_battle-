@@ -29,6 +29,11 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/b43dae419dbf5f0b1f3001
 ![playfield module](images/Codeblocks/playfield_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/59f155b856ed63c6a5572dada64f37a7d32ef30a/blueprints/boards/board.py#L35-L49
 
+### Модуль взаимодействия админа с кораблями
+![action_module]()
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/458150183253d68d7966209db8fc88ec157cf43a/blueprints/boards/board.py#L54-L142
+https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/458150183253d68d7966209db8fc88ec157cf43a/blueprints/boards/board.py#L247-L261
+
 ### Модуль выстрелов
 ![shoot module](images/Codeblocks/shot_module.jpg)
 https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/ba2bb57e30f45c35a83698779b47baa561b15d65/blueprints/api/api.py#L34-L73
@@ -58,4 +63,4 @@ https://github.com/QvkkpotentialExplorer/Sea_battle-/blob/c39fe7d6b9abe1ee357317
 ![add_prize](images/Screenshots/add_prize.png)
 ### Список призов
 ![prize_list](images/Screenshots/prize_list.png)
-## 5. [Видео](https://www.youtube.com/) с работой
+## 5. [Видео](https://youtu.be/rGfcZs_NnaM) с работой
