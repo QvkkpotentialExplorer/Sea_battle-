@@ -80,6 +80,7 @@ def edit_board(board_id: int):
 
     else:
         add_ship_form = AddShipForm(board_id=board_id)
+        print([(prize.id, prize.name) for prize in db_sess.query(Prize).all()])
         add_ship_form.prize.choices = [(prize.id, prize.name) for prize in db_sess.query(Prize).all()]
 
         board = db_sess.get(Board, board_id)

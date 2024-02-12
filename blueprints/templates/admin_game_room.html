@@ -141,15 +141,17 @@
                              {%for user_on_board in users_on_board%}
                                 {% if user_on_board.user_id == user.id%}
                                 <p class = "text-white">Кол-во выстрелов :{{user_on_board.count}}</p>
-                                <a href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = user.id,shoots_count = 1)}}">Начислить выстрелы</a>
-                                <a data-id="{{ user.id }}" id="{{ user.id }}" href="{{url_for('board.delete_user',board_id = board.id,user_id = user.id )}}">Удалить пользователя</a>
+                              <a href = "{{url_for('admin.add_shoot',board_id = board_id,user_id = user.id,shoots_count = 1)}}">Начислить выстрелы</a>
                                 {%endif%}
                             {%endfor%}
                             <a class = "mt-o" data-id="{{ user.id }}" id="{{ user.id }}"
                                href="{{url_for('board.add_user',board_id = board.id,user_id = user.id )}}">
                                 Добавить пользователя
                             </a>
-
+                            <a data-id="{{ user.id }}" id="{{ user.id }}"
+                               href="{{url_for('board.delete_user',board_id = board.id,user_id = user.id )}}">
+                                Удалить пользователя
+                            </a>
 
 
                         </div>
