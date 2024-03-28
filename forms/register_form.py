@@ -16,5 +16,4 @@ class RegisterForm(FlaskForm):
     login = StringField('Логин', validators=[DataRequired(), validate_login])
     password = PasswordField('Пароль', validators=[DataRequired(), EqualTo('confirm', message='Пароли не совпадают')])
     confirm = PasswordField('Подтвердите пароль', validators=[DataRequired()])
-    jid = EmailField('xmpp адрес')
     submit = SubmitField('Регистрация')
